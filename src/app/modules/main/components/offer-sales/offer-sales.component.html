@@ -1,0 +1,111 @@
+
+<main class="main">
+
+
+  <section class="offer_section" id="offer_section">
+    <div class="align-items-center">
+      <div class="banner_title" data-aos="fade-down" data-aos-duration="1500">
+        <h1>Offers Section</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="product_section">
+
+
+    <div class="preview_section" data-aos="zoom-in-left"
+      data-aos-duration="1000">
+      <div class="Tool_bar">
+        <button mat-button class="mat_button" (click)="resetFilter()">
+          <mat-icon>restore</mat-icon>reset
+        </button>
+
+        <span class="example-spacer"></span>
+        <mat-form-field>
+          <mat-select (selectionChange)="changeSorting($event.value)"
+            value="lable">
+            <mat-option value="lable" disabled="">sort by preference</mat-option>
+            <mat-option value="LowToHigh">Off.Price: Low to High</mat-option>
+            <mat-option value="HighToLow">Off.Price: High to Low</mat-option>
+            <mat-option value="latest">Latest Arrivals</mat-option>
+            <mat-option value="rating">Customer Review</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="nonAvailableProducts === true">
+
+        <div class="emptyfilterResult">
+          <img src="../../../../../../assets/images/undraw_empty_re_opql
+            (1).svg" alt="">
+        </div>
+        <h2 class="emptyfilterResultH2">Sorry, no results found! <br>
+          Please try something else</h2>
+      </div>
+      <div class="row">
+        <div class="col-xl-2 col-md-3 col-lg-3 col-sm-4 col-6" *ngFor="let img
+          of dataSource$ | async">
+
+          <div class="card">
+
+            <img src="{{img.image['original']}}" alt="Photo of {{img.name}}"
+              class="" (click)="productPreview(img.id)">
+            <button mat-icon-button class="banner_explore_button"
+              (click)="openSnackBar(img.alt)">
+              <mat-icon>favorite_border</mat-icon>
+            </button>
+
+            <div class="card-body" (click)="productPreview(img.id)">
+              <div class="card-title">{{img.name}}</div>
+              <div class="card-subtitle text-muted">Card subtitle</div>
+              <div>
+                <b class='item' *ngIf="currencyType === 'EUR'">
+                  €{{img['OfferEuro']}}</b>
+                <b class='item' *ngIf="currencyType === 'USD'">
+                  ${{img['OfferDollar'] }}</b>
+                <b class='item' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['OfferSAR']}} </b>
+                <b class='item' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</b>
+                <b class='item' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</b>
+                <span class='offer_price item' *ngIf="currencyType === 'EUR'">
+                  €{{img['productpriceEuro']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'USD'">
+                  ${{img['productpriceDollar'] }}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['productpriceSAR']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'GBP'">
+                  £{{img['productpriceSterling']}}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'AED'">
+                  د.إ{{img['productpriceDirham']}}</span>
+
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'EUR'">{{img['OfferPecentageEuro']}}off</span>
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'USD'">{{img['OfferPecentageDollar']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'SAR'">{{img['OfferPecentageSAR']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'GBP'">{{img['OfferPecentageSterling']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'AED'">{{img['OfferPecentageDirham']}}off</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6"  count="12" animation="progress">
+    </ngx-skeleton-loader> -->
+      <mat-paginator *ngIf=!nonAvailableProducts [style.display]="loading ?
+        'none': ''" [length]="totalItems" [pageSizeOptions]="[12, 15, 100]"
+        [pageIndex]="0" aria-label="Select page">
+      </mat-paginator>
+
+
+    </div>
+
+  </section>
+
+
+</main>

@@ -1,0 +1,255 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="over">
+  <mat-sidenav #rightSidenav mode="over" class="rightSidenav"
+    [fixedInViewport]="true" [fixedTopGap]="0" position="end"
+    class="xxx" hasBackdrop="unset" mode="over">
+
+    <main class="main">
+      <section class="offer_section" id="offer_section">
+
+        <div class="align-items-center">
+          <mat-toolbar class="toolbar_main">
+            <h1>Cart</h1>
+
+            <button mat-button class="mobile_menu mobile_icon"
+              (click)="toggleRightSidenav()">
+              <i class="fa fa-close"></i>
+            </button>
+            <button mat-mini-fab (click)="toggleRightSidenav()"
+              class="for_desktop">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-toolbar>
+
+          <div class="Empty_cart_section" *ngIf="carts.length ===0">
+            <img src="../../../../../assets/images/shoppingCard_s.png" alt="">
+            <div class="undraw_content">
+              <h1>Your Cart is Empty Start adding Products</h1>
+              <a class="custom-btn btn-11" routerLink="['/']"
+                (click)="toggleRightSidenav(); navigateToHome()">Add New<div
+                  class="dot"></div></a>
+            </div>
+          </div>
+
+
+          <div *ngIf="carts.length !==0">
+            <div class="product_cart for_desktop">
+
+              <div class="product_list" *ngFor="let cart of carts">
+                <div class="product_image">
+                  <img src="{{cart['color']['image_one']['original']}}" alt="">
+                </div>
+                <div class="product_details">
+                  <div class="title_price">
+                    <div>
+                      <h1>{{cart['product']['name']}}</h1>
+                    </div>
+
+                  </div>
+                  <div class="size_color">
+
+                    <h2 *ngIf="cart['size']!==null">Size: &nbsp;&nbsp;
+                      &nbsp;&nbsp;{{cart['size']['size']}}</h2>
+
+                    <div>
+                      <h2 *ngIf="cart['color']!==null">Color:&nbsp;&nbsp;
+                        &nbsp;{{cart['color']['color']}}</h2>
+                    </div>
+                  </div>
+                  <div class="quantity_remove">
+                    <div>
+                      <h3 style="display: flex;">quantity:
+                        <button mat-mini-fab
+                          (click)="decrementValue(cart['id'])" ng-click="count=
+                          count + 1"
+                          ng-init="count=0">
+                          <mat-icon>remove</mat-icon>
+                        </button>
+                        <input matInput #myname min="1" max="5" type="number"
+                          ngModel="{{cart['quantity']}}"
+                          (ngModelChange)="inputValueChange($event, cart['id'])"
+                          />
+                        <button mat-mini-fab
+                          (click)="incrementValue(cart['id'])">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <h1 *ngIf="currencyType === 'EUR'">
+                      €{{cart['product']['OfferEuro'] * cart['quantity']}} </h1>
+                    <h1 *ngIf="currencyType === 'USD'">
+                      €{{cart['product']['OfferDollar'] * cart['quantity'] }}
+                    </h1>
+                    <h1 *ngIf="currencyType === 'SAR'">
+                      €{{cart['product']['OfferSAR'] * cart['quantity']}} </h1>
+                    <h1 *ngIf="currencyType === 'GBP'">
+                      €{{cart['product']['OfferSterling'] * cart['quantity']}}
+                    </h1>
+                    <h1 *ngIf="currencyType === 'AED'">
+                      €{{cart['product']['OfferDirham'] * cart['quantity']}}
+                    </h1>
+                  </div>
+                  <button mat-button class="action"
+                    (click)="removefromCart(cart['id'])"> Remove</button>
+                </div>
+              </div>
+
+
+              <div></div>
+              <mat-divider class="header-divider"></mat-divider>
+              <form [formGroup]="fboForm">
+
+                <div class="additional_details for_desktop">
+                  <div class="sub_total">
+                    <h2>Subtotal</h2>
+                    <h4>€{{fboForm.controls.totalAmount.value}}</h4>
+                  </div>
+                  <div class="shipping">
+                    <h2>Shipping</h2>
+                    <h4>€{{fboForm.controls.shippingFee.value}}</h4>
+                  </div>
+
+                </div>
+                <mat-divider class="header-divider"></mat-divider>
+                <mat-divider class="header-divider"></mat-divider>
+                <div class="Total_amount for_desktop">
+                  <div class="sub_total">
+                    <h2>Total</h2>
+                    <h4>€{{fboForm.controls.grandTotal.value}}</h4>
+                  </div>
+
+                </div>
+              </form>
+
+
+              <div class="checkout_section for_desktop">
+                <button mat-button class="checkout_button" (click)="checkOut()">CHECKOUT</button>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- ===================================mobile cart -->
+            <div class="for_mobile">
+              <div class="product_cart">
+                <div class="product_list" *ngFor="let cart of carts">
+
+
+                  <div class="product_image">
+                    <img src="{{cart['color']['image_one']['original']}}"
+                      alt="">
+                  </div>
+                  <div class="product_details">
+
+                    <div class="title_price">
+                      <div>
+                        <h1>{{cart['product']['name']}}</h1>
+                      </div>
+
+                    </div>
+                    <div class="size_color">
+                      <div>
+                        <h2 *ngIf="cart['size']!==null">Size:
+                          &nbsp;{{cart['size']['size']}}</h2>
+                      </div>
+                      <div>
+                        <h2 *ngIf="cart['color']!==null">Color:&nbsp;{{cart['color']['color']}}</h2>
+                      </div>
+                    </div>
+                    <div class="quantity_remove">
+                      Qty: &nbsp;&nbsp;
+                      <button mat-button class="mobile_menu"
+                        (click)="decrementValue(cart['id'])">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+
+                      <input matInput id="quantity" min="1" max="5"
+                        type="number" ngModel="{{cart['quantity']}}"
+                        (ngModelChange)="inputValueChange($event, cart['id'])"
+                        />
+
+                      <button mat-button class="mobile_menu"
+                        (click)="incrementValue(cart['id'])">
+                        <mat-icon>add</mat-icon>
+                      </button>
+
+
+                    </div>
+
+                    <div class="price_remove">
+                      <div class="price">
+                        <h1 *ngIf="currencyType === 'EUR'">
+                          €{{cart['product']['OfferEuro'] * cart['quantity']}}
+                        </h1>
+                        <h1 *ngIf="currencyType === 'USD'">
+                          €{{cart['product']['OfferDollar'] * cart['quantity']
+                          }} </h1>
+                        <h1 *ngIf="currencyType === 'SAR'">
+                          €{{cart['product']['OfferSAR'] * cart['quantity']}}
+                        </h1>
+                        <h1 *ngIf="currencyType === 'GBP'">
+                          €{{cart['product']['OfferSterling'] *
+                          cart['quantity']}} </h1>
+                        <h1 *ngIf="currencyType === 'AED'">
+                          €{{cart['product']['OfferDirham'] * cart['quantity']}}
+                        </h1>
+                      </div>
+                      <button mat-button class="mobile_menu"
+                        (click)="removefromCart(cart['id'])">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+              <mat-divider class="header-divider" style="margin-top: 1em;"></mat-divider>
+              <form [formGroup]="fboForm">
+                <div class="additional_details for_mobile">
+                  <div class="sub_total">
+                    <h2>Subtotal</h2>
+                    <h4>€{{fboForm.controls.totalAmount.value}}</h4>
+                  </div>
+                  <div class="shipping">
+                    <h2>Shipping</h2>
+                    <h4>€{{fboForm.controls.shippingFee.value}}</h4>
+                  </div>
+
+                </div>
+                <mat-divider class="header-divider"></mat-divider>
+                <mat-divider class="header-divider"></mat-divider>
+                <div class="Total_amount for_mobile">
+                  <div class="sub_total">
+                    <h2>Total</h2>
+                    <h4>€{{fboForm.controls.grandTotal.value}}</h4>
+                  </div>
+
+                </div>
+              </form>
+
+              <div class="checkout_section for_mobile">
+                <button mat-button class="checkout_button" (click)="checkOut()">CHECKOUT</button>
+              </div>
+
+            </div>
+          </div>
+
+
+          
+        </div>
+
+      </section>
+    </main>
+  </mat-sidenav>
+</mat-drawer-container>

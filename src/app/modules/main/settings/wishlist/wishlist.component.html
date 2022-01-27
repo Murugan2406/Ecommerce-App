@@ -1,0 +1,45 @@
+<main class="main">
+  <section class="offer_section" id="offer_section">
+
+    <div class="align-items-center">
+      <h1 data-aos="fade-up" data-aos-duration="1500">Wishlist</h1>
+      <div class="Empty_cart_section" aTilt *ngIf="emptyProduct === true">
+        <img src="../../../../../assets/images/like.jpg" alt=""
+          data-aos="zoom-in-up" data-aos-duration="1500">
+        <div class="undraw_content">
+          <h1>Your Wishlist is empty..!!</h1>
+          <button class="custom-btn btn-11" [routerLink]="['/']"
+            data-aos="fade-down" data-aos-duration="1500">Add New
+            <div class="dot"></div></button>
+        </div>
+      </div>
+      <div class="preview_section">
+        <div class="row">
+          <div class="col-xl-3 col-lg-4 col-sm-6 col-6" *ngFor="let img of
+            products">
+            <div class="card">
+              <img src="{{img.product['image']['original']}}" alt="Photo of
+                {{img.product['name']}}" class=""
+                routerLink="../../previewProduct/{{img.product['id']}}/">
+              <button mat-icon-button class="banner_explore_button">
+                <mat-icon (click)="removeProduct(img.id)">clear</mat-icon>
+              </button>
+              <div class="card-body">
+                <h5 class="card-title">{{img.product['name']}}</h5>
+                <h6 class="card-subtitle text-muted">Card subtitle</h6>
+                <b>${{img.product['price']}}</b>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</main>

@@ -1,0 +1,76 @@
+<main class="main">
+  <section class='contact_section'>
+    <div class="signup_container">
+      <div class="align-items-center">
+
+        <div class="contact_form">
+
+          <form [formGroup]="contactForm" (ngSubmit)='submitContact()'>
+
+            <h1>Sign up</h1>
+
+            <mat-form-field class="contact">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput formControlName="name">
+              <mat-error
+                *ngIf="contactForm.controls['name'].hasError('required')">Username
+                is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="contact">
+              <mat-label>E-mail</mat-label>
+              <input type="email" matInput formControlName="email">
+              <mat-error
+                *ngIf="contactForm.controls['email'].hasError('required')">Email
+                address is required
+              </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="contact">
+              <mat-label>password</mat-label>
+              <input type="password" matInput formControlName="password"
+                autocomplete="on">
+              <mat-error
+                *ngIf="contactForm.controls['password'].hasError('required')">Password
+                is required</mat-error>
+              <mat-error
+                *ngIf="contactForm.controls['password'].errors?.['minlength']">
+                password must be at least 5 characters long.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="contact">
+              <mat-label>confirm password</mat-label>
+              <input type="password" matInput formControlName="cpassword"
+                autocomplete="on">
+              <mat-error
+                *ngIf="contactForm.controls['cpassword'].hasError('required')">Confirm
+                Password is required
+              </mat-error>
+              <mat-error
+                *ngIf="contactForm.controls['cpassword'].errors?.['minlength']">
+                confirm password must be at least 5 characters long.
+              </mat-error>
+            </mat-form-field>
+
+            <p *ngIf="error" class="error">
+              {{ error }}
+            </p>
+            <br> <br> <br>
+            <p>
+              <button type="submit" mat-button class="submit-container">Sign up
+                &nbsp;<mat-icon>trending_flat</mat-icon> </button>
+            </p>
+            <br>
+            <p class="bottom_new">
+              Already have an account? &nbsp; <a routerLink="/login">Login </a>
+            </p>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

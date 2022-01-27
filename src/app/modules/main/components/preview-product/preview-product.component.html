@@ -1,0 +1,213 @@
+<main class="main">
+  <section class="preview_section" id="offer_section">
+      <div class="items-center">
+          <div class="imgShow product_tap" data-aos="zoom-in-right" data-aos-duration="1000">
+              <mat-grid-list cols="3" rowHeight="188px" style="text-align: end;">
+                  <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="changelgImage(previewSm1)" (mouseenter)="changelgImage(previewSm1)">
+                      <img src="{{previewSm1}}" class="preview_sm1">
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="2" [rowspan]="3">
+                      <img src="{{previewlg}}" class="category_lg">
+                      <button mat-icon-button class="banner_explore_button" (click)="addtoWishlist(productId)">
+              <mat-icon>favorite_border</mat-icon>
+            </button>
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="changelgImage(previewSm2)" (mouseenter)="changelgImage(previewSm2)">
+                      <img src="{{previewSm2}}" class="preview_sm1">
+                  </mat-grid-tile>
+                  <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="changelgImage(previewSm3)" (mouseenter)="changelgImage(previewSm3)">
+                      <img src="{{previewSm3}}" class="preview_sm1">
+                  </mat-grid-tile>
+              </mat-grid-list>
+          </div>
+
+          <!-- for mobile -->
+          <div class="swiper_slider">
+              <div class="category_lg">
+                  <img src="{{previewlg}}" alt="preview-lg" class="preview_lg" data-aos="fade-down" data-aos-duration="1000">
+              </div>
+              <div class="thumb_images">
+                  <img src="{{previewSm1}}" alt="preview-1" class="preview_sm1" (click)='changePreviewImage(previewSm1)' data-aos="fade-down" data-aos-duration="1000">
+                  <img src="{{previewSm2}}" alt="preview-2" class="preview_sm1" (click)='changePreviewImage(previewSm2)'>
+                  <img src="{{previewSm3}}" alt="preview-3" class="preview_sm1" (click)='changePreviewImage(previewSm3)' data-aos="fade-up" data-aos-duration="1000">
+              </div>
+
+          </div>
+
+          <div class="imgdetails">
+              <h1>{{productName}}</h1>
+              <h2> <i *ngFor="let key of counter(3) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                  <i *ngFor="let key of counter(2) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+              </h2>
+              <div class="pricing">
+
+                  <b class='item' *ngIf="currencyType === 'EUR' "> €{{offerPrice}}</b>
+                  <b class='item' *ngIf="currencyType === 'USD' "> ${{offerPrice}}</b>
+                  <b class='item' *ngIf="currencyType === 'SAR' "> SAR{{offerPrice}} </b>
+                  <b class='item' *ngIf="currencyType === 'GBP' ">£{{offerPrice}}</b>
+                  <b class='item' *ngIf="currencyType === 'AED' ">د.إ{{offerPrice}}</b>
+                  <span class='offer_price item' *ngIf="currencyType === 'EUR' "> €{{productPrice}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'USD' "> ${{productPrice}}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'SAR' "> SAR{{productPrice}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'GBP' "> £{{productPrice}}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'AED' "> د.إ{{productPrice}}}</span>
+                  <span class='offerPercentage item '*ngIf="currencyType === 'EUR' ">{{offerPercentage}}off</span>
+
+
+              </div>
+
+              <mat-tab-group mat-align-tabs="start" class="product_tap">
+                  <mat-tab label="First">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus amet tristique commodo nibh proin. Laoreet integer odio pretium semper posuere in purus </p>
+                  </mat-tab>
+                  <mat-tab label="Second">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus amet tristique commodo nibh proin.
+
+                      </p>
+                  </mat-tab>
+                  <mat-tab label="Third">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nibh massa malesuada tristique posuere. Elementum augue amet adipiscing in massa nec vel massa in.</p>
+                  </mat-tab>
+              </mat-tab-group>
+              <form [formGroup]="contactForm" (ngSubmit)='addtoCart()'>
+              <div class="choose_color">
+                  <span>Color &nbsp; &nbsp;</span>
+                    <mat-button-toggle-group class="choose_color" formControlName="color" >
+                      <mat-button-toggle *ngFor="let color of productOptions" [style.background]="color['colorhash']"
+                       (change)="changeColor(color['colorhash'])" class="xxx" title="{{color['colorhash'] }}" [value]="color['id']"></mat-button-toggle>
+                      </mat-button-toggle-group>
+                    <mat-error *ngIf="contactForm.controls['color'].hasError('required')">Choose color to proceed </mat-error>
+
+
+              </div>
+
+              <div class="choose_size">
+                  <span>Size &nbsp;</span>
+                  <mat-button-toggle-group formControlName="size">
+                      <mat-button-toggle *ngFor="let subtask of size"  class="mat_toggle_buttton" [value]="subtask['id']">
+                          {{subtask.size}}
+                      </mat-button-toggle>
+                  </mat-button-toggle-group>
+                  <mat-error *ngIf="contactForm.controls['size'].hasError('required')">Choose size to proceed</mat-error>
+              </div>
+              <div class="action_button">
+                  <button mat-button type="submit" class="cart_button">{{cartButton}}</button>
+                  <button mat-button type="button" (click)="gotoCheckout()" class="buy_button">BUY NOW</button>
+              </div>
+              </form>
+          </div>
+      </div>
+  </section>
+
+  <section class="accordian_section">
+
+      <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
+
+
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="filter_title"> About Product</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="filter_body matPanel">
+                  <p>{{aboutProduct}}</p>
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
+
+
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="filter_title"> Structure</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="filter_body matPanel">
+                  <p>{{aboutProduct}}</p>
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
+
+
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="filter_title"> Delivery & Payments</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="filter_body matPanel">
+                  <p>{{aboutProduct}}</p>
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+
+
+  </section>
+
+  <section class="review_section">
+
+      <div class="align-items-center">
+
+          <div class='review_header'>Reviews</div>
+
+          <div *ngFor="let product of products">
+
+              <owl-carousel-o [options]="customOptions">
+
+                  <ng-template carouselSlide *ngFor="let reviewS of product.review">
+
+                      <mat-card>
+
+                          <mat-card-title> {{reviewS.reviewerName}}</mat-card-title>
+                          <mat-card-subtitle>
+                              <i *ngFor="let key of counter(2) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                              <i *ngFor="let key of counter(5-(2)) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                          </mat-card-subtitle>
+
+                          <mat-card-content>
+                              <p>
+                                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod aliquid obcaecati officia pariatur corrupti repellendus qui. Laborum, dignissimos maiores. Omnis atque aliquam sequi repudiandae consequuntur voluptate quia vero nisi magnam. {{reviewS.review
+                                  }}
+                              </p>
+                          </mat-card-content>
+
+                      </mat-card>
+                  </ng-template>
+
+              </owl-carousel-o>
+          </div>
+      </div>
+
+
+  </section>
+
+
+  <section class="suggestion_section">
+
+      <div class="align-items-center">
+
+          <div class="suggestion_header" data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="700">You may also like</div>
+          <div data-aos="fade-down-right" data-aos-duration="700">
+              <owl-carousel-o [options]="suggestionOptions">
+                  <ng-container *ngFor="let img of offerSale">
+                      <ng-template carouselSlide let-owlItem class="offer_curousal_imgs">
+                          <img src="{{img.image['original']}}" alt="{{img.alt}}" (click)="productPreview(img.id)">
+                          <div class="offer_details">
+                              <h4>{{img.name}}</h4>
+                              <h4>{{img.price}}</h4>
+                          </div>
+                      </ng-template>
+                  </ng-container>
+
+              </owl-carousel-o>
+          </div>
+
+      </div>
+
+
+  </section>
+</main>

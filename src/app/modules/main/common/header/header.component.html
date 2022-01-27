@@ -1,0 +1,243 @@
+<header class="for_desktop">
+  <mat-toolbar class="toolbar_main">
+    <div class="first_toolbar_left" data-aos="fade-right"
+      data-aos-duration="2000">
+      <form [formGroup]="currencyForm">
+        <mat-form-field>
+
+          <mat-select formControlName="currency"
+            (selectionChange)="changeCurrency()">
+
+            <mat-option value="EUR">€ EUR</mat-option>
+            <mat-option value="USD">$ USD</mat-option>
+            <mat-option value="GBP">£ pound </mat-option>
+            <mat-option value="AED">د.إ AED </mat-option>
+            <mat-option value="SAR">SR </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+      <span class="example-spacer"></span>
+      <form [formGroup]="LanguageForm">
+
+      <mat-button-toggle-group formControlName="language" (change)="toggleLanguage()">
+        <mat-button-toggle value="france">FR</mat-button-toggle>
+        <mat-button-toggle value="English">EN</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      </form>
+
+    </div>
+    <span class="example-spacer">
+    </span>
+
+    <div class="first_toolbar_right" data-aos="fade-left"
+      data-aos-duration="2000">
+
+      <form [formGroup]="searchForm" class="header-search"
+        (submit)="upsertSearch()">
+        <mat-form-field class="input_field">
+          <input type="text" matInput formControlName="inputValue">
+        </mat-form-field>
+
+        <button type="submit" mat-button class="submit_button">
+          <mat-icon class="mat-5by1-white">search</mat-icon>
+        </button>
+      </form>
+      <button mat-button (click)="myAccountNavigate()">{{user}} </button>
+      <button mat-icon-button class="banner_explore_button"
+        [routerLink]="'settings/wishlist'">
+        <mat-icon>favorite</mat-icon>
+      </button>
+
+
+      <button mat-button
+        (click)="toggleRightSidenav();$event.stopPropagation();"
+        matBadge="{{cartLength}}"
+        matBadgePosition="after">
+        CART
+      </button>
+
+    </div>
+  </mat-toolbar>
+  <mat-divider class="header-divider"></mat-divider>
+  <mat-toolbar class="toolbar_main">
+    <div class="logo_container" [routerLink]="'/'"data-aos="zoom-in"
+      data-aos-duration="2500">
+      <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
+    </div>
+  </mat-toolbar>
+  <mat-divider class="header-divider"></mat-divider>
+
+  <div class="nav_menu"data-aos="flip-left" data-aos-duration="2000"
+    (mouseleave)="ClosePanel()">
+    <ul class="nav_list"id="nav_menu">
+
+      <li class="nav_items" *ngFor="let catogeory of mainCategory">
+        <a [routerLink]="['listProduct', catogeory.id, catogeory.name]"
+          [queryParams]="{category:true,id:catogeory.id}"
+          fragment={{catogeory.id}} routerLinkActive="active"
+          (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
+          catogeory.name)">{{catogeory.name }}
+        </a>
+      </li>
+
+    </ul>
+    <mat-divider class="header-divider"></mat-divider>
+
+
+    <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
+      <div class="parent_sub_menu">
+        <div *ngFor="let element of subCategories">
+          <a mat-button [routerLink]="['listProduct', mainCategoryId,
+            categoryName]" routerLinkActive="active"
+            [queryParams]="{category:true,id:mainCategoryId,subcategory:true,
+            subId:element.id }"
+            fragment={{element.name}} class="nav_link"
+            (mouseenter)="openSubSubCategories(element.subsubcategories,
+            element.id, element.name)"
+            [ngClass]="element.default && toggleClass == true ? 'red' :
+            'blue'">
+            {{element.name}}
+            <mat-icon class="icon">arrow_forward</mat-icon>
+            <!-- <mat-icon *ngIf="routerLinkActive">arrow_forward</mat-icon> -->
+            <mat-icon *ngIf="element.default && toggleClass == true">arrow_forward</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="child_sub_menu">
+        <div *ngFor="let child of subsubCategories">
+          <button mat-button [routerLink]="['listProduct',
+            mainCategoryId,categoryName]" routerLinkActive="active"
+            [queryParams]="{category:true,id:CategoryId,subcategory:true,subId:subsubCategoryId,subsubId:child.id}"
+            fragment={{ssName}} class="nav_link">{{child.name}}
+            <mat-icon class="icon">arrow_forward</mat-icon>
+          </button>
+        </div>
+        <button mat-button class="offer_explore_button"
+          *ngIf="subsubCategories.length !==0"
+          [routerLink]="['listProduct', CategoryId,'']">
+          Shop All<mat-icon>trending_flat</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+<mat-sidenav-container class="sidenav-container"
+  (click)="$event.stopPropagation();">
+  <mat-sidenav-content>
+    <app-cart></app-cart>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<header class="for_mobile">
+
+  <mat-toolbar class="toolbar_main">
+    <div class="toggle_side_nav">
+      <button mat-button class="mobile_menu"
+        (click)="drawer.open();$event.stopPropagation();">
+
+        <mat-icon>list</mat-icon>
+      </button>
+    </div>
+
+
+
+    <mat-drawer #drawer class="example-sidenav" mode="over"
+      hasBackdrop="hasBackdrop.value"
+      (click)="$event.stopPropagation();">
+
+      <mat-toolbar class="toolbar_main">
+        <div class="login_banner">
+          <mat-icon>account_circle</mat-icon> &nbsp;
+          <button mat-button class="login_button_nav">
+            <button mat-button (click)="myAccountNavigate()"
+              (click)="drawer.close()">{{user}}</button>
+          </button>
+        </div>
+        <button mat-button class="mobile_menu" (click)="drawer.toggle()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-toolbar>
+      <ul class="nav_list"id="nav_menu">
+        <li class="nav_items" *ngFor="let catogeory of mainCategory">
+
+          <a [routerLink]="['listProduct', mainCategoryId, categoryName]"
+            [queryParams]="{category:'mainCategories',id:catogeory.id}"
+            fragment={{catogeory.id}}
+            routerLinkActive="active"
+            (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,catogeory.name
+            )">{{catogeory.name }}
+          </a>
+        </li>
+      </ul>
+      <div class="nav_list"id="nav_menu">
+        <div class="language">
+          <span>Language</span>
+          <mat-label class="switch">
+            <input type="checkbox">
+          </mat-label>
+        </div>
+        <div class="currency">
+          <span>Currency</span>
+          <form [formGroup]="currencyForm">
+
+            <mat-form-field style="text-align: end;">
+              <mat-select formControlName="currency"
+                (selectionChange)="changeCurrency()">
+                <mat-option value="EUR">EUR</mat-option>
+                <mat-option value="AUD">AUD</mat-option>
+                <mat-option value="EGP">EGP</mat-option>
+                <mat-option value="AED">AED</mat-option>
+                <mat-option value="SAR">SAR</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </div>
+
+      </div>
+
+
+      <ul class="nav_list"id="nav_menu">
+
+        <li class="nav_items">
+          <a routerLinkActive="active" [routerLink]="'settings/myaccount'">
+            <i class="fa fa-user" aria-hidden="true"></i>My Account</a>
+        </li>
+
+        <li class="nav_items">
+          <a routerLinkActive="active" [routerLink]="'settings/orders'">
+            <i class="fa fa-cart-plus" aria-hidden="true"></i>My Orders</a>
+        </li>
+
+        <li class="nav_items">
+          <a routerLinkActive="active" [routerLink]="'settings/wishlist'">
+            <i class="fa fa-heart" aria-hidden="true"></i>My Wishlist</a>
+        </li>
+
+        <li class="nav_items" *ngIf="!logoutNeeded">
+          <a routerLinkActive="active" (click)="logOut()">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
+        </li>
+      </ul>
+    </mat-drawer>
+
+
+    <div class="logo_container"[routerLink]="'dashboard'">
+      <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
+    </div>
+
+    <div class="toggle_side_nav">
+      <button mat-button class="mobile_menu"
+        (click)="toggleRightSidenav();$event.stopPropagation();">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+
+    </div>
+  </mat-toolbar>
+
+</header>
+<div id="google_translate_element"></div>

@@ -1,0 +1,35 @@
+<div class="loading" *ngIf="loading" style="display: none;">
+
+  <div class="pendulum-container">
+
+    <div class="ball-first">
+      <div id="ball-1" class="first"></div>
+      <div id="shadow-1" class="first-shadow"></div>
+    </div>
+    <div id="ball-2"></div>
+    <div id="ball-3"></div>
+    <div id="ball-4"></div>
+    <div id="ball-5"></div>
+    <div id="ball-6"></div>
+    <div class="ball-first">
+      <div id="ball-7" class="last"></div>
+      <div id="shadow-2" class="last-shadow"></div>
+    </div>
+  </div>
+  <div class="loader">
+    <span>Hey Buddy...👋</span>
+  </div>
+</div>
+
+<div>
+  <app-header class="header"></app-header>
+
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+
+  <app-footer class="footer"></app-footer>
+
+</div>

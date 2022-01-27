@@ -1,0 +1,106 @@
+<main class="main">
+
+
+  <section class="offer_section" id="offer_section">
+
+    <div class="align-items-center">
+
+      <form [formGroup]="userInfo" class="fbo-create-form"
+        (ngSubmit)="upsertBank()">
+        <div class="user_details">
+          <h1>Contact Information</h1>
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>First Name</mat-label>
+            <input formControlName="firstName" type="text" matInput>
+            <mat-error
+              *ngIf="userInfo.controls['firstName'].hasError('required')">Please
+              Enter First name</mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>Last Name</mat-label>
+            <input formControlName="lastName" type="text" matInput>
+            <mat-error
+              *ngIf="userInfo.controls['lastName'].hasError('required')">Please
+              Enter Last Name</mat-error>
+          </mat-form-field>
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>E-mail</mat-label>
+            <input formControlName="email" type="email" matInput>
+            <mat-error *ngIf="userInfo.controls['email'].hasError('required')">Please
+              Enter Your E-mail Address
+            </mat-error>
+            <mat-error *ngIf="userInfo.controls['email'].hasError('email')">Enter
+              valid email address</mat-error>
+          </mat-form-field>
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>Phone</mat-label>
+            <input formControlName="phone" type="tel" matInput>
+            <mat-error *ngIf="userInfo.controls['phone'].hasError('required')">Please
+              Enter Your Phone Number
+            </mat-error>
+            <mat-error *ngIf="userInfo.controls['phone'].errors?.['pattern']">
+              Please check Phone Number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="user_address">
+          <h1>Shipping Address</h1>
+
+
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>Country</mat-label>
+            <input formControlName="country" type="text" matInput>
+            <mat-error
+              *ngIf="userInfo.controls['country'].hasError('required')">Please
+              Enter Your Country Name
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>City</mat-label>
+            <input formControlName="city" type="text" matInput>
+            <mat-error *ngIf="userInfo.controls['city'].hasError('required')">Please
+              Enter Your City Name
+            </mat-error>
+
+          </mat-form-field>
+
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>Address</mat-label>
+            <input formControlName="address" type="text" matInput>
+            <mat-error
+              *ngIf="userInfo.controls['address'].hasError('required')">Please
+              Enter Your Address</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="fbo-create-formTwo">
+            <mat-label>ZIP code</mat-label>
+            <input formControlName="pincode" type="text" pattern="[0-9]*"
+              matInput>
+            <mat-error
+              *ngIf="userInfo.controls['pincode'].hasError('required')">Please
+              Enter your ZIP Code</mat-error>
+            <mat-error *ngIf="userInfo.controls['pincode'].errors?.['pattern']">
+              Please check ZIP Code
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <p *ngIf="error" class="fbo-create-formTwo">
+          {{ error }}
+        </p>
+        <div class="form-submit-container">
+
+          <button class="submit-button" type="submit" mat-button>Continue
+            <mat-icon>trending_flat</mat-icon></button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+
+</main>

@@ -1,0 +1,8 @@
+<div mat-dialog-title>
+  Are you sure want to logout?
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No, back</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="doLogout()"
+    class="confirm_button">Yes, logout</button>
+</div>

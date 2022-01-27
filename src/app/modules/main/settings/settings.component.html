@@ -1,0 +1,44 @@
+<main class="main">
+  <section class="offer_section" id="offer_section">
+
+    <div class="align-center">
+
+
+
+      <nav class="nav_section" data-aos="zoom-in-right"
+        data-aos-duration="1000">
+
+        <ul>
+          <li class="nav_list"><a href="" routerLinkActive="active"
+              [routerLink]="'myaccount'" class="nav_items"
+              #account="routerLinkActive"> MY ACCOUNT <mat-icon
+                *ngIf="account.isActive === true">trending_flat</mat-icon></a></li>
+          <li class="nav_list"><a href="" routerLinkActive="active"
+              [routerLink]="'orders'" class="nav_items"
+              #order="routerLinkActive"> ORDERS <mat-icon *ngIf="order.isActive
+                === true">trending_flat</mat-icon></a> </li>
+          <li class="nav_list"><a href="" routerLinkActive="active"
+              [routerLink]="'wishlist'" class="nav_items"
+              #wishlist="routerLinkActive"> WISHLIST <mat-icon
+                *ngIf="wishlist.isActive === true">trending_flat</mat-icon></a>
+          </li>
+          <li class="nav_list">
+            <a mat-button routerLinkActive="active" class="logout"
+              (click)="openDialog()">
+              <mat-icon>exit_to_app</mat-icon>LOG OUT</a>
+          </li>
+          <li class='contact_link'>Need help? <a href="">Contact Us</a></li>
+        </ul>
+
+
+      </nav>
+
+      <main class="content_section">
+
+        <router-outlet></router-outlet>
+      </main>
+
+    </div>
+
+  </section>
+</main>

@@ -1,0 +1,424 @@
+<main class="main">
+  <!-- banner section -->
+  <section id="home" class="home_section">
+    <div class="main_container">
+      <div class="align-items-center">
+        <div class="banner_title" data-aos="fade-down" data-aos-duration="3000">
+          <h1>Lorem ipsum doler </h1>
+          <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut netus
+            convallis </h3>
+        </div>
+        <div>
+          <owl-carousel-o [options]="customOptions" class='banner_section'
+            data-aos="fade-down" data-aos-easing="linear"
+            data-aos-duration="1500">
+
+            <ng-template carouselSlide *ngFor="let img of banner"
+              data-aos="zoom-out-down" data-aos-duration="5000">
+
+              <img src="{{img.imgUrl}}" alt="{{img.alt}}" class="inner-image
+                banner_img"data-aos="zoom-out-down"
+                data-aos-delay="5000">
+
+              <div class="offer_details">
+                <p>{{img.imgName}}</p>
+                <b>{{img.price}}</b>
+
+              </div>
+            </ng-template>
+
+          </owl-carousel-o>
+        </div>
+        <div class='offer_explore_button_div'>
+          <button mat-button class="offer_explore_button">
+            New Collections &nbsp;<mat-icon>trending_flat</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories section -->
+  <section id='categories' class="categories_section">
+    <div class="main_container">
+      <div class="align-categories">
+        <div class="nav_categories">
+          <span>OUR CATEGORIES</span>
+          <div class="categories_links" data-aos="zoom-in-right"
+            data-aos-duration="1000">
+            <ul class="nav_list"id="nav_menu">
+              <li class="nav_items" *ngFor="let catogeory of mainCategory">
+                <a [routerLink]="['/listProduct', catogeory.id, catogeory.name]"
+                  [queryParams]="{category:'mainCategories',id:catogeory.id}"
+                  fragment={{catogeory.id}}
+                  routerLinkActive="active"
+                  (mouseover)="openSubCategories(catogeory.subcategories,catogeory.id)">{{catogeory.name
+                  }} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="img_categories" data-aos="zoom-in-left"
+          data-aos-duration="1000">
+
+          <mat-grid-list cols="2" rowHeight="200px" style="text-align: end;">
+            <mat-grid-tile [colspan]="1" [rowspan]="4"
+              [routerLink]="['/listProduct',id1, name1]"
+              [queryParams]="{category:'subCategories',id:CategoryId, subId:id1
+              }" fragment={{name1}}>
+              <img src="{{category1}}" alt="" class="category_img1">
+              <div class="categories_img_name name1">
+                <span>{{name1}}</span>
+              </div>
+
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="2"
+              [routerLink]="['/listProduct',id2, name2]"
+              [queryParams]="{category:'subCategories',id:CategoryId, subId:id2
+              }" fragment={{name2}}>
+              <img src="{{category2}}" alt="" class="category_img2">
+
+              <span class="categories_img_name name2">{{name2}}</span>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="2"
+              [routerLink]="['/listProduct',id3, name3]"
+              [queryParams]="{category:'subCategories',id:CategoryId, subId:id3
+              }" fragment={{name3}}>
+              <img src="{{category3}}" alt="" class="category_img3">
+              <div class="categories_img_name name3">
+                <span>{{name3}}</span>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- offer-section -->
+
+
+  <section class="offer_section" id="offer_section">
+
+    <div class="main_container">
+
+      <span>WE RECCOMENDED</span>
+      <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
+        data-aos-duration="1000">Offer Sale</h1>
+      <div data-aos="fade-right" data-aos-duration="1000">
+        <owl-carousel-o [options]="offerOptions">
+          <ng-container *ngFor="let img of offerSale">
+
+            <ng-template carouselSlide class="offer_curousal_imgs">
+              <img src="{{img.image['original']}}" alt="{{img.name}}"
+                [routerLink]="'/previewProduct/' + img.id">
+              <div class="offer_details">
+                <p>{{img.name}}</p>
+                <div class="pricing" style="display: flex; justify-content:
+                  center; align-items: baseline;">
+                  <h3 class='item ' *ngIf="currencyType === 'EUR'">
+                    €{{img['OfferEuro']}}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'USD'">
+                    ${{img['OfferDollar'] }}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'SAR'">
+                    SAR{{img['OfferSAR']}} </h3>
+                  <h3 class='item ' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</h3>
+                  <span class='offer_price item' *ngIf="currencyType === 'EUR'">
+                    €{{img['productpriceEuro']}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'USD'">
+                    ${{img['productpriceDollar'] }}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'SAR'">
+                    SAR{{img['productpriceSAR']}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'GBP'">
+                    £{{img['productpriceSterling']}}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'AED'">
+                    د.إ{{img['productpriceDirham']}}</span>
+
+                  <span class='offer_percentage item '*ngIf="currencyType ===
+                    'EUR'">{{img['OfferPecentageEuro']}}off</span>
+                  <span class='offer_percentage item '*ngIf="currencyType ===
+                    'USD'">{{img['OfferPecentageDollar']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'SAR'">{{img['OfferPecentageSAR']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'GBP'">{{img['OfferPecentageSterling']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'AED'">{{img['OfferPecentageDirham']}}off</span>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+
+        </owl-carousel-o>
+      </div>
+
+
+      <div class='' data-aos="fade-right" data-aos-duration="1200">
+        <button mat-button class="explore_button_offer"
+          [routerLink]="'/offersales'">
+          Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- collections section -->
+  <section class='collections_section'>
+    <div class="main_container">
+      <div class="align-categories">
+        <div class="Collections_text_container" data-aos="zoom-in-right"
+          data-aos-easing="linear"
+          data-aos-duration="700">
+          <h1 class="collection_title">VOUI 2021 Collection</h1>
+          <h2>Just for Him & Her</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sit consectetur nisi, donec quis. Lorem ipsum dolor sit amet,</p>
+          <button class="collection_explore_button">
+            Explore all &nbsp;
+            <mat-icon>trending_flat</mat-icon>
+          </button>
+        </div>
+        <div class="Collections_img_container">
+          <div>
+            <img src="../../../../assets/images/collections-1.jpg"
+              alt="collections-1" class="inner-image collection"
+              style="width: 100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- new Arrivals section -->
+  <section class="new_arrivals_section">
+
+    <div class="main_container">
+      <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
+        data-aos-duration="1000">New Arrivals</h1>
+      <div data-aos="fade-up" data-aos-anchor-placement="top-bottom"
+        data-aos-duration="1000">
+        <owl-carousel-o [options]="suggestionOptions">
+
+          <ng-template carouselSlide *ngFor="let img of newArraivals">
+
+            <img src="{{img.image['original']}}" alt="{{img.alt}}"
+              class="inner-image arrival_img">
+
+            <div class="offer_details">
+              <p>{{img.name}}</p>
+              <div class="pricing" style="display: flex; justify-content:
+                center; align-items: baseline;">
+                <h3 class='item ' *ngIf="currencyType === 'EUR'">
+                  €{{img['OfferEuro']}}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'USD'">
+                  ${{img['OfferDollar'] }}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['OfferSAR']}} </h3>
+                <h3 class='item ' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</h3>
+                <span class='offer_price item' *ngIf="currencyType === 'EUR'">
+                  €{{img['productpriceEuro']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'USD'">
+                  ${{img['productpriceDollar'] }}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['productpriceSAR']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'GBP'">
+                  £{{img['productpriceSterling']}}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'AED'">
+                  د.إ{{img['productpriceDirham']}}</span>
+
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'EUR'">{{img['OfferPecentageEuro']}}off</span>
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'USD'">{{img['OfferPecentageDollar']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'SAR'">{{img['OfferPecentageSAR']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'GBP'">{{img['OfferPecentageSterling']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'AED'">{{img['OfferPecentageDirham']}}off</span>
+              </div>
+            </div>
+          </ng-template>
+
+        </owl-carousel-o>
+      </div>
+      <div class='offer_explore_button_div'>
+        <button mat-button class="offer_explore_button">
+          Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- winter collection section -->
+  <section class='session_collections_section'>
+    <div class="main_container">
+      <div class="align-categories">
+        <div class="Collections_img_container" data-aos="zoom-in-right"
+          data-aos-duration="1000">
+          <div>
+            <img src="../../../../assets/images/winter_collection-1.jpg"
+              alt="winter_collections-1"
+              class="inner-image collection">
+          </div>
+        </div>
+        <div class="Collections_winter_container">
+          <h1 class="collection_title">VOUI Winter Collection</h1>
+          <h2>Lorem ipsum doler </h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sit consectetur nisi, donec quis. Lorem ipsum dolor sit amet,</p>
+          <button class="collection_explore_button" data-aos="zoom-in-left"
+            data-aos-duration="1000">
+            Explore all &nbsp;
+            <mat-icon>trending_flat</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- free collection -->
+  <section class='free_collections_section'>
+    <div class="main_container">
+      <div class="align-categories">
+        <div class="Collections_free_container">
+          <h2>Lorem ipsum doler amet,
+            consectetur adipiscing elit.</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sit consectetur nisi, donec quis. Lorem ipsum dolor sit amet,</p>
+        </div>
+        <div class="Collections_img_container" data-aos="zoom-in-left"
+          data-aos-easing="linear"
+          data-aos-duration="1000">
+          <div>
+            <img src="../../../../assets/images/free_collection.jpg"
+              alt="free-collections-1"
+              class="inner-image collection">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- bags trend section -->
+  <section class="bags_section" id="bags_section">
+
+    <div class="main_container">
+
+      <span>WE RECCOMENDED</span>
+      <h1 data-aos="flip-right" data-aos-easing="ease-out-cubic"
+        data-aos-duration="1000">Bags on Trend</h1>
+      <div data-aos="fade-down-right" data-aos-duration="1000">
+        <owl-carousel-o [options]="suggestionOptions">
+
+          <ng-template carouselSlide *ngFor="let img of bagsTrends">
+
+            <img src="{{img.image['original']}}" alt="{{img.alt}}"
+              class="inner-image arrival_img">
+
+            <div class="offer_details">
+              <p>{{img.name}}</p>
+              <div class="pricing" style="display: flex; justify-content:
+                center; align-items: baseline;">
+                <h3 class='item ' *ngIf="currencyType === 'EUR'">
+                  €{{img['OfferEuro']}}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'USD'">
+                  ${{img['OfferDollar'] }}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['OfferSAR']}} </h3>
+                <h3 class='item ' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</h3>
+                <h3 class='item ' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</h3>
+                <span class='offer_price item' *ngIf="currencyType === 'EUR'">
+                  €{{img['productpriceEuro']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'USD'">
+                  ${{img['productpriceDollar'] }}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'SAR'">
+                  SAR{{img['productpriceSAR']}} </span>
+                <span class='offer_price item' *ngIf="currencyType === 'GBP'">
+                  £{{img['productpriceSterling']}}</span>
+                <span class='offer_price item' *ngIf="currencyType === 'AED'">
+                  د.إ{{img['productpriceDirham']}}</span>
+
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'EUR'">{{img['OfferPecentageEuro']}}off</span>
+                <span class='offer_percentage item '*ngIf="currencyType ===
+                  'USD'">{{img['OfferPecentageDollar']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'SAR'">{{img['OfferPecentageSAR']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'GBP'">{{img['OfferPecentageSterling']}}off</span>
+                <span class='offer_percentage item ' *ngIf="currencyType ===
+                  'AED'">{{img['OfferPecentageDirham']}}off</span>
+              </div>
+            </div>
+          </ng-template>
+
+        </owl-carousel-o>
+      </div>
+      <div class='offer_explore_button_div'>
+        <button mat-button class="offer_explore_button">
+          Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- contact section -->
+  <section class='contact_section'>
+    <div class="main_container">
+      <div class="align-items-center">
+        <h1>Enter the world of VOUI</h1>
+        <div class="contact_form">
+          <form [formGroup]="contactForm" (submit)='submitContact()'>
+            <mat-form-field class="contact">
+              <mat-label>Enter the Email</mat-label>
+              <input type="text" matInput formControlName="Email">
+              <button mat-button class="form_submit_button"
+                data-aos="fade-right" data-aos-duration="1000">Send &nbsp;
+                <mat-icon>trending_flat</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="mobile_contact_form">
+              <mat-form-field>
+                <mat-label>E-mail</mat-label>
+                <input type="text" matInput formControlName="Email">
+              </mat-form-field>
+              <span>Hear about exclusive events, collections and news</span>
+              <div class='offer_explore_button_div'>
+                <button mat-button class="offer_explore_button">
+                  Subscribe &nbsp; <mat-icon>trending_flat</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+          <h4 *ngIf='error'>{{error}}</h4>
+          <span class="contact">Hear about exclusive events, collections and
+            news</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+</main>

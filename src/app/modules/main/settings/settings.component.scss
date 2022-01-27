@@ -1,0 +1,120 @@
+.main {
+  background: #FFFAF3;
+}
+
+
+@media only screen and (min-width:769px) {
+  .offer_section {
+      padding: var(--section-padding);
+  }
+  .align-center {
+      display: flex;
+  }
+  a {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 45px;
+      text-transform: capitalize;
+      text-decoration: none;
+      color: #000000;
+  }
+  .nav_section {
+      background-color: #F3EEE9;
+      width: 30%;
+      min-width: 250px;
+      padding: 0 0 3em 5%;
+  }
+  h1 {
+      font-family: Ogg;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 40px;
+      line-height: 77px;
+      text-transform: capitalize;
+      margin-left: 20px;
+      color: #000000;
+  }
+  h2 {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 30px;
+      text-transform: capitalize;
+      color: #763301
+  }
+  .logout {
+      margin-top: 50px !important;
+      padding: 0;
+  }
+  mat-icon {
+      vertical-align: text-top;
+      margin-right: 10px;
+  }
+  .active {
+      border-bottom: 1px solid #a48162;
+      text-decoration: none;
+      font-family: Ogg;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 25px;
+      line-height: 45px;
+      text-transform: capitalize;
+      color: #763301;
+      padding: 10px 0;
+      width: 100%;
+      mat-icon {
+          margin-left: 3%;
+      }
+  }
+  .nav_list {
+      margin: 20px 0;
+  }
+  .content_section {
+      margin-left: 3%;
+      width: 70%;
+  }
+  .contact_link {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px !important;
+      text-transform: capitalize;
+      color: #000000;
+      margin-top: 20%;
+      a {
+          font-size: 14px !important;
+          text-decoration: underline;
+      }
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .nav_section {
+      display: none;
+  }
+  .content_section {
+      margin: 0;
+      width: 100%;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1199px) {
+  h1 {
+      font-size: 20px;
+  }
+  .active {
+      font-size: 22px;
+  }
+  a {
+      font-size: 18p;
+  }
+  .nav_section {
+      background-color: #F3EEE9;
+      width: 30%;
+      min-width: 250px;
+      padding: 0 0 3em 2%;
+  }
+}

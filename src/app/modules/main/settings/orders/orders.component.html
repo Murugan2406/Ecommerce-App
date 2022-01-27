@@ -1,0 +1,85 @@
+<main class="main">
+  <section class="offer_section" id="offer_section">
+
+    <div class="align-items-center">
+
+      <h1 data-aos="fade-up" data-aos-duration="1000">My Orders</h1>
+      <div class="Empty_cart_section" *ngIf="emptyOrders=== true">
+        <img src="../../../../../assets/images/undraw_empty_re_opql (1).svg"
+          alt="" data-aos="zoom-in-up" data-aos-duration="1500">
+        <div class="undraw_content">
+          <h1>Your Order history is empty. Starts adding Products</h1>
+          <button class="custom-btn btn-11" (click)="navigateToHome()"
+            data-aos="fade-down" data-aos-duration="1000">Let's Start<div
+              class="dot"></div></button>
+        </div>
+      </div>
+      <div *ngIf="emptyOrders === false">
+        <mat-card class="example-card for_desktop" *ngFor="let idx of orders">
+          <div data-aos="fade-right">
+            <img mat-card-lg-image
+              src="{{idx['selectedcolor']['image_one']['original']}}">
+          </div>
+          <div class="info">
+            <mat-card-title>{{idx['product']['name']}}</mat-card-title>
+            <mat-card-subtitle>Size: {{idx['selectedsize']['size']}}</mat-card-subtitle>
+            <mat-card-subtitle>Color: {{idx['selectedcolor']['color']}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price
+              €{{idx['product']['OfferEuro'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'USD'">Price
+              €{{idx['product']['OfferDollar'] * idx['quantity'] }}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'SAR'">Price
+              €{{idx['product']['OfferSAR'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'GBP'">Price
+              €{{idx['product']['OfferSterling'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'AED'">Price
+              €{{idx['product']['OfferDirham'] * idx['quantity']}}
+            </mat-card-subtitle>
+
+          </div>
+          <div class="content">
+            <mat-card-subtitle>Status</mat-card-subtitle>
+            <mat-card-content>
+              {{longText}}
+            </mat-card-content>
+          </div>
+        </mat-card>
+
+        <mat-card class="for_mobile" *ngFor="let idx of orders">
+          <mat-card-title-group>
+            <mat-card-title>{{idx['product']['name']}}</mat-card-title>
+            <mat-card-subtitle>Size: {{idx['selectedsize']['size']}}</mat-card-subtitle>
+            <mat-card-subtitle>Color: {{idx['selectedcolor']['color']}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price
+              €{{idx['product']['OfferEuro'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'USD'">Price
+              €{{idx['product']['OfferDollar'] * idx['quantity'] }}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'SAR'">Price
+              €{{idx['product']['OfferSAR'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'GBP'">Price
+              €{{idx['product']['OfferSterling'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'AED'">Price
+              €{{idx['product']['OfferDirham'] * idx['quantity']}}
+            </mat-card-subtitle>
+            <img mat-card-sm-image
+              src="{{idx['selectedcolor']['image_one']['original']}}"
+              data-aos="fade-right">
+          </mat-card-title-group>
+          <mat-card-content>
+            <mat-card-subtitle>Status</mat-card-subtitle>
+            {{longText}}
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </section>
+</main>

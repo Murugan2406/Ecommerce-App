@@ -1,0 +1,19 @@
+.mat-dialog-actions {
+  justify-content: space-evenly;
+}
+
+.mat-dialog-title {
+  font-family: poppins;
+}
+
+.confirm_button {
+  color: #763301;
+}
+
+::ng-deep.mat-simple-snackbar {
+  color: green;
+}
+
+.mat-snack-bar-container {
+  background-color: #ffffff;
+}

@@ -1,0 +1,76 @@
+<main class="main">
+  <section class="offer_section" id="offer_section">
+
+    <div class="align-items-center">
+
+      <h1 data-aos="fade-up" data-aos-duration="1000">My Account</h1>
+
+
+
+      <div class="personal_details" *ngIf='dataSource.length !==0'>
+        <div class="address_flex">
+          <h2 data-aos="fade-up" data-aos-duration="1000">CONTACT INFORMATION</h2>
+          <button mat-button class="edit_button" (click)="navigateToInfo()">Edit</button>
+        </div>
+        <div class="example-container"data-aos="fade-down"
+          data-aos-duration="1000">
+          <mat-table #table [dataSource]="dataSource" multiTemplateDataRows
+            matSort>
+            <ng-container [matColumnDef]="column" *ngFor="let column of
+              displayedColumns">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{columnHeaders[column]}} </mat-header-cell>
+
+              <mat-cell *matCellDef="let element">
+                <div class="mobile-label"> {{columnHeaders[column]}}</div>{{findColumnValue(element,
+                column)}}
+              </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+      </div>
+
+      <div class="Empty_cart_section" *ngIf='dataSource.length ===0'>
+        <img
+          src="../../../../../assets/images/undraw_delivery_address_re_cjca.svg"
+          alt="" data-aos="zoom-in-up" data-aos-duration="1000">
+        <div class="undraw_content">
+          <h1>Your delivery Address is empty</h1>
+          <button class="custom-btn btn-11" (click)="navigateToInfo()"
+            data-aos="fade-down" data-aos-duration="1000">Add
+            New<div class="dot"></div></button>
+        </div>
+      </div>
+      <div class="address_details" *ngIf='dataSource.length !==0'>
+        <div class="address_flex">
+          <h2 data-aos="fade-up" data-aos-duration="1000">BILLING ADDRESS</h2>
+          <button mat-button class="edit_button" (click)="navigateToInfo()">Edit</button>
+        </div>
+        <div class="example-container" data-aos="fade-down"
+          data-aos-duration="1000">
+          <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+            <ng-container [matColumnDef]="column" *ngFor="let column of
+              displayedAddress">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{columnAddress[column]}} </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="mobile-label"> {{columnAddress[column]}}</div>
+                {{findColumnValue(element, column)}}
+              </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedAddress"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedAddress;"></mat-row>
+          </mat-table>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+</main>

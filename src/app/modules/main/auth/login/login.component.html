@@ -1,0 +1,57 @@
+<main class="main">
+
+  <div class="align-items-center">
+
+    <div class="contact_form">
+
+      <form [formGroup]="contactForm" (ngSubmit)='submitContact()' class="form">
+        <h1>Log in</h1>
+
+        <mat-form-field class="contact">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput formControlName="email">
+          <mat-error *ngIf="contactForm.controls['email'].hasError('required')">Email
+            Address is required</mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field class="contact">
+          <mat-label>password</mat-label>
+
+          <input type="password" matInput formControlName="password"
+            autocomplete="on">
+          <mat-error
+            *ngIf="contactForm.controls['password'].hasError('required')">Password
+            is required</mat-error>
+          <mat-error
+            *ngIf="contactForm.controls['password'].errors?.['minlength']">
+            password must be at least 5 characters long.
+          </mat-error>
+        </mat-form-field>
+
+
+        <p *ngIf="error" class="error">
+          {{ error }}
+        </p>
+        <p class="bottom">
+          <a routerLink="/login"> forgot your password? &nbsp; </a>
+        </p>
+
+        <p>
+          <button type="submit" mat-button class="submit-container">Log in
+            &nbsp;<mat-icon>trending_flat</mat-icon>
+          </button>
+        </p>
+
+
+        <p class="bottom_new">
+          Don't have an account? &nbsp; <a routerLink="/signup">Create new one
+          </a>
+        </p>
+      </form>
+
+    </div>
+  </div>
+
+
+</main>
