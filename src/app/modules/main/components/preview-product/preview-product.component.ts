@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as AOS from 'aos';
 import { PreviewProductService } from '../../../service/preview-product.service';
@@ -7,7 +7,6 @@ import { DashboardService } from '../../../service/dashboard.service';
 import { ACCESS_TOKEN_ID, CURRENCY_TYPE } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 export interface subtasks {
   name: string;
   Available: boolean;
@@ -191,6 +190,17 @@ export class PreviewProductComponent implements OnInit {
   value: any = 0;
 
   ngOnInit(): void {
+
+    this.router.events.subscribe((evt) => {
+
+      if (!(evt instanceof NavigationEnd)) {
+
+        return;
+
+      }
+      window.scrollTo(0, 0);
+
+    });
 
 
     this.dashboardService.getOfferSales().subscribe((data: any) => {

@@ -202,9 +202,14 @@ export class HeaderComponent implements OnInit {
   // eslint-disable-next-line class-methods-use-this
   upsertSearch(): void {
 
-    const language = this.LanguageForm.get('language')?.value;
+    if (this.searchForm.valid) {
 
-    localStorage.setItem(LANGUAGE, language);
+      const language = this.searchForm.get('inputValue')?.value;
+
+      this.router.navigate([ '/offersales' ], { queryParams: {value: language,
+        from: 'searchResult'} });
+
+    }
 
   }
 

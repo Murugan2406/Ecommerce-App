@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 import {Component, HostListener, OnInit, ViewChild, } from '@angular/core';
 import { OwlOptions} from 'ngx-owl-carousel-o';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -8,7 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from '../../../service/dashboard.service';
 import { CURRENCY_TYPE, ACCESS_TOKEN_ID } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderService } from 'src/app/modules/service/header.service';
 @Component({
   selector: 'app-offer-sales',
   templateUrl: './offer-sales.component.html',
@@ -23,6 +25,10 @@ export class OfferSalesComponent implements OnInit {
   sizeValue?: string;
 
   brandValue?: string;
+
+  sectionTitle = '';
+
+  sectionSubtitle = '';
 
   currencyType = 'USD';
 
@@ -42,6 +48,10 @@ export class OfferSalesComponent implements OnInit {
 
   dataSource$: any;
 
+  linkFrom = '';
+
+  searchValue = '';
+
   filterCategory: any[] = [];
 
   mainCategory: any[] = [];
@@ -49,6 +59,12 @@ export class OfferSalesComponent implements OnInit {
   products: any = [];
 
   sortingArray: any[] = [];
+
+  brandList: any[] = [];
+
+  sizeList:any[] = [];
+
+  colorList:any[] = [];
 
   hparam: any;
 
@@ -130,6 +146,8 @@ export class OfferSalesComponent implements OnInit {
     private readonly router: Router,
     private dashboardService :DashboardService,
     private readonly productService: ProductService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly headerService: HeaderService,
   ) {
 
     this.pageSize = 9;
@@ -189,6 +207,55 @@ export class OfferSalesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.currencyChanges();
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+
+      console.log(params);
+
+
+      this.linkFrom = params['from'];
+      this.searchValue = params['value'];
+
+      if (this.linkFrom === 'searchResult') {
+
+        this.headerService.getSearchResult(this.searchValue).subscribe((result: any) => {
+
+          console.log(result);
+
+
+          this.products = result['products'];
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource$ = this.dataSource.connect();
+          this.dataSource.paginator = this.paginator;
+
+
+        });
+
+      } else {
+
+
+        this.dashboardService.getOfferSales().subscribe((data: any) => {
+
+          console.log(data);
+
+
+          this.products = data;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource$ = this.dataSource.connect();
+          this.dataSource.paginator = this.paginator;
+
+        });
+
+      }
+
+    });
+
+
+  }
+
+  currencyChanges() {
+
     if (localStorage.getItem(CURRENCY_TYPE)) {
 
       const cValue = localStorage.getItem(CURRENCY_TYPE);
@@ -232,16 +299,6 @@ export class OfferSalesComponent implements OnInit {
       this.currencyType = 'EUR';
 
     }
-
-    this.dashboardService.getOfferSales().subscribe((data: any) => {
-
-      this.products = data;
-      this.dataSource = new MatTableDataSource(this.products);
-      this.dataSource$ = this.dataSource.connect();
-      this.dataSource.paginator = this.paginator;
-
-    });
-
 
   }
 
@@ -390,6 +447,138 @@ export class OfferSalesComponent implements OnInit {
 
     const link = [ 'previewProduct', id ];
     this.router.navigate(link);
+
+  }
+
+
+  filterbySize(params: string) {
+
+
+    const paramss = params.toLowerCase();
+
+    const question: any = [];
+    const question$ = [ ...this.products ];
+
+    question$.forEach((element: { [x: string]: any }) => {
+
+      if (element['options'].length > 0) {
+
+        const questionS = element['options'];
+        questionS.forEach((data: { [x: string]: any }) => {
+
+          if (data['sizes'].length > 0) {
+
+            const xyz = data['sizes'];
+            xyz.forEach((ele: { [x: string]: any }) => {
+
+              if (paramss === ele['size']) {
+
+                question.push(element);
+
+              } else {
+
+              }
+
+            });
+
+          } else {
+
+          }
+
+        });
+
+
+      } else {
+
+      }
+
+    });
+    this.updateValueChanges(question);
+
+  }
+
+  filterbycolor(param: string) {
+
+    const params = param.toLowerCase();
+    const question: any = [];
+    const question$ = [ ...this.products ];
+    question$.forEach((element: { [x: string]: any }) => {
+
+      if (element['options'].length > 0) {
+
+        const questionS = element['options'];
+        questionS.forEach((data: { [x: string]: any }) => {
+
+          if (params === data['color']) {
+
+            question.push(element);
+
+          }
+
+        });
+
+      } else {
+
+      }
+
+    });
+
+    this.updateValueChanges(question);
+
+  }
+
+
+  filterbyBrand(params: string) {
+
+    const paramss = params.toLowerCase();
+    const question: any = [];
+    const question$ = [ ...this.products ];
+
+    question$.forEach((element: { [x: string]: any }) => {
+
+      if (element['brand']) {
+
+        if (element['brand'].name === paramss) {
+
+          question.push(element);
+
+        }
+
+      }
+
+    });
+
+    this.updateValueChanges(question);
+
+  }
+
+  submit() {
+
+    const minimumPrice = this.form.get('startprice')?.value;
+    const maximumPrice = this.form.get('endprice')?.value;
+    this.sortingArray = [ ...this.dataSource.data ];
+    this.sortingArray = this.sortingArray.filter((product) =>
+      product.price >= minimumPrice && product.price <= maximumPrice);
+
+    this.updateValueChanges(this.sortingArray);
+
+  }
+
+
+  updateValueChanges(products:any) {
+
+    this.dataSource = new MatTableDataSource(products);
+    this.dataSource$ = this.dataSource.connect();
+    this.dataSource.paginator = this.paginator;
+    if (this.dataSource.data.length === 0) {
+
+      this.nonAvailableProducts = true;
+
+    } else {
+
+      this.nonAvailableProducts = false;
+
+    }
 
   }
 

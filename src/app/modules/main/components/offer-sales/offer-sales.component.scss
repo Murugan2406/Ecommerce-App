@@ -1,14 +1,182 @@
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+  background: #f3eee9;
+}
+.filter_submit_button{
+  background-color:#FFBD8C;
+  text-transform: uppercase;
+  margin-top: 1em;
+  border-radius: 15px;
+  line-height: 30px;
+}
+.mat-input-element {
+  caret-color: #874c20;
+}
+.Filtertogglebutton{
+  text-transform: lowercase;
+}
+::ng-deep[type=button]:not(:disabled),
+button:not(:disabled):before {
+  cursor: pointer;
+  text-align: end;
+}
+
+:host ::ng-deep.mat-expansion-panel {
+  box-shadow: none;
+}
+
+:host ::ng-deep.mat-accordion .mat-expansion-panel:first-of-type {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+:host ::ng-deep.mat-accordion .mat-expansion-panel:last-of-type {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+:host ::ng-deep.mat-accordion .mat-expansion-panel {
+  color: #000000;
+  background-color: transparent;
+}
+
+.toggle_body {
+  column-count: 2;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+}
+
+:host ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--main-color);
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: var(--main-color) !important;
+}
+
+// overwrite the ripple overlay on hover and click
+::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background-color: var(--main-color) !important;
+}
+
+::ng-deep.mat-checkbox-inner-container {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 0 !important;
+  padding: 0 !important;
+  text-transform: uppercase;
+}
+::ng-deep .mat-button-toggle-group-appearance-standard {
+  border: none !important;
+}
+.mat-button-toggle-checked{
+  color: #763301 !important;
+}
+
+.mat-button-toggle {
+  border-radius: 15px !important;
+  padding: 3px 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+  margin-top: 15px;
+  width: 80px;
+  margin-right: 10px;
+  background-color: #ffff;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  display: block;
+  position: relative;
+  flex: auto;
+  min-width: 0;
+  text-align: end;
+}
+
+.betweenKeyInputs {
+  display: inline-flex;
+  align-items: center;
+  font: -webkit-small-control !important;
+  span {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 2px;
+  }
+   ::ng-deep .mat-form-field-infix {
+      width: auto !important;
+  }
+}
+::ng-deep.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 0;
+}
+
+.inputPrimary {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 0 0 0 10px;
+}
+.offer_price{
+color: #874C20;
+margin-top: 3px;
+text-decoration: line-through;
+font-size: 14px;
+}
+
+.offer_percentage{
+color: #26a541 !important;
+margin-top: 3px;
+font-size: 14px;
+}
+.item{
+margin-right: 5px;
+font-size: 14px;
+}
+
+.betweenlable {
+  margin: 0 5px;
+  font-size: 14px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+
 ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
   display: none;
 }
 
-::ng-deep.mat-form-field-wrapper {
-  padding-bottom: 0 !important;
+.mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  padding-bottom: 0;
 }
 
 ::ng-deep .mat-form-field-infix {
   padding: 0;
   border-top: none;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: var(--main-color);
+}
+ghgh
+gh
+.filter_submit_button {
+  background: #ffbd8c;
+  border-radius: 15px;
+  font-size: 15px;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #763301;
+  padding: 2px 30px;
+  margin-top: 1em;
+  margin-left: 5%;
 }
 
 // ==============================================
@@ -163,6 +331,22 @@
   text-align: center;
 }
 
+.ActiveRouter {
+  color: #874c20;
+}
+
+.active {
+  font-family: Ogg;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #965627 !important;
+  font-weight: 500;
+}
+
 // intermediate ==============================================================================================
 @media only screen and (min-width: 769px) and (max-width: 1199px) {
   .card-title,
@@ -175,7 +359,7 @@
       line-height: 30px;
       color: #000000;
       display: inline-block;
-      // min-width: 180px;
+      min-width: 180px;
       white-space: nowrap;
       overflow: hidden !important;
       text-overflow: ellipsis;
@@ -193,19 +377,20 @@
 
 // ===========desktop =======================================
 @media only screen and (min-width:769px) {
-  .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-right: -15px;
-      margin-left: -30px;
-  }
   .main {
       background-color: #fffaf3;
       top: 0;
       padding: var(--section-padding);
   }
+  .banner_curousal {
+      margin: 2em 0;
+  }
   mat-icon {
       vertical-align: middle;
+  }
+  .mat-expansion-panel-header-title {
+      margin: 0;
+      font-weight: 500;
   }
   h1 {
       font-family: Ogg;
@@ -214,6 +399,102 @@
       font-size: 45px;
       font-weight: 400;
       color: var(--main-color);
+  }
+  h3 {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 37px;
+      font-weight: 400;
+      color: var(--main-color);
+  }
+  span {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 30px;
+      color: #000000;
+  }
+  .category_name {
+      background: rgba(196, 196, 196, 0.8);
+      position: absolute;
+      padding: 15px 2px;
+      width: 100%;
+      font-family: Ogg;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      bottom: 0;
+      color: #000000;
+  }
+   :host ::ng-deep.offer_section .owl-next,
+   :host ::ng-deep.offer_section .owl-prev {
+      font-size: 20px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 5px;
+      cursor: pointer;
+      color: #2c2b2b;
+      box-shadow: 3px 3px 15px #d1d9e6, -3px -3px 15px white, inset 0 0 15px #d1d9e6, inset 0 0 15px white;
+      text-shadow: 0 0 5px rgb(209 141 77 / 50%), 0 0 15px rgb(94 10 219 / 50%);
+      transition: 0.2s ease;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+  }
+   :host ::ng-deep.offer_section .owl-next {
+      position: absolute;
+      top: 50%;
+      right: 32%;
+      transform: translate(-50%, -50%);
+  }
+   :host ::ng-deep.offer_section .owl-prev {
+      position: absolute;
+      top: 50%;
+      left: 36%;
+      transform: translate(-50%, -50%);
+  }
+   :host ::ng-deep.owl-carousel .owl-stage {
+      display: flex;
+      align-items: center;
+  }
+   :host ::ng-deep.owl-carousel .caption {
+      text-align: center;
+  }
+   :host ::ng-deep .owl-carousel .owl-item.center {
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      margin-top: 0 !important;
+      flex: 0 0 auto !important;
+      img {
+          height: 400px;
+      }
+      .category_name {
+          background: rgba(196, 196, 196, 0.8);
+          position: absolute;
+          bottom: 0;
+          padding: 20px 2px;
+          width: 100%;
+          font-family: Ogg;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 25px;
+          color: #000000;
+      }
+  }
+   :host ::ng-deep .owl-carousel {
+      justify-content: space-around;
+      padding: 1em;
+      img {
+          height: 300px;
+      }
   }
   .product_section {
       display: flex;
@@ -225,11 +506,111 @@
       max-width: 300px;
       text-align: center;
   }
+  .nav_path {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 40px;
+      text-transform: capitalize;
+      color: #874c20;
+      text-align: initial;
+      mat-icon {
+          vertical-align: middle;
+          color: #000000;
+      }
+      .mat-button {
+          padding: 0;
+          min-width: 50px;
+          text-transform: uppercase;
+          letter-spacing: 0.2px;
+      }
+  }
+  .filter_title {
+      display: inline-flex;
+      padding: 0;
+      letter-spacing: 1px;
+      border: none;
+      background-color: none;
+      font-family: Ogg;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      color: #874c20;
+      mat-icon {
+          vertical-align: middle;
+          color: #874c20;
+      }
+  }
+  .example-spacer {
+      flex: 1 1 auto;
+  }
+  .filter_container {
+      padding: 2em 16px;
+      background-color: #f3eee9;
+  }
   // ===============product preview section ==========
   .preview_section {
       float: right;
-      width: 100%;
+      width: 80%;
       padding: 0 0 0 1em;
+  }
+  .mat_panel {
+      text-align: initial;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 3px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000000;
+      margin-left: 15%;
+      word-break: break-word;
+      a {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 30px;
+          letter-spacing: 0.03em;
+          font-weight: 400px;
+          text-transform: uppercase;
+          color: #000000;
+          ;
+      }
+  }
+   :host ::ng-deep.mat-expansion-panel-body {
+      padding: 0;
+  }
+  .mat-expansion-panel-header {
+      padding: 0 10px;
+      height: 40px;
+  }
+  .mat-expansion-panel-header.mat-expanded {
+      height: 40px;
+  }
+  .inputPrimary {
+      border-radius: 15px !important;
+      padding: 0 10px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #000000;
+      margin-top: 15px;
+      width: 90px;
+      border: solid 1px rgba(0, 0, 0, .12);
+  }
+  .betweenKeyInputs {
+      display: inline;
+      align-items: center;
+      font: 14px;
+  }
+   ::ng-deep[type=button]:not(:disabled),
+  button:not(:disabled):before {
+      cursor: pointer;
+      text-align: center;
   }
   .example-card {
       max-width: 400px;
@@ -260,10 +641,6 @@
       white-space: nowrap;
       overflow: hidden !important;
       text-overflow: ellipsis;
-  }
-  .card-subtitle {
-      font-size: 16px;
-      line-height: 25px;
   }
   .banner_explore_button {
       position: absolute;
@@ -303,33 +680,6 @@
   }
 }
 
-.offer_price {
-  color: #874C20;
-  margin-top: 3px;
-  text-decoration: line-through;
-  font-size: 15px;
-}
-
-.offer_percentage {
-  color: #26a541 !important;
-  margin-top: 3px;
-  font-size: 15px;
-}
-
-.item {
-  margin-right: 2%;
-}
-
-.price {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 30px;
-  text-transform: uppercase;
-  color: #000000;
-}
-
 // ===============================Mobile Responsive ===============================
 @media only screen and (max-width:768px) {
    :host ::ng-deep.loader {
@@ -341,11 +691,17 @@
       border-radius: 15px !important;
       border: 1px solid white;
   }
+  .nav_path {
+      display: none;
+  }
   main {
       background-color: #fffaf3;
   }
+  .banner_title {
+      padding: 2em 16px;
+  }
   .offer_section {
-      padding: 3em 16px 2em 16px;
+      padding: 1em 16px;
   }
   h1 {
       font-family: Ogg;
@@ -356,7 +712,80 @@
       text-align: center;
       letter-spacing: 0.05em;
       color: #763301;
-      margin-bottom: 0;
+  }
+  h3 {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 200;
+      font-size: 15px;
+      line-height: 24px;
+      text-align: center;
+      letter-spacing: 0.03em;
+      color: #763301;
+  }
+   :host ::ng-deep.offer_section .owl-next,
+   :host ::ng-deep.offer_section .owl-prev {
+      font-size: 20px;
+      position: absolute;
+      padding: 5px;
+      cursor: pointer;
+      color: #2c2b2b;
+      box-shadow: 3px 3px 15px #d1d9e6, -3px -3px 15px white, inset 0 0 15px #d1d9e6, inset 0 0 15px white;
+      text-shadow: 0 0 5px rgb(209 141 77 / 50%), 0 0 15px rgb(94 10 219 / 50%);
+      transition: 0.2s ease;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+  }
+   :host ::ng-deep.offer_section .owl-next {
+      top: 45%;
+      right: 0;
+  }
+   :host ::ng-deep.offer_section .owl-prev {
+      top: 45%;
+      left: 0;
+  }
+   :host ::ng-deep .owl-carousel .owl-item {
+      img {
+          max-height: 350px;
+          min-height: 350px;
+      }
+  }
+   :host ::ng-deep .owl-carousel .owl-item.center {
+      margin-top: 0 !important;
+      flex: 0 0 auto !important;
+      img {
+          max-height: 350px;
+          min-height: 350px;
+      }
+  }
+  .filter_section {
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #f3eee9;
+      text-align: center;
+  }
+  .category_name {
+      background-color: rgba(196, 196, 196, 0.8);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      font-family: Ogg;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 25px;
+      line-height: 30px;
+      padding: 17px 0 6px 0;
+      justify-content: center;
+      text-align: center;
+      display: flex;
+      color: #000000;
   }
   h1 {
       font-family: Ogg;
@@ -450,6 +879,70 @@
           color: rgb(226, 45, 72);
       }
   }
+  .filter_title_top {
+      font-weight: 500;
+      font-size: 16px;
+  }
+   ::ng-deep.mat-snack-bar-container {
+      max-width: 250px !important;
+      margin-top: 3.7em !important;
+      color: #ff4081;
+  }
+  .mat_panel {
+      text-align: initial;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 30px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #000000;
+      margin-left: 15%;
+      a {
+          color: #000000;
+          line-height: 35px;
+      }
+      [type=button]:not(:disabled),
+      button[_ngcontent-ikl-c148]:not(:disabled):before {
+          cursor: pointer;
+          color: var(--main-color) !important;
+          text-align: center;
+      }
+  }
+  .inputPrimary {
+      border-radius: 15px !important;
+      padding: 1px 4px 0px 15px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #000000;
+      margin-top: 15px;
+      width: 85px;
+      height: 30px;
+      border: solid 1px rgba(0, 0, 0, .12);
+  }
+  .betweenKeyInputs {
+      display: inline;
+      align-items: center;
+      font: 14px;
+  }
+   :host ::ng-deep.mat-expansion-panel-body {
+      padding: 0;
+  }
+  .mat-expansion-panel-header {
+      padding: 0 10px;
+      height: 40px;
+  }
+  .mat-expansion-panel-header.mat-expanded {
+      height: 40px;
+  }
+   ::ng-deep[type=button]:not(:disabled),
+  button:not(:disabled):before {
+      cursor: pointer;
+      text-align: center;
+  }
 }
 
 @media only screen and (max-width:768px) {
@@ -457,8 +950,8 @@
       box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
       border-radius: 15px;
       img {
-          min-height: 300px;
-          max-height: 300px;
+          min-height: 250px;
+          max-height: 250px;
           width: 100%;
           object-fit: cover;
           padding: 3%;
@@ -466,8 +959,8 @@
           transition-duration: 0.4s;
       }
       img:hover {
-          min-height: 300px;
-          max-height: 300px;
+          min-height: 250px;
+          max-height: 250px;
           width: 100%;
           object-fit: cover;
           padding: 0;
@@ -475,19 +968,5 @@
           border-radius: 15px;
           filter: drop-shadow(2px 4px 8px #585858);
       }
-  }
-}
-
-@media only screen and (min-width:128px) {
-  .card img {
-      min-height: 250px;
-      max-height: 250px;
-  }
-  .card img:hover {
-      min-height: 250px;
-      max-height: 250px;
-  }
-  span {
-      line-height: 0;
   }
 }
