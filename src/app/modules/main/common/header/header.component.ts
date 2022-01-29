@@ -1,6 +1,7 @@
+/* eslint-disable dot-notation */
 import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild, } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainService } from '../../../service/main.service';
 import { HeaderService } from '../../../service/header.service';
 import { UserService } from '../../../service/user.service';
@@ -56,6 +57,10 @@ export class HeaderComponent implements OnInit {
 
   logoutNeeded = true;
 
+  searchValue = '';
+
+  linkFrom = '';
+
   size: any[] = [
     { name: 'FR ',
       completed: false },
@@ -93,6 +98,7 @@ export class HeaderComponent implements OnInit {
     private readonly headerService: HeaderService,
     private readonly userService: UserService,
     private readonly productService: ProductService,
+    private readonly activatedRoute: ActivatedRoute,
     public dialog: MatDialog
   ) {
 
@@ -119,6 +125,19 @@ export class HeaderComponent implements OnInit {
     this.toggleClass = false;
     AOS.init();
     this.setdefaultValue();
+
+    this.activatedRoute.params.subscribe((params) => {
+
+      this.searchValue = params['value'];
+      this.linkFrom = params['from'];
+
+      if (this.linkFrom === 'searchResult') {
+
+        this.searchForm.get('inputValue')?.setValue(this.searchValue);
+
+      }
+
+    });
 
 
     if (localStorage.getItem(ACCESS_TOKEN_ID)) {
@@ -206,7 +225,8 @@ export class HeaderComponent implements OnInit {
 
       const language = this.searchForm.get('inputValue')?.value;
 
-      this.router.navigate([ '/offersales' ], { queryParams: {value: language,
+
+      this.router.navigate([ '/specialProducts' ], { queryParams: {value: language,
         from: 'searchResult'} });
 
     }

@@ -36,7 +36,7 @@
 
               <div class="product_list" *ngFor="let cart of carts">
                 <div class="product_image">
-                  <img src="{{cart['color']['image_one']['original']}}" alt="">
+                  <img *ngIf="cart['color']!==null" src="{{cart['color']['image_one']['original']}}" alt="">
                 </div>
                 <div class="product_details">
                   <div class="title_price">
@@ -144,7 +144,7 @@
 
 
                   <div class="product_image">
-                    <img src="{{cart['color']['image_one']['original']}}"
+                    <img *ngIf="cart['color']!==null" src="{{cart['color']['image_one']['original']}}"
                       alt="">
                   </div>
                   <div class="product_details">
@@ -246,7 +246,7 @@
           </div>
 
 
-          
+
         </div>
 
       </section>

@@ -36,7 +36,7 @@ const routes: Routes = [
         component: ListProductComponent,
       },
       {
-        path: 'previewProduct/:id',
+        path: 'previewProduct',
         component: PreviewProductComponent,
       },
       {
@@ -44,7 +44,7 @@ const routes: Routes = [
         component: UserInfoComponent,
       },
       {
-        path: 'offersales',
+        path: 'specialProducts',
         component: OfferSalesComponent,
       },
       {

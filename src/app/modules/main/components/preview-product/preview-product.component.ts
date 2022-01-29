@@ -1,5 +1,6 @@
+/* eslint-disable dot-notation */
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as AOS from 'aos';
 import { PreviewProductService } from '../../../service/preview-product.service';
@@ -7,9 +8,10 @@ import { DashboardService } from '../../../service/dashboard.service';
 import { ACCESS_TOKEN_ID, CURRENCY_TYPE } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/modules/service/user.service';
 export interface subtasks {
-  name: string;
-  Available: boolean;
+  name: string
+  Available: boolean
 
 }
 @Component({
@@ -23,11 +25,11 @@ export class PreviewProductComponent implements OnInit {
 
   productName = '';
 
-  productPrice = 0;
+  productPrice = '';
 
-  offerPrice = 0;
+  offerPrice = '';
 
-  offerPercentage = 0;
+  offerPercentage = '';
 
   timeOutDuration:number;
 
@@ -45,10 +47,12 @@ export class PreviewProductComponent implements OnInit {
 
   articleList: any[] = [];
 
-
   product: Array<string> = [];
 
   reviewS: any;
+
+
+  colorIdx = 0;
 
   images: any;
 
@@ -62,14 +66,13 @@ export class PreviewProductComponent implements OnInit {
 
   previewlg = '';
 
-
   aboutProduct = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nullam faucibus amet tristique commodo nibh proin. Laoreet integer odio pretium semper posuere in purus tristique fringilla.Suspendisse nibh massa malesuada tristique posuere. Enim ac tempus interdum egestas justo et.';
 
   isFirst = false;
 
   panelOpenState = false;
 
-  size: any[] = [];
+  sizeList: any[] = [];
 
   colors: any[] = [];
 
@@ -149,7 +152,7 @@ export class PreviewProductComponent implements OnInit {
   offerSale: any[] = [];
 
   contactForm: FormGroup = new FormGroup({
-    product: new FormControl(null),
+    product: new FormControl(),
     size: new FormControl(null),
     color: new FormControl(null),
     quantity: new FormControl(1),
@@ -162,13 +165,32 @@ export class PreviewProductComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private dashboardService: DashboardService,
     private previewProductService: PreviewProductService,
-    private readonly productService: ProductService,) {
-
+    private readonly productService: ProductService,
+    public readonly userService: UserService,) {
 
     this.timeOutDuration = 700;
     this.reviewS = [];
 
   }
+
+  checkoutForm: FormGroup = new FormGroup({
+
+    color: new FormControl(0),
+    size: new FormControl(0),
+    email: new FormControl('', [ Validators.required ]),
+    address: new FormControl('', [ Validators.required ]),
+    city: new FormControl('', [ Validators.required ]),
+    country: new FormControl('', [ Validators.required ]),
+    pincode: new FormControl('', [ Validators.required ]),
+    firstName: new FormControl('', [ Validators.required ]),
+    lastName: new FormControl(1),
+    phone: new FormControl('', [ Validators.required ]),
+    currency: new FormControl('', [ Validators.required ]),
+    product: new FormControl(0),
+    unitprice: new FormControl(0),
+    quantity: new FormControl(1),
+
+  });
 
   // eslint-disable-next-line class-methods-use-this
   counter(index: number) {
@@ -191,52 +213,93 @@ export class PreviewProductComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.router.events.subscribe((evt) => {
-
-      if (!(evt instanceof NavigationEnd)) {
-
-        return;
-
-      }
-      window.scrollTo(0, 0);
-
-    });
-
-
     this.dashboardService.getOfferSales().subscribe((data: any) => {
 
-      this.offerSale = data;
+      this.offerSale = data['products'];
 
     });
-    this.activatedRoute.params.subscribe((params) => {
 
-      // eslint-disable-next-line dot-notation
-      this.productId = Number.parseInt(params['id'], 10);
+    this.activatedRoute.queryParams.subscribe((params) => {
+
+
+      this.productId = Number.parseInt(params['from'], 10);
+
+
+      // eslint-disable-next-line max-statements
       this.previewProductService.getDataofSubSubCategory(this.productId).subscribe((data) => {
+
 
         this.contactForm.get('product')?.setValue(data.id);
 
+        this.checkoutForm.get('product')?.setValue(data.id);
+
+
         this.productName = data.name;
 
-
-        this.productOptions = data.options;
+        this.setCurrencyValue(data);
 
         if (data.options.length > 0) {
 
-          this.contactForm.get('color')?.setValue(this.productOptions[0].id);
-          this.productOptions.forEach((element) => {
 
-            this.colors.push(element.colorhash);
+          this.productOptions = data.options;
 
-            this.colorsName.push(element.color);
 
-          });
-          this.changeColor(this.colors[0]);
+          if (params['colorId']) {
+
+            this.colorIdx = Number.parseInt(params['colorId'], 10);
+
+            this.colorIdx = this.colorIdx;
+
+
+            this.contactForm.get('color')?.setValue(this.colorIdx);
+            this.checkoutForm.get('color')?.setValue(this.colorIdx);
+
+            this.productOptions.forEach((element) => {
+
+              this.sizeList = element.sizes;
+
+
+              if (element.id === this.colorIdx) {
+
+
+                if (params['sizeId']) {
+
+                  const sizeId = Number.parseInt(params['sizeId'], 10);
+
+
+                  this.contactForm.get('size')?.setValue(sizeId);
+
+                  this.checkoutForm.get('size')?.setValue(sizeId);
+
+                }
+                this.previewSm1 = element.image_one.original;
+                this.previewSm2 = element.image_two.original;
+                this.previewSm3 = element.image_three.original;
+                this.previewlg = this.previewSm1;
+
+              }
+
+            });
+
+
+          } else {
+
+            this.previewSm1 = data.options[0].image_one.original;
+            this.previewSm2 = data.options[0].image_two.original;
+            this.previewSm3 = data.options[0].image_three.original;
+            this.previewlg = this.previewSm1;
+
+            this.sizeList = data.options[0].sizes;
+
+          }
 
         } else {
 
           this.previewSm1 = data.image.original;
+          this.previewSm2 = data.image.original;
+          this.previewSm3 = data.image.original;
           this.previewlg = this.previewSm1;
+
 
         }
 
@@ -246,54 +309,6 @@ export class PreviewProductComponent implements OnInit {
 
   }
 
-
-  setCurrencyValue() {
-
-    if (localStorage.getItem(CURRENCY_TYPE)) {
-
-      const cValue = localStorage.getItem(CURRENCY_TYPE);
-      switch (cValue) {
-
-      case 'EUR': {
-
-        this.currencyType = 'EUR';
-        break;
-
-      }
-      case 'USD': {
-
-        this.currencyType = 'USD';
-        break;
-
-      }
-      case 'SAR': {
-
-        this.currencyType = 'SAR';
-        break;
-
-      }
-      case 'GBP': {
-
-        this.currencyType = 'GBP';
-        break;
-
-      }
-      case 'AED': {
-
-        this.currencyType = 'AED';
-        break;
-
-      }
-
-      }
-
-    } else {
-
-      this.currencyType = 'EUR';
-
-    }
-
-  }
 
   changelgImage(event: any): void {
 
@@ -309,38 +324,99 @@ export class PreviewProductComponent implements OnInit {
   };
 
 
-  changeColor(color: string) {
+  changeColor(colorId: number) {
+
+    this.router.navigate([ 'previewProduct', ], { queryParams: {from: this.productId,
+      colorId } });
+
+  }
 
 
-    this.contactForm.get('size')?.reset();
-    this.productOptions.forEach((element) => {
+  changeSize(sizeId :number) {
 
-      if (element.colorhash === color) {
+    this.router.navigate([ 'previewProduct' ], { queryParams: {from: this.productId,
+      colorId: this.colorIdx,
+      sizeId } });
 
+  }
 
-        this.size = element.sizes;
+  // eslint-disable-next-line max-statements
+  setCurrencyValue(datas:any) {
 
+    if (localStorage.getItem(CURRENCY_TYPE)) {
 
-        if (this.size.length !== 0) {
+      const cValue = localStorage.getItem(CURRENCY_TYPE);
+      switch (cValue) {
 
+      case 'EUR': {
 
-          this.contactForm.get('size')?.setValidators(Validators.required);
-          this.contactForm.get('size')?.setValue(this.size[0].id);
+        this.currencyType = 'EUR';
 
-        } else {
+        this.offerPrice = `€${datas.OfferEuro}`;
 
+        this.productPrice = `€${datas.productpriceEuro}`;
 
-          this.contactForm.get('size')?.clearValidators();
+        this.offerPercentage = `${datas.OfferPecentageEuro}`;
+        break;
 
-        }
-        this.previewSm1 = element.image_one.original;
-        this.previewSm2 = element.image_two.original;
-        this.previewSm3 = element.image_three.original;
-        this.previewlg = this.previewSm1;
+      }
+      case 'USD': {
+
+        this.currencyType = 'USD';
+        this.offerPrice = `$${datas.OfferDollar}`;
+
+        this.productPrice = `$${datas.productpriceDollar}`;
+
+        this.offerPercentage = `${datas.OfferPecentageDollar}`;
+        break;
+
+      }
+      case 'SAR': {
+
+        this.currencyType = 'SAR';
+        this.offerPrice = `SAR${datas.OfferSAR}`;
+
+        this.productPrice = `SAR${datas.productpriceSAR}`;
+
+        this.offerPercentage = `${datas.OfferPecentageSAR}`;
+        break;
+
+      }
+      case 'GBP': {
+
+        this.currencyType = 'GBP';
+        this.offerPrice = `£${datas.OfferSterling}`;
+
+        this.productPrice = `£${datas.productpriceSterling}`;
+
+        this.offerPercentage = `${datas.OfferPecentageSterling}`;
+        break;
+
+      }
+      case 'AED': {
+
+        this.currencyType = 'AED';
+        this.offerPrice = `د.إ${datas.OfferDirham}`;
+
+        this.productPrice = `د.إ${datas.productpriceDirham}`;
+
+        this.offerPercentage = `${datas.OfferPecentageDirham}`;
+        break;
 
       }
 
-    });
+      }
+
+    } else {
+
+      this.currencyType = 'USD';
+      this.offerPrice = `$${datas.OfferDollar}`;
+
+      this.productPrice = `$${datas.productpriceDollar}`;
+
+      this.offerPercentage = `${datas.OfferPecentageDollar}`;
+
+    }
 
   }
 
@@ -369,26 +445,46 @@ export class PreviewProductComponent implements OnInit {
 
   addtoCart(): void {
 
-    if (!this.contactForm.valid) {
 
-    } else if (localStorage.getItem(ACCESS_TOKEN_ID) !== null) {
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-      this.productService.addtoCart(this.contactForm.value).subscribe((data) => {
 
-        this.cartButton = 'go to cart';
-        window.location.reload();
-        this._snackBar.open('product added to cart !', '', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
+      if (this.productOptions.length > 0) {
+
+        this.contactForm.controls['color']?.setValidators(Validators.required);
+
+        this.contactForm.controls['color']?.updateValueAndValidity();
+
+      }
+
+      if (this.sizeList.length > 0) {
+
+        this.contactForm.controls['size']?.setValidators(Validators.required);
+        this.contactForm.controls['size']?.updateValueAndValidity();
+
+      }
+
+      if (this.contactForm.valid) {
+
+        this.productService.addtoCart(this.contactForm.value).subscribe((data) => {
+
+
+          this.cartButton = 'go to cart';
+          window.location.reload();
+          this._snackBar.open('product added to cart !', '', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+          });
+          setTimeout(() => {
+
+
+            this._snackBar.dismiss();
+
+          }, this.timeOutDuration);
+
         });
-        setTimeout(() => {
 
-          this._snackBar.dismiss();
-
-        }, this.timeOutDuration);
-
-      });
-
+      }
 
     } else {
 
@@ -404,24 +500,73 @@ export class PreviewProductComponent implements OnInit {
 
     }
 
-  }
 
+  }
 
   gotoCheckout(): void {
 
-    if (localStorage.getItem(ACCESS_TOKEN_ID) === null) {
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-      this.router.navigate([ 'login' ]);
+
+      if (this.productOptions.length > 0) {
+
+        this.contactForm.controls['color']?.setValidators(Validators.required);
+
+        this.contactForm.controls['color']?.updateValueAndValidity();
+
+      }
+
+      if (this.sizeList.length > 0) {
+
+        this.contactForm.controls['size']?.setValidators(Validators.required);
+        this.contactForm.controls['size']?.updateValueAndValidity();
+
+      }
+
+      if (this.contactForm.valid) {
+
+        localStorage.getItem(CURRENCY_TYPE);
+        this.userService.getUserData().subscribe((data: any) => {
+
+          if (data) {
+
+            this.checkoutForm.get('firstName')?.setValue(data[0].address[0].firstName);
+            this.checkoutForm.get('lastName')?.setValue(data[0].address[0].lastName);
+            this.checkoutForm.get('phone')?.setValue(data[0].address[0].phone);
+            this.checkoutForm.get('email')?.setValue(data[0].address[0].email);
+            this.checkoutForm.get('address')?.setValue(data[0].address[0].address);
+            this.checkoutForm.get('city')?.setValue(data[0].address[0].city);
+            this.checkoutForm.get('country')?.setValue(data[0].address[0].country);
+            this.checkoutForm.get('pincode')?.setValue(data[0].address[0].pincode);
+            this.checkoutForm.get('currency')?.setValue(localStorage.getItem(CURRENCY_TYPE));
+            this.productService.singleCheckOut(this.checkoutForm.value).subscribe((element) => {
+
+              if (element) {
+
+                this.productService.redirecttoCheckout(element.sessionId);
+
+              }
+
+            });
+
+          } else {
+
+            this.router.navigate([ '/login' ]);
+
+          }
+
+        });
+
+      }
 
     }
 
   }
 
-
   productPreview(id: number): void {
 
-    const link = [ 'previewProduct', id ];
-    this.router.navigate(link);
+    const link = [ 'previewProduct' ];
+    this.router.navigate(link, { queryParams: {from: id }});
 
   }
 

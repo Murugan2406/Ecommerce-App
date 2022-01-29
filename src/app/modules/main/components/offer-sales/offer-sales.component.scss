@@ -13,6 +13,7 @@
 }
 .Filtertogglebutton{
   text-transform: lowercase;
+  flex-direction: column;
 }
 ::ng-deep[type=button]:not(:disabled),
 button:not(:disabled):before {
@@ -39,11 +40,6 @@ button:not(:disabled):before {
   background-color: transparent;
 }
 
-.toggle_body {
-  column-count: 2;
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-}
 
 :host ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: var(--main-color);
@@ -78,7 +74,7 @@ button:not(:disabled):before {
 
 .mat-button-toggle {
   border-radius: 15px !important;
-  padding: 3px 10px;
+  padding: 3px 0;
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
@@ -498,6 +494,7 @@ gh
   }
   .product_section {
       display: flex;
+      justify-content: space-between;
   }
   .filter_section {
       float: left;
@@ -652,9 +649,7 @@ gh
           padding-top: 1px;
       }
   }
-  .row {
-      margin-top: 1em;
-  }
+
   .card {
       box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
       border-radius: 15px;

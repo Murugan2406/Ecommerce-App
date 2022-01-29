@@ -62,7 +62,6 @@
               </div>
               </mat-expansion-panel>
             </mat-accordion>
-
             <mat-accordion >
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
@@ -96,8 +95,7 @@
 
                 <div class="toggle_body mat_panel">
                   <section>
-                    <mat-button-toggle-group  aria-label="Font Style"
-                      *ngFor="let subtask of sizeList">
+                    <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue" *ngFor="let subtask of sizeList">
                       <mat-button-toggle value="{{subtask.size}}" (click)="filterbySize(subtask.size)" class="Filtertogglebutton">{{subtask.size}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -110,6 +108,7 @@
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
+
                   <mat-panel-title class="filter_title">
                     Color
                   </mat-panel-title>
@@ -117,13 +116,14 @@
 
                 <div class="toggle_body mat_panel">
                   <section>
-                    <mat-button-toggle-group aria-label="Font Style"
-                      *ngFor="let subtask of colorList">
-                      <mat-button-toggle value="{{subtask.color}}" (click)="filterbycolor(subtask.color)" class="Filtertogglebutton">{{subtask.color}}
-                      </mat-button-toggle>
-                    </mat-button-toggle-group>
+
+                    <mat-button-toggle-group [(ngModel)]="colorValue" *ngFor="let brand of colorList" aria-label="Font Style">
+                    <mat-button-toggle   value="{{brand.color}}" (click)="filterbycolor(brand.color)" class="Filtertogglebutton">{{brand.color}}
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
                   </section>
                 </div>
+
 
               </mat-expansion-panel>
             </mat-accordion>
@@ -195,14 +195,14 @@
       <div class="row" *ngIf="nonAvailableProducts === false ">
         <div class="col-xl-3 col-md-4 col-lg-4 col-sm-4 col-6" *ngFor="let img of dataSource$ | async">
           <div class="card">
-            <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" class=""
-              [routerLink]="'/previewProduct/' + img.id">
+            <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" onerror ="this.src='../../../../../../assets/images/Logo_VOUI.svg' " class=""
+              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
             <button mat-icon-button class="banner_explore_button" (click)="openSnackBar(img.id)" matRipple
               matRippleColor="green">
               <mat-icon>favorite_border</mat-icon>
             </button>
 
-            <div class="card-body" [routerLink]="'/previewProduct/' + img.id">
+            <div class="card-body"   [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
               <div class="card-title">{{img.name}}</div>
               <div class="card-subtitle text-muted">Card subtitlle</div>
               <div>

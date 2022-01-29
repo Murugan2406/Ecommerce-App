@@ -201,17 +201,14 @@ export class DashboardComponent implements OnInit {
     });
     this.dashboardService.getOfferSales().subscribe((data:any) => {
 
-      this.offerSale = data;
+
+      this.offerSale = data['products'];
 
 
     });
     this.dashboardService.getNewArrivals().subscribe((data: any) => {
 
-      data.forEach((element: { [x: string]: any; }) => {
-
-        this.newArraivals.push(element['product']);
-
-      });
+      this.newArraivals = data['products'];
 
 
     });
@@ -324,11 +321,5 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  productPreview(id: number): void {
-
-    const link = [ 'offersales' ];
-    this.router.navigate(link);
-
-  }
 
 }

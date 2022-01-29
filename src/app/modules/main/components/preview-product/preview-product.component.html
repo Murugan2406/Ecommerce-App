@@ -41,17 +41,9 @@
               </h2>
               <div class="pricing">
 
-                  <b class='item' *ngIf="currencyType === 'EUR' "> €{{offerPrice}}</b>
-                  <b class='item' *ngIf="currencyType === 'USD' "> ${{offerPrice}}</b>
-                  <b class='item' *ngIf="currencyType === 'SAR' "> SAR{{offerPrice}} </b>
-                  <b class='item' *ngIf="currencyType === 'GBP' ">£{{offerPrice}}</b>
-                  <b class='item' *ngIf="currencyType === 'AED' ">د.إ{{offerPrice}}</b>
-                  <span class='offer_price item' *ngIf="currencyType === 'EUR' "> €{{productPrice}} </span>
-                  <span class='offer_price item' *ngIf="currencyType === 'USD' "> ${{productPrice}}</span>
-                  <span class='offer_price item' *ngIf="currencyType === 'SAR' "> SAR{{productPrice}} </span>
-                  <span class='offer_price item' *ngIf="currencyType === 'GBP' "> £{{productPrice}}</span>
-                  <span class='offer_price item' *ngIf="currencyType === 'AED' "> د.إ{{productPrice}}}</span>
-                  <span class='offerPercentage item '*ngIf="currencyType === 'EUR' ">{{offerPercentage}}off</span>
+                  <b class='item' >{{offerPrice}}</b>
+                  <span class='offer_price item'> {{productPrice}} </span>
+                  <span class='offerPercentage item' >{{offerPercentage}}off</span>
 
 
               </div>
@@ -74,9 +66,9 @@
                   <span>Color &nbsp; &nbsp;</span>
                     <mat-button-toggle-group class="choose_color" formControlName="color" >
                       <mat-button-toggle *ngFor="let color of productOptions" [style.background]="color['colorhash']"
-                       (change)="changeColor(color['colorhash'])" class="xxx" title="{{color['colorhash'] }}" [value]="color['id']"></mat-button-toggle>
+                       (change)="changeColor(color['id'])" class="xxx" title="{{color['color'] }}" [value]="color['id']"></mat-button-toggle>
                       </mat-button-toggle-group>
-                    <mat-error *ngIf="contactForm.controls['color'].hasError('required')">Choose color to proceed </mat-error>
+                    <mat-error *ngIf="contactForm.controls['color'].hasError('required')">*Choose color to proceed </mat-error>
 
 
               </div>
@@ -84,11 +76,11 @@
               <div class="choose_size">
                   <span>Size &nbsp;</span>
                   <mat-button-toggle-group formControlName="size">
-                      <mat-button-toggle *ngFor="let subtask of size"  class="mat_toggle_buttton" [value]="subtask['id']">
-                          {{subtask.size}}
+                      <mat-button-toggle *ngFor="let size of sizeList"   class="mat_toggle_buttton" [value]="size['id']" (change)="changeSize(size['id'])">
+                          {{size.size}}
                       </mat-button-toggle>
                   </mat-button-toggle-group>
-                  <mat-error *ngIf="contactForm.controls['size'].hasError('required')">Choose size to proceed</mat-error>
+                  <mat-error *ngIf="contactForm.controls['size'].hasError('required')">*Choose size to proceed</mat-error>
               </div>
               <div class="action_button">
                   <button mat-button type="submit" class="cart_button">{{cartButton}}</button>

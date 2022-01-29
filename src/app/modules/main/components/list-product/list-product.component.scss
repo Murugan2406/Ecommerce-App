@@ -159,8 +159,7 @@ font-size: 14px;
 ::ng-deep .mat-expansion-indicator::after {
   color: var(--main-color);
 }
-ghgh
-gh
+
 .filter_submit_button {
   background: #ffbd8c;
   border-radius: 15px;
@@ -492,6 +491,7 @@ gh
   }
   .product_section {
       display: flex;
+      justify-content: space-between;
   }
   .filter_section {
       float: left;

@@ -58,6 +58,11 @@ export const CHECKOUT_API = 'checkoutcart/';
 export const CHECKOUT_API_URI = `${BASE_URI}${CHECKOUT_API}`;
 
 
+// SINGLE CHECKOUT API
+export const SINGLE_CHECKOUT_API = 'checkoutproduct/';
+export const SINGLE_CHECKOUT_API_URI = `${BASE_URI}${SINGLE_CHECKOUT_API}`;
+
+
 // ORDERS HISTORY  API
 export const ORDERS_API = 'get-orders/';
 export const ORDERS_API_URI = `${BASE_URI}${ORDERS_API}`;

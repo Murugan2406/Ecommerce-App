@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../../service/user.service';
-import { ACCESS_TOKEN_ID, VERIFY } from '../../../../../assets/API/server-api';
+import { ACCESS_TOKEN_ID } from '../../../../../assets/API/server-api';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,9 +22,10 @@ export class LoginComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
+
     private readonly userService: UserService,
-    private readonly _snackBar: MatSnackBar,) {
+    private readonly _snackBar: MatSnackBar,
+    private _location: Location) {
 
     const passwordlength = 5;
     this.timeOutduration = 3000;
@@ -65,7 +67,7 @@ export class LoginComponent {
         this.userService.login(this.contactForm.value).subscribe((data: any) => {
 
           localStorage.setItem(ACCESS_TOKEN_ID, data.access);
-          localStorage.setItem(VERIFY, 'true');
+
           if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
             this._snackBar.open('login successfull !', '', {
@@ -77,7 +79,7 @@ export class LoginComponent {
               this._snackBar.dismiss();
 
             }, this.timeOutduration);
-            this.router.navigate([ '/' ]);
+            this._location.back();
 
           }
 
@@ -88,6 +90,7 @@ export class LoginComponent {
         });
 
       }
+
 
     }
 

@@ -26,6 +26,8 @@ export class OfferSalesComponent implements OnInit {
 
   brandValue?: string;
 
+  colorValue?: string;
+
   sectionTitle = '';
 
   sectionSubtitle = '';
@@ -58,6 +60,12 @@ export class OfferSalesComponent implements OnInit {
 
   products: any = [];
 
+
+  fontStyleControl = new FormControl();
+
+
+  filterProducts:any = [];
+
   sortingArray: any[] = [];
 
   brandList: any[] = [];
@@ -79,32 +87,6 @@ export class OfferSalesComponent implements OnInit {
   data:any[] = [ {product: 1} ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
-
-  subtasks: any[] = [
-    { name: 'Oppo',
-      completed: false },
-    { name: 'Vivo',
-      completed: false },
-    { name: 'Realme',
-      completed: false },
-  ];
-
-  size: any[] = [
-    { name: 'one size ',
-      completed: false },
-    { name: 'S',
-      completed: false },
-    { name: 'M',
-      completed: false },
-    { name: 'L',
-      completed: false },
-    { name: 'XL',
-      completed: false },
-    { name: 'XXL',
-      completed: false },
-    { name: 'XXXl',
-      completed: false },
-  ];
 
   offerOptions: OwlOptions = {
     loop: true,
@@ -211,46 +193,130 @@ export class OfferSalesComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
 
-      console.log(params);
-
 
       this.linkFrom = params['from'];
       this.searchValue = params['value'];
 
       if (this.linkFrom === 'searchResult') {
 
-        this.headerService.getSearchResult(this.searchValue).subscribe((result: any) => {
+        this.sectionTitle = 'Search Result';
 
-          console.log(result);
+        this.getDataforSearch(this.searchValue);
 
+      } else if (this.linkFrom === 'offerSales') {
 
-          this.products = result['products'];
-          this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource$ = this.dataSource.connect();
-          this.dataSource.paginator = this.paginator;
+        this.sectionTitle = 'Offer Sales';
 
+        this.getDataforOffersales();
 
-        });
+      } else if (this.linkFrom === 'newArrivals') {
 
-      } else {
+        this.sectionTitle = 'New Arrivals';
 
+        this.getDataforNewArraivals();
 
-        this.dashboardService.getOfferSales().subscribe((data: any) => {
+      } else if (this.linkFrom === 'bagsTrends') {
 
-          console.log(data);
+        this.sectionTitle = 'Trending Bags';
 
-
-          this.products = data;
-          this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource$ = this.dataSource.connect();
-          this.dataSource.paginator = this.paginator;
-
-        });
+        this.getDataforTrendingProducts();
 
       }
 
     });
 
+
+  }
+
+
+  getDataforSearch(searchValue:string) {
+
+    this.headerService.getSearchResult(searchValue).subscribe((result: any) => {
+
+
+      this.brandList = result['availablebrands'];
+
+      this.sizeList = result['availableSizes'];
+
+      this.colorList = result['availabeColours'];
+
+      this.products = result['products'];
+
+      this.filterProducts = result['products'];
+      this.dataSourceUpdation(this.products);
+
+
+    });
+
+  }
+
+
+  getDataforOffersales() {
+
+    this.dashboardService.getOfferSales().subscribe((data: any) => {
+
+
+      this.brandList = data['availablebrands'];
+
+      this.sizeList = data['availableSizes'];
+
+      this.colorList = data['availabeColours'];
+
+      this.products = data['products'];
+
+      this.filterProducts = data['products'];
+
+      this.dataSourceUpdation(this.products);
+
+    });
+
+  }
+
+
+  getDataforNewArraivals() {
+
+    this.dashboardService.getNewArrivals().subscribe((data: any) => {
+
+
+      this.brandList = data['availablebrands'];
+
+      this.sizeList = data['availableSizes'];
+
+      this.colorList = data['availabeColours'];
+
+      this.products = data['products'];
+
+      this.filterProducts = data['products'];
+
+      this.dataSourceUpdation(this.products);
+
+    });
+
+  }
+
+
+  getDataforTrendingProducts() {
+
+    this.dashboardService.getBottomProducts().subscribe((data: any) => {
+
+
+      data.forEach((element: { [x: string]: any; }) => {
+
+        this.products.push(element['product']);
+
+      });
+      this.dataSourceUpdation(this.products);
+
+
+    });
+
+  }
+
+  dataSourceUpdation(products: any[]) {
+
+    this.dataSource = new MatTableDataSource(products);
+    this.dataSource$ = this.dataSource.connect();
+    this.dataSource.paginator = this.paginator;
 
   }
 
@@ -323,8 +389,6 @@ export class OfferSalesComponent implements OnInit {
         new Date(secondArray.created_date).getTime() -
             new Date(firsyArray.created_date).getTime()
       );
-      break;
-    default:
       break;
 
     }
@@ -458,13 +522,18 @@ export class OfferSalesComponent implements OnInit {
 
     const question: any = [];
     const question$ = [ ...this.products ];
+    let idx: any[] = [];
 
     question$.forEach((element: { [x: string]: any }) => {
+
 
       if (element['options'].length > 0) {
 
         const questionS = element['options'];
+
+
         questionS.forEach((data: { [x: string]: any }) => {
+
 
           if (data['sizes'].length > 0) {
 
@@ -473,7 +542,13 @@ export class OfferSalesComponent implements OnInit {
 
               if (paramss === ele['size']) {
 
-                question.push(element);
+                if (!idx.includes(element['id'])) {
+
+                  question.push(element);
+
+                }
+
+                idx.push(element['id']);
 
               } else {
 
@@ -487,8 +562,8 @@ export class OfferSalesComponent implements OnInit {
 
         });
 
+        idx = idx.sort();
 
-      } else {
 
       }
 
@@ -497,33 +572,26 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
-  filterbycolor(param: string) {
+  filterbycolor() {
 
-    const params = param.toLowerCase();
     const question: any = [];
-    const question$ = [ ...this.products ];
+    const question$ = [ ...this.filterProducts ];
+
+
     question$.forEach((element: { [x: string]: any }) => {
 
       if (element['options'].length > 0) {
 
-        const questionS = element['options'];
-        questionS.forEach((data: { [x: string]: any }) => {
+        element['options'].forEach((ele: any) => {
 
-          if (params === data['color']) {
-
-            question.push(element);
-
-          }
+          question.push(ele);
 
         });
-
-      } else {
 
       }
 
     });
 
-    this.updateValueChanges(question);
 
   }
 
@@ -538,7 +606,7 @@ export class OfferSalesComponent implements OnInit {
 
       if (element['brand']) {
 
-        if (element['brand'].name === paramss) {
+        if (paramss === element['brand'].name.toLowerCase()) {
 
           question.push(element);
 

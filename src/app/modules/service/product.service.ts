@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import {WISHLIST_API_URI, CART_API_URI, CHECKOUT_API_URI, ACCESS_TOKEN_ID} from '../../../assets/API/server-api';
+import {WISHLIST_API_URI, CART_API_URI, CHECKOUT_API_URI, ACCESS_TOKEN_ID, SINGLE_CHECKOUT_API_URI} from '../../../assets/API/server-api';
 import {reditectToStripe as _reditectToStripe } from '../utils/classmethod.util';
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,11 @@ export class ProductService {
 
   }
 
-  getWishlist():any {
+  getWishlist(accessToken:string | null):any {
 
     const headers = new HttpHeaders({
       'content-type': 'application/json',
-      'Authorization': `Bearer ${this.token}`,
+      'Authorization': `Bearer ${accessToken}`,
     });
     return this.http.get(`${WISHLIST_API_URI}`, { headers });
 
@@ -116,7 +116,28 @@ export class ProductService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`,
     });
+
+
     return this.http.post(`${CHECKOUT_API_URI}`, data$, { headers }).pipe(
+      catchError((err) => {
+
+        console.error(err);
+        return throwError(err);
+
+      })
+    );
+
+  }
+
+  singleCheckOut(data:any): Observable<any> {
+
+    const data$ = JSON.stringify(data);
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
+    });
+
+    return this.http.post(`${SINGLE_CHECKOUT_API_URI}`, data$, { headers }).pipe(
       catchError((err) => {
 
         console.error(err);

@@ -1,3 +1,5 @@
+
+
 export const findColumnValue = (element:any, column:string,
   parsingFn?:(elm:any, clm:string)=>string):string => {
 
@@ -22,7 +24,13 @@ export const reditectToStripe = (token:string) => {
 
   const stripe = Stripe('pk_test_ED9cjwAaAIi6XvKCXzwGOu6100MabxSaDJ');
   stripe.redirectToCheckout({
-    sessionId: token
+    sessionId: token,
+
+  }).then((res:any) => {
+
+    console.log(res);
+
   });
 
 };
+

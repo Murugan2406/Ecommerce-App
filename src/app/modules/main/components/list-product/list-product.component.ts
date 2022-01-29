@@ -29,6 +29,8 @@ export class ListProductComponent implements OnInit {
 
   brandValue?: string;
 
+  colorValue?: string;
+
   currencyType = 'EUR';
 
   date: any = '';
@@ -52,6 +54,8 @@ export class ListProductComponent implements OnInit {
   mainCategory: any[] = [];
 
   products: any = [];
+
+  filterProducts:any = [];
 
   sortingArray: any[] = [];
 
@@ -414,6 +418,8 @@ export class ListProductComponent implements OnInit {
 
 
           Array.prototype.push.apply(this.products, ele.products);
+          Array.prototype.push.apply(this.filterProducts, ele.products);
+
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource$ = this.dataSource.connect();
           this.dataSource.paginator = this.paginator;
@@ -438,6 +444,8 @@ export class ListProductComponent implements OnInit {
 
 
         this.products = data.products;
+
+        this.filterProducts = data.products;
         this.brandList = data.availablebrands;
         this.sizeList = data.availableSizes;
         this.colorList = data.availabeColours;
@@ -499,8 +507,8 @@ export class ListProductComponent implements OnInit {
     }
     if (localStorage.getItem(CURRENCY_TYPE) === 'GBP') {
 
-      // eslint-disable-next-line max-len
-      this.sortingArray.sort((firsyArray: any, secondArray: any) => firsyArray.OfferSterling - secondArray.OfferSterling);
+
+      this.sortingArray.sort((firsyArray: any, secArray: any) => firsyArray.OfferSterling - secArray.OfferSterling);
 
     }
     if (localStorage.getItem(CURRENCY_TYPE) === 'AED') {
@@ -597,13 +605,18 @@ export class ListProductComponent implements OnInit {
 
     const question: any = [];
     const question$ = [ ...this.products ];
+    let idx: any[] = [];
 
     question$.forEach((element: { [x: string]: any }) => {
+
 
       if (element['options'].length > 0) {
 
         const questionS = element['options'];
+
+
         questionS.forEach((data: { [x: string]: any }) => {
+
 
           if (data['sizes'].length > 0) {
 
@@ -612,7 +625,13 @@ export class ListProductComponent implements OnInit {
 
               if (paramss === ele['size']) {
 
-                question.push(element);
+                if (!idx.includes(element['id'])) {
+
+                  question.push(element);
+
+                }
+
+                idx.push(element['id']);
 
               } else {
 
@@ -626,8 +645,8 @@ export class ListProductComponent implements OnInit {
 
         });
 
+        idx = idx.sort();
 
-      } else {
 
       }
 
@@ -640,15 +659,18 @@ export class ListProductComponent implements OnInit {
 
     const params = param.toLowerCase();
     const question: any = [];
-    const question$ = [ ...this.products ];
+    const question$ = [ ...this.filterProducts ];
     question$.forEach((element: { [x: string]: any }) => {
+
 
       if (element['options'].length > 0) {
 
         const questionS = element['options'];
+
         questionS.forEach((data: { [x: string]: any }) => {
 
-          if (params === data['color']) {
+
+          if (params === data['color'].toLowerCase()) {
 
             question.push(element);
 
@@ -661,6 +683,7 @@ export class ListProductComponent implements OnInit {
       }
 
     });
+
 
     this.updateValueChanges(question);
 
@@ -677,7 +700,7 @@ export class ListProductComponent implements OnInit {
 
       if (element['brand']) {
 
-        if (element['brand'].name === paramss) {
+        if (paramss === element['brand'].name.toLowerCase()) {
 
           question.push(element);
 
@@ -707,6 +730,7 @@ export class ListProductComponent implements OnInit {
 
     const link = [ 'previewProduct', id ];
     this.router.navigate(link);
+
 
   }
 

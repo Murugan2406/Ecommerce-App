@@ -12,25 +12,52 @@
           <owl-carousel-o [options]="customOptions" class='banner_section'
             data-aos="fade-down" data-aos-easing="linear"
             data-aos-duration="1500">
+            <ng-template carouselSlide *ngFor="let img of newArraivals">
 
-            <ng-template carouselSlide *ngFor="let img of banner"
-              data-aos="zoom-out-down" data-aos-duration="5000">
-
-              <img src="{{img.imgUrl}}" alt="{{img.alt}}" class="inner-image
-                banner_img"data-aos="zoom-out-down"
-                data-aos-delay="5000">
+              <img src="{{img.image['original']}}" alt="{{img.alt}}"
+                class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
               <div class="offer_details">
-                <p>{{img.imgName}}</p>
-                <b>{{img.price}}</b>
+                <p>{{img.name}}</p>
+                <div class="pricing" style="display: flex; justify-content:
+                  center; align-items: baseline;">
+                  <h3 class='item ' *ngIf="currencyType === 'EUR'">
+                    €{{img['OfferEuro']}}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'USD'">
+                    ${{img['OfferDollar'] }}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'SAR'">
+                    SAR{{img['OfferSAR']}} </h3>
+                  <h3 class='item ' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</h3>
+                  <h3 class='item ' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</h3>
+                  <span class='offer_price item' *ngIf="currencyType === 'EUR'">
+                    €{{img['productpriceEuro']}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'USD'">
+                    ${{img['productpriceDollar'] }}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'SAR'">
+                    SAR{{img['productpriceSAR']}} </span>
+                  <span class='offer_price item' *ngIf="currencyType === 'GBP'">
+                    £{{img['productpriceSterling']}}</span>
+                  <span class='offer_price item' *ngIf="currencyType === 'AED'">
+                    د.إ{{img['productpriceDirham']}}</span>
 
+                  <span class='offer_percentage item '*ngIf="currencyType ===
+                    'EUR'">{{img['OfferPecentageEuro']}}off</span>
+                  <span class='offer_percentage item '*ngIf="currencyType ===
+                    'USD'">{{img['OfferPecentageDollar']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'SAR'">{{img['OfferPecentageSAR']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'GBP'">{{img['OfferPecentageSterling']}}off</span>
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
+                    'AED'">{{img['OfferPecentageDirham']}}off</span>
+                </div>
               </div>
             </ng-template>
 
           </owl-carousel-o>
         </div>
         <div class='offer_explore_button_div'>
-          <button mat-button class="offer_explore_button">
+          <button mat-button class="offer_explore_button" [routerLink]="'/specialProducts'" [queryParams]="{from:'newArrivals'}">
             New Collections &nbsp;<mat-icon>trending_flat</mat-icon>
           </button>
         </div>
@@ -117,7 +144,7 @@
 
             <ng-template carouselSlide class="offer_curousal_imgs">
               <img src="{{img.image['original']}}" alt="{{img.name}}"
-                [routerLink]="'/previewProduct/' + img.id">
+              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
               <div class="offer_details">
                 <p>{{img.name}}</p>
                 <div class="pricing" style="display: flex; justify-content:
@@ -160,9 +187,9 @@
       </div>
 
 
-      <div class='' data-aos="fade-right" data-aos-duration="1200">
+      <div class=''>
         <button mat-button class="explore_button_offer"
-          [routerLink]="'/offersales'">
+          [routerLink]="'/specialProducts'" [queryParams]="{from:'offerSales'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
@@ -211,7 +238,7 @@
           <ng-template carouselSlide *ngFor="let img of newArraivals">
 
             <img src="{{img.image['original']}}" alt="{{img.alt}}"
-              class="inner-image arrival_img">
+              class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
               <p>{{img.name}}</p>
@@ -253,7 +280,8 @@
         </owl-carousel-o>
       </div>
       <div class='offer_explore_button_div'>
-        <button mat-button class="offer_explore_button">
+        <button mat-button class="offer_explore_button"
+        [routerLink]="'/specialProducts'" [queryParams]="{from:'newArrivals'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
@@ -328,7 +356,7 @@
           <ng-template carouselSlide *ngFor="let img of bagsTrends">
 
             <img src="{{img.image['original']}}" alt="{{img.alt}}"
-              class="inner-image arrival_img">
+              class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
               <p>{{img.name}}</p>
@@ -370,7 +398,8 @@
         </owl-carousel-o>
       </div>
       <div class='offer_explore_button_div'>
-        <button mat-button class="offer_explore_button">
+        <button mat-button class="offer_explore_button"
+        [routerLink]="'/specialProducts'" [queryParams]="{from:'bagsTrends'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>

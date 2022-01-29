@@ -5,7 +5,7 @@
   <section class="offer_section" id="offer_section">
     <div class="align-items-center">
       <div class="banner_title" data-aos="fade-down" data-aos-duration="1500">
-        <h1>Offers Section</h1>
+        <h1>{{sectionTitle}}</h1>
       </div>
     </div>
   </section>
@@ -38,9 +38,8 @@
 
                 <div class="toggle_body mat_panel ">
                   <section>
-                    <mat-button-toggle-group [(ngModel)]="brandValue" aria-label="Font Style"
-                      *ngFor="let brand of brandList">
-                      <mat-button-toggle value="{{brand.name}}" (click)="filterbyBrand(brand.name)" class="Filtertogglebutton">{{brand.name}}
+                    <mat-button-toggle-group [(ngModel)]="brandValue" multiple>
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand(brand.name)" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
@@ -60,9 +59,9 @@
 
                 <div class="toggle_body mat_panel">
                   <section>
-                    <mat-button-toggle-group  aria-label="Font Style"
-                      *ngFor="let subtask of sizeList">
-                      <mat-button-toggle value="{{subtask.size}}" (click)="filterbySize(subtask.size)" class="Filtertogglebutton">{{subtask.size}}
+                    <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue"  class="Filtertogglebutton" multiple>
+                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="filterbySize(subtask.size)" >
+                        {{subtask.size}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
@@ -74,6 +73,7 @@
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
+
                   <mat-panel-title class="filter_title">
                     Color
                   </mat-panel-title>
@@ -81,16 +81,18 @@
 
                 <div class="toggle_body mat_panel">
                   <section>
-                    <mat-button-toggle-group aria-label="Font Style"
-                      *ngFor="let subtask of colorList">
-                      <mat-button-toggle value="{{subtask.color}}" (click)="filterbycolor(subtask.color)" class="Filtertogglebutton">{{subtask.color}}
-                      </mat-button-toggle>
-                    </mat-button-toggle-group>
+
+                    <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterbycolor()" >{{brand.color}}
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
                   </section>
                 </div>
 
+
               </mat-expansion-panel>
             </mat-accordion>
+
             <form [formGroup]="form" (ngSubmit)="submit()" class="form_container">
 
               <mat-accordion>
@@ -160,13 +162,13 @@
         <div class="col-xl-3 col-md-4 col-lg-4 col-sm-4 col-6" *ngFor="let img of dataSource$ | async">
           <div class="card">
             <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" class=""
-              [routerLink]="'/previewProduct/' + img.id">
+              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
             <button mat-icon-button class="banner_explore_button" (click)="openSnackBar(img.id)" matRipple
               matRippleColor="green">
               <mat-icon>favorite_border</mat-icon>
             </button>
 
-            <div class="card-body" [routerLink]="'/previewProduct/' + img.id">
+            <div class="card-body" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
               <div class="card-title">{{img.name}}</div>
               <div class="card-subtitle text-muted">Card subtitlle</div>
               <div>

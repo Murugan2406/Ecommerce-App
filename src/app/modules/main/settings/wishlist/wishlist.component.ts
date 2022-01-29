@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as AOS from 'aos';
 import { ProductService } from '../../../service/product.service';
 import { ACCESS_TOKEN_ID } from '../../../../../assets/API/server-api';
@@ -19,6 +19,7 @@ export class WishlistComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar,
     public readonly router: Router,
     public readonly productService: ProductService,
+    private readonly activatedRoute: ActivatedRoute,
     public el: ElementRef) { }
 
     // eslint-disable-next-line class-methods-use-this
@@ -30,28 +31,33 @@ export class WishlistComponent implements OnInit {
 
     ngOnInit(): void {
 
-      if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+      this.activatedRoute.queryParams.subscribe((params) => {
 
-        this.productService.getWishlist().subscribe((data: any) => {
+        if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-          if (data.length === 0) {
+          this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
 
-            this.emptyProduct = true;
+            if (data.length === 0) {
 
-          } else {
+              this.emptyProduct = true;
 
-            this.products = data;
-            this.emptyProduct = false;
+            } else {
 
-          }
+              this.products = data;
+              this.emptyProduct = false;
 
-        });
+            }
 
-      } else {
+          });
 
-        this.emptyProduct = true;
+        } else {
 
-      }
+          this.emptyProduct = true;
+
+        }
+
+      });
+
 
     }
 
