@@ -230,6 +230,7 @@
       <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
     </div>
 
+
     <div class="toggle_side_nav">
       <button mat-button class="mobile_menu"
         (click)="toggleRightSidenav();$event.stopPropagation();">
@@ -239,5 +240,17 @@
     </div>
   </mat-toolbar>
 
+ <mat-toolbar class="toolbar_main">
+
+    <form [formGroup]="searchForm" class="header-search"
+    (submit)="upsertSearch()">
+
+      <input type="text" matInput formControlName="inputValue" class="input_field">
+
+    <button type="submit" mat-button class="mobile_menu">
+      <mat-icon class="mat-5by1-white">search</mat-icon>
+    </button>
+  </form>
+    </mat-toolbar>
+
 </header>
-<div id="google_translate_element"></div>

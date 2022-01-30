@@ -1,19 +1,12 @@
 .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
   background: #f3eee9;
 }
-.filter_submit_button{
-  background-color:#FFBD8C;
-  text-transform: uppercase;
-  margin-top: 1em;
-  border-radius: 15px;
-  line-height: 30px;
-}
+
 .mat-input-element {
   caret-color: #874c20;
 }
 .Filtertogglebutton{
   text-transform: lowercase;
-  flex-direction: column;
 }
 ::ng-deep[type=button]:not(:disabled),
 button:not(:disabled):before {
@@ -40,6 +33,11 @@ button:not(:disabled):before {
   background-color: transparent;
 }
 
+.toggle_body {
+  column-count: 2;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+}
 
 :host ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: var(--main-color);
@@ -74,7 +72,7 @@ button:not(:disabled):before {
 
 .mat-button-toggle {
   border-radius: 15px !important;
-  padding: 3px 0;
+  padding: 3px 10px;
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
@@ -161,8 +159,7 @@ font-size: 14px;
 ::ng-deep .mat-expansion-indicator::after {
   color: var(--main-color);
 }
-ghgh
-gh
+
 .filter_submit_button {
   background: #ffbd8c;
   border-radius: 15px;
@@ -316,7 +313,7 @@ gh
 }
 
 .emptyfilterResult img {
-  max-width: 400px;
+  max-width: 250px;
 }
 
 .emptyfilterResultH2 {
@@ -373,6 +370,9 @@ gh
 
 // ===========desktop =======================================
 @media only screen and (min-width:769px) {
+
+
+  
   .main {
       background-color: #fffaf3;
       top: 0;
@@ -649,7 +649,9 @@ gh
           padding-top: 1px;
       }
   }
-
+  .row {
+      margin-top: 1em;
+  }
   .card {
       box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
       border-radius: 15px;

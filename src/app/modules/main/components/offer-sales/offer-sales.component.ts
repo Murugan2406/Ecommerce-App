@@ -145,13 +145,10 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
-  @HostListener('window:scroll', [ '$event' ])onScroll(event: any) {
+  // eslint-disable-next-line class-methods-use-this
+  @HostListener('window:scroll', [ '$event' ])onScroll(_event: any) {
 
-    if (window.innerWidth >= this.screenSize) {
-
-      AOS.init();
-
-    }
+    AOS.init({disable: 'mobile'});
 
   }
 
