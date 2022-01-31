@@ -463,8 +463,9 @@ export class OfferSalesComponent implements OnInit {
 
     this.sizeValue = [];
     this.brandValue = [];
-    this.dataSource.data = this.products;
-    this.dataSource$ = this.dataSource.connect();
+    this.colorValue = [];
+
+    this.updateValueChanges(this.products);
 
   }
 
@@ -516,55 +517,13 @@ export class OfferSalesComponent implements OnInit {
   // eslint-disable-next-line max-lines-per-function
   filterbySize(params: string) {
 
-
-    const tempArray:any[] = [];
-
-
     if (this.colorValue.length === 0 && this.brandValue.length === 0) {
+
+      const question$ = [ ...this.filterProducts ];
 
       if (this.sizeValue.length > 0) {
 
-        const question$ = [ ...this.filterProducts ];
-
-        question$.forEach((element: { [x: string]: any }) => {
-
-
-          if (element['options'].length > 0) {
-
-
-            element['options'].forEach((ele: any) => {
-
-
-              if (ele['sizes']) {
-
-                ele['sizes'].forEach((xyz:any) => {
-
-
-                  this.sizeValue.forEach((size: any) => {
-
-                    if (size === xyz['size']) {
-
-                      tempArray.push(element);
-
-                    }
-
-                  });
-
-                });
-
-              }
-
-
-            });
-
-          }
-
-        });
-
-        const ids = tempArray.map((ooo) => ooo.id);
-        const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
-
-        this.updateValueChanges(filtered);
+        this.updateSize(question$);
 
       } else {
 
@@ -574,15 +533,74 @@ export class OfferSalesComponent implements OnInit {
       }
 
 
+    } else {
+
+      const question$ = [ ...this.dataSource.data ];
+
+      if (this.sizeValue.length > 0) {
+
+        this.updateSize(question$);
+
+      } else {
+
+        this.updateValueChanges(this.dataSource.data);
+
+
+      }
+
     }
+
+  }
+
+
+  updateSize(question$:any) {
+
+    const tempArray:any[] = [];
+
+    question$.forEach((element: { [x: string]: any }) => {
+
+
+      if (element['options'].length > 0) {
+
+
+        element['options'].forEach((ele: any) => {
+
+
+          if (ele['sizes']) {
+
+            ele['sizes'].forEach((xyz:any) => {
+
+
+              this.sizeValue.forEach((size: any) => {
+
+                if (size === xyz['size']) {
+
+                  tempArray.push(element);
+
+                }
+
+              });
+
+            });
+
+          }
+
+
+        });
+
+      }
+
+    });
+
+    const ids = tempArray.map((ooo) => ooo.id);
+    const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+    this.updateValueChanges(filtered);
 
   }
 
   // eslint-disable-next-line max-lines-per-function
   filterbycolor() {
-
-
-    const tempArray:any[] = [];
 
     if (this.sizeValue.length === 0 && this.brandValue.length === 0) {
 
@@ -591,39 +609,7 @@ export class OfferSalesComponent implements OnInit {
 
         const question$ = [ ...this.filterProducts ];
 
-        question$.forEach((element: { [x: string]: any }) => {
-
-
-          if (element['options'].length > 0) {
-
-            element['options'].forEach((ele: any) => {
-
-
-              if (ele['color']) {
-
-                this.colorValue.forEach((color: any) => {
-
-                  if (color === ele['color']) {
-
-                    tempArray.push(element);
-
-                  }
-
-                });
-
-              }
-
-
-            });
-
-          }
-
-        });
-
-        const ids = tempArray.map((ooo) => ooo.id);
-        const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
-
-        this.updateValueChanges(filtered);
+        this.updateColor(question$);
 
       } else {
 
@@ -633,33 +619,44 @@ export class OfferSalesComponent implements OnInit {
       }
 
 
+    } else {
+
+      const question$ = [ ...this.dataSource.data ];
+
+      if (this.colorValue.length > 0) {
+
+        this.updateColor(question$);
+
+      } else {
+
+        this.updateValueChanges(this.dataSource.data);
+
+
+      }
+
     }
 
 
   }
 
 
-  filterbyBrand() {
-
+  updateColor(question$:any) {
 
     const tempArray:any[] = [];
 
-    let sizeFilter = [];
-
-    if (this.sizeValue.length === 0 && this.colorValue.length === 0) {
-
-      sizeFilter = [ ...this.filterProducts ];
-
-      if (this.brandValue.length > 0) {
+    question$.forEach((element: { [x: string]: any }) => {
 
 
-        sizeFilter.forEach((element:any) => {
+      if (element['options'].length > 0) {
 
-          if (element['brand']) {
+        element['options'].forEach((ele: any) => {
 
-            this.brandValue.forEach((brand: any) => {
 
-              if (brand === element['brand'].name) {
+          if (ele['color']) {
+
+            this.colorValue.forEach((color: any) => {
+
+              if (color === ele['color']) {
 
                 tempArray.push(element);
 
@@ -669,8 +666,31 @@ export class OfferSalesComponent implements OnInit {
 
           }
 
+
         });
-        this.updateValueChanges(tempArray);
+
+      }
+
+    });
+
+    const ids = tempArray.map((ooo) => ooo.id);
+    const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+    this.updateValueChanges(filtered);
+
+  }
+
+  filterbyBrand() {
+
+
+    let sizeFilter = [];
+
+    if (this.sizeValue.length === 0 && this.colorValue.length === 0) {
+
+      sizeFilter = [ ...this.filterProducts ];
+      if (this.brandValue.length > 0) {
+
+        this.updateBrand(sizeFilter);
 
       } else {
 
@@ -679,8 +699,50 @@ export class OfferSalesComponent implements OnInit {
 
       }
 
+    } else {
+
+      sizeFilter = [ ...this.dataSource.data ];
+      if (this.brandValue.length > 0) {
+
+        this.updateBrand(sizeFilter);
+
+      } else {
+
+
+        this.updateValueChanges(this.dataSource.data);
+
+      }
+
 
     }
+
+  }
+
+  updateBrand(sizeFilter:any) {
+
+
+    const tempArray:any[] = [];
+
+
+    sizeFilter.forEach((element:any) => {
+
+      if (element['brand']) {
+
+        this.brandValue.forEach((brand: any) => {
+
+          if (brand === element['brand'].name) {
+
+            tempArray.push(element);
+
+          }
+
+        });
+
+      }
+
+    });
+    this.updateValueChanges(tempArray);
+
 
   }
 

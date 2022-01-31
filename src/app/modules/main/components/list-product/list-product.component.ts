@@ -25,11 +25,11 @@ export class ListProductComponent implements OnInit {
 
   subCategoryName?: string;
 
-  sizeValue?: string;
+  sizeValue:any[] = [];
 
-  brandValue?: string;
+  brandValue:any[] = [];
 
-  colorValue?: string;
+  colorValue:any[] = [];
 
   currencyType = 'EUR';
 
@@ -550,14 +550,14 @@ export class ListProductComponent implements OnInit {
 
   }
 
+
   resetFilter(): void {
 
-    this.sizeValue = '';
-    this.brandValue = '';
+    this.sizeValue = [];
+    this.brandValue = [];
+    this.colorValue = [];
 
-    this.dataSource = new MatTableDataSource(this.products);
-    this.dataSource$ = this.dataSource.connect();
-    this.dataSource.paginator = this.paginator;
+    this.updateValueChanges(this.products);
 
   }
 
@@ -598,119 +598,236 @@ export class ListProductComponent implements OnInit {
 
   }
 
+  // eslint-disable-next-line max-lines-per-function
   filterbySize(params: string) {
 
+    if (this.colorValue.length === 0 && this.brandValue.length === 0) {
 
-    const paramss = params.toLowerCase();
+      const question$ = [ ...this.filterProducts ];
 
-    const question: any = [];
-    const question$ = [ ...this.products ];
-    let idx: any[] = [];
+      if (this.sizeValue.length > 0) {
+
+        this.updateSize(question$);
+
+      } else {
+
+        this.updateValueChanges(this.filterProducts);
+
+
+      }
+
+
+    } else {
+
+      const question$ = [ ...this.dataSource.data ];
+
+      if (this.sizeValue.length > 0) {
+
+        this.updateSize(question$);
+
+      } else {
+
+        this.updateValueChanges(this.dataSource.data);
+
+
+      }
+
+    }
+
+  }
+
+
+  updateSize(question$:any) {
+
+    const tempArray:any[] = [];
 
     question$.forEach((element: { [x: string]: any }) => {
 
 
       if (element['options'].length > 0) {
 
-        const questionS = element['options'];
+
+        element['options'].forEach((ele: any) => {
 
 
-        questionS.forEach((data: { [x: string]: any }) => {
+          if (ele['sizes']) {
+
+            ele['sizes'].forEach((xyz:any) => {
 
 
-          if (data['sizes'].length > 0) {
+              this.sizeValue.forEach((size: any) => {
 
-            const xyz = data['sizes'];
-            xyz.forEach((ele: { [x: string]: any }) => {
+                if (size === xyz['size']) {
 
-              if (paramss === ele['size']) {
-
-                if (!idx.includes(element['id'])) {
-
-                  question.push(element);
+                  tempArray.push(element);
 
                 }
 
-                idx.push(element['id']);
+              });
 
-              } else {
+            });
+
+          }
+
+
+        });
+
+      }
+
+    });
+
+    const ids = tempArray.map((ooo) => ooo.id);
+    const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+    this.updateValueChanges(filtered);
+
+  }
+
+
+  // eslint-disable-next-line max-lines-per-function
+  filterbycolor() {
+
+    if (this.sizeValue.length === 0 && this.brandValue.length === 0) {
+
+      if (this.colorValue.length > 0) {
+
+
+        const question$ = [ ...this.filterProducts ];
+
+        this.updateColor(question$);
+
+      } else {
+
+        this.updateValueChanges(this.filterProducts);
+
+
+      }
+
+
+    } else {
+
+      const question$ = [ ...this.dataSource.data ];
+
+      if (this.colorValue.length > 0) {
+
+        this.updateColor(question$);
+
+      } else {
+
+        this.updateValueChanges(this.dataSource.data);
+
+
+      }
+
+    }
+
+
+  }
+
+
+  updateColor(question$:any) {
+
+    const tempArray:any[] = [];
+
+    question$.forEach((element: { [x: string]: any }) => {
+
+
+      if (element['options'].length > 0) {
+
+        element['options'].forEach((ele: any) => {
+
+
+          if (ele['color']) {
+
+            this.colorValue.forEach((color: any) => {
+
+              if (color === ele['color']) {
+
+                tempArray.push(element);
 
               }
 
             });
 
-          } else {
-
           }
 
+
         });
-
-        idx = idx.sort();
-
 
       }
 
     });
-    this.updateValueChanges(question);
+
+    const ids = tempArray.map((ooo) => ooo.id);
+    const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+    this.updateValueChanges(filtered);
 
   }
 
-  filterbycolor(param: string) {
-
-    const params = param.toLowerCase();
-    const question: any = [];
-    const question$ = [ ...this.filterProducts ];
-    question$.forEach((element: { [x: string]: any }) => {
+  filterbyBrand() {
 
 
-      if (element['options'].length > 0) {
+    let sizeFilter = [];
 
-        const questionS = element['options'];
+    if (this.sizeValue.length === 0 && this.colorValue.length === 0) {
 
-        questionS.forEach((data: { [x: string]: any }) => {
+      sizeFilter = [ ...this.filterProducts ];
+      if (this.brandValue.length > 0) {
 
-
-          if (params === data['color'].toLowerCase()) {
-
-            question.push(element);
-
-          }
-
-        });
+        this.updateBrand(sizeFilter);
 
       } else {
 
+
+        this.updateValueChanges(this.filterProducts);
+
       }
 
-    });
+    } else {
+
+      sizeFilter = [ ...this.dataSource.data ];
+      if (this.brandValue.length > 0) {
+
+        this.updateBrand(sizeFilter);
+
+      } else {
 
 
-    this.updateValueChanges(question);
+        this.updateValueChanges(this.dataSource.data);
+
+      }
+
+
+    }
 
   }
 
+  updateBrand(sizeFilter:any) {
 
-  filterbyBrand(params: string) {
 
-    const paramss = params.toLowerCase();
-    const question: any = [];
-    const question$ = [ ...this.products ];
+    const tempArray:any[] = [];
 
-    question$.forEach((element: { [x: string]: any }) => {
+
+    sizeFilter.forEach((element:any) => {
 
       if (element['brand']) {
 
-        if (paramss === element['brand'].name.toLowerCase()) {
+        this.brandValue.forEach((brand: any) => {
 
-          question.push(element);
+          if (brand === element['brand'].name) {
 
-        }
+            tempArray.push(element);
+
+          }
+
+        });
 
       }
 
     });
+    this.updateValueChanges(tempArray);
 
-    this.updateValueChanges(question);
 
   }
 
