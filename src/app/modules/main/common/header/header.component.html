@@ -20,10 +20,11 @@
       <span class="example-spacer"></span>
       <form [formGroup]="LanguageForm">
 
-      <mat-button-toggle-group formControlName="language" (change)="toggleLanguage()">
-        <mat-button-toggle value="france">FR</mat-button-toggle>
-        <mat-button-toggle value="English">EN</mat-button-toggle>
-      </mat-button-toggle-group>
+        <mat-button-toggle-group formControlName="language"
+          (change)="toggleLanguage()">
+          <mat-button-toggle value="france">FR</mat-button-toggle>
+          <mat-button-toggle value="English">EN</mat-button-toggle>
+        </mat-button-toggle-group>
 
       </form>
 
@@ -51,27 +52,23 @@
       </button>
 
 
-      <button mat-button
-        (click)="toggleRightSidenav();$event.stopPropagation();"
-        matBadge="{{cartLength}}"
-        matBadgePosition="after">
-        CART
-      </button>
+      <button mat-button  (click)="toggleRightSidenav();$event.stopPropagation();"
+      matBadge="{{cartLength}}" matBadgePosition="after">  CART </button>
 
     </div>
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
   <mat-toolbar class="toolbar_main">
-    <div class="logo_container" [routerLink]="'/'"data-aos="zoom-in"
+    <div class="logo_container" [routerLink]="'/'" data-aos="zoom-in"
       data-aos-duration="2500">
       <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
     </div>
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
 
-  <div class="nav_menu"data-aos="flip-left" data-aos-duration="2000"
+  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000"
     (mouseleave)="ClosePanel()">
-    <ul class="nav_list"id="nav_menu">
+    <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
         <a [routerLink]="['listProduct', catogeory.id, catogeory.name]"
@@ -162,7 +159,7 @@
           <mat-icon>clear</mat-icon>
         </button>
       </mat-toolbar>
-      <ul class="nav_list"id="nav_menu">
+      <ul class="nav_list" id="nav_menu">
         <li class="nav_items" *ngFor="let catogeory of mainCategory">
 
           <a [routerLink]="['listProduct', mainCategoryId, categoryName]"
@@ -174,7 +171,7 @@
           </a>
         </li>
       </ul>
-      <div class="nav_list"id="nav_menu">
+      <div class="nav_list" id="nav_menu">
         <div class="language">
           <span>Language</span>
           <mat-label class="switch">
@@ -201,7 +198,7 @@
       </div>
 
 
-      <ul class="nav_list"id="nav_menu">
+      <ul class="nav_list" id="nav_menu">
 
         <li class="nav_items">
           <a routerLinkActive="active" [routerLink]="'settings/myaccount'">
@@ -226,7 +223,7 @@
     </mat-drawer>
 
 
-    <div class="logo_container"[routerLink]="'dashboard'">
+    <div class="logo_container" [routerLink]="'dashboard'">
       <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
     </div>
 
@@ -240,17 +237,18 @@
     </div>
   </mat-toolbar>
 
- <mat-toolbar class="toolbar_main">
+  <mat-toolbar class="toolbar_main">
 
     <form [formGroup]="searchForm" class="header-search"
-    (submit)="upsertSearch()">
+      (submit)="upsertSearch()">
 
-      <input type="text" matInput formControlName="inputValue" class="input_field">
+      <input type="text" matInput formControlName="inputValue"
+        class="input_field">
 
-    <button type="submit" mat-button class="mobile_menu">
-      <mat-icon class="mat-5by1-white">search</mat-icon>
-    </button>
-  </form>
-    </mat-toolbar>
+      <button type="submit" mat-button class="mobile_menu">
+        <mat-icon class="mat-5by1-white">search</mat-icon>
+      </button>
+    </form>
+  </mat-toolbar>
 
 </header>

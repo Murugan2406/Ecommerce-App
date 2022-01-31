@@ -17,14 +17,16 @@
       <div *ngIf="emptyOrders === false">
         <mat-card class="example-card for_desktop" *ngFor="let idx of orders">
           <div data-aos="fade-right">
-            <img mat-card-lg-image
-              src="{{idx['selectedcolor']['image_one']['original']}}">
+              <img mat-card-lg-image *ngIf="idx['selectedcolor'] === null" src="{{idx['product']['image']['original']}}"class="">
+              <img mat-card-lg-image *ngIf="idx['selectedcolor']" src="{{idx['selectedcolor']['image_one']['original']}}"class="">
           </div>
           <div class="info">
             <mat-card-title>{{idx['product']['name']}}</mat-card-title>
-            <mat-card-subtitle>Size: {{idx['selectedsize']['size']}}</mat-card-subtitle>
-            <mat-card-subtitle>Color: {{idx['selectedcolor']['color']}}</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price
+            <mat-card-subtitle *ngIf="idx['selectedsize']">Size: {{idx['selectedsize']['size'] ?? '-'}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['selectedsize'] === null">Size: -</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['selectedcolor']">Color: {{idx['selectedcolor']['color'] ?? '-'}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['selectedcolor'] === null">Color: -</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price:
               €{{idx['product']['OfferEuro'] * idx['quantity']}}
             </mat-card-subtitle>
             <mat-card-subtitle *ngIf="currencyType === 'USD'">Price
@@ -52,9 +54,9 @@
         <mat-card class="for_mobile" *ngFor="let idx of orders">
           <mat-card-title-group>
             <mat-card-title>{{idx['product']['name']}}</mat-card-title>
-            <mat-card-subtitle>Size: {{idx['selectedsize']['size']}}</mat-card-subtitle>
-            <mat-card-subtitle>Color: {{idx['selectedcolor']['color']}}</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price
+            <mat-card-subtitle *ngIf="idx['selectedsize']">Size: {{idx['selectedsize']['size'] ?? '-'}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['selectedcolor']">Color: {{idx['selectedcolor']['color'] ?? '-'}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="currencyType === 'EUR'">Price:
               €{{idx['product']['OfferEuro'] * idx['quantity']}}
             </mat-card-subtitle>
             <mat-card-subtitle *ngIf="currencyType === 'USD'">Price
@@ -69,9 +71,9 @@
             <mat-card-subtitle *ngIf="currencyType === 'AED'">Price
               €{{idx['product']['OfferDirham'] * idx['quantity']}}
             </mat-card-subtitle>
-            <img mat-card-sm-image
-              src="{{idx['selectedcolor']['image_one']['original']}}"
-              data-aos="fade-right">
+
+              <img mat-card-sm-image *ngIf="idx['selectedcolor'] === null" src="{{idx['product']['image']['original']}}"class="" data-aos="fade-right">
+              <img mat-card-sm-image *ngIf="idx['selectedcolor']" src="{{idx['selectedcolor']['image_one']['original']}}"class="" data-aos="fade-right">
           </mat-card-title-group>
           <mat-card-content>
             <mat-card-subtitle>Status</mat-card-subtitle>

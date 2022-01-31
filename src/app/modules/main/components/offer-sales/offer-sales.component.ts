@@ -28,6 +28,12 @@ export class OfferSalesComponent implements OnInit {
 
   colorValue:any[] = [];
 
+  sizeTempArray:any[] = [];
+
+  colorTempArray:any[] = [];
+
+  brandTempArray:any[] = [];
+
   sectionTitle = '';
 
   sectionSubtitle = '';
@@ -535,7 +541,7 @@ export class OfferSalesComponent implements OnInit {
 
     } else {
 
-      const question$ = [ ...this.dataSource.data ];
+      const question$ = [ ...this.brandTempArray ];
 
       if (this.sizeValue.length > 0) {
 
@@ -543,7 +549,7 @@ export class OfferSalesComponent implements OnInit {
 
       } else {
 
-        this.updateValueChanges(this.dataSource.data);
+        this.updateValueChanges(this.brandTempArray);
 
 
       }
@@ -595,6 +601,8 @@ export class OfferSalesComponent implements OnInit {
     const ids = tempArray.map((ooo) => ooo.id);
     const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
 
+    this.sizeTempArray = filtered;
+
     this.updateValueChanges(filtered);
 
   }
@@ -621,7 +629,7 @@ export class OfferSalesComponent implements OnInit {
 
     } else {
 
-      const question$ = [ ...this.dataSource.data ];
+      const question$ = [ ...this.brandTempArray ];
 
       if (this.colorValue.length > 0) {
 
@@ -629,7 +637,7 @@ export class OfferSalesComponent implements OnInit {
 
       } else {
 
-        this.updateValueChanges(this.dataSource.data);
+        this.updateValueChanges(this.brandTempArray);
 
 
       }
@@ -676,6 +684,8 @@ export class OfferSalesComponent implements OnInit {
     const ids = tempArray.map((ooo) => ooo.id);
     const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
 
+    this.colorTempArray = filtered;
+
     this.updateValueChanges(filtered);
 
   }
@@ -701,7 +711,7 @@ export class OfferSalesComponent implements OnInit {
 
     } else {
 
-      sizeFilter = [ ...this.dataSource.data ];
+      sizeFilter = [ ...this.brandTempArray ];
       if (this.brandValue.length > 0) {
 
         this.updateBrand(sizeFilter);
@@ -709,7 +719,7 @@ export class OfferSalesComponent implements OnInit {
       } else {
 
 
-        this.updateValueChanges(this.dataSource.data);
+        this.updateValueChanges(this.brandTempArray);
 
       }
 
@@ -741,7 +751,12 @@ export class OfferSalesComponent implements OnInit {
       }
 
     });
-    this.updateValueChanges(tempArray);
+
+    const ids = tempArray.map((ooo) => ooo.id);
+    const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+    this.brandTempArray = filtered;
+    this.updateValueChanges(filtered);
 
 
   }

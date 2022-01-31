@@ -168,7 +168,7 @@ export class PreviewProductComponent implements OnInit {
     private readonly productService: ProductService,
     public readonly userService: UserService,) {
 
-    this.timeOutDuration = 700;
+    this.timeOutDuration = 1000;
     this.reviewS = [];
 
   }
@@ -542,6 +542,7 @@ export class PreviewProductComponent implements OnInit {
             this.productService.singleCheckOut(this.checkoutForm.value).subscribe((element) => {
 
               if (element) {
+
 
                 this.productService.redirecttoCheckout(element.sessionId);
 

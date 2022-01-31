@@ -19,86 +19,98 @@ export class OrdersComponent implements OnInit {
   emptyOrders = true;
 
   constructor(public readonly router: Router,
-      public readonly userService: UserService,) { }
+      public readonly userService: UserService) { }
 
-      // eslint-disable-next-line class-methods-use-this
-      @HostListener('window:scroll', [ '$event' ]) onScroll(_event: any) {
+  // eslint-disable-next-line class-methods-use-this
+ @HostListener('window:scroll', [ '$event' ]) onScroll(_event: any) {
 
     AOS.init({disable: 'mobile'});
 
   }
 
-      ngOnInit(): void {
+ ngOnInit(): void {
 
-        if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-          this.userService.getOrders().subscribe((data: any) => {
+   if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-            if (data.length === 0) {
+     this.userService.getOrders().subscribe((data: any) => {
 
-              this.emptyOrders = true;
+       console.log(data);
 
-            } else {
 
-              this.emptyOrders = false;
+       if (data.length === 0) {
 
-              this.orders = data;
-              if (localStorage.getItem(CURRENCY_TYPE)) {
+         this.emptyOrders = true;
 
-                const cValue = localStorage.getItem(CURRENCY_TYPE);
-                switch (cValue) {
+       } else {
 
-                case 'EUR': {
+         this.emptyOrders = false;
 
-                  this.currencyType = 'EUR';
-                  break;
 
-                }
-                case 'USD': {
+         this.orders = data;
+         if (localStorage.getItem(CURRENCY_TYPE)) {
 
-                  this.currencyType = 'USD';
-                  break;
+           this.setCurrencyValue();
 
-                }
-                case 'SAR': {
+         } else {
 
-                  this.currencyType = 'SAR';
-                  break;
+           this.currencyType = 'EUR';
 
-                }
-                case 'GBP': {
+         }
 
-                  this.currencyType = 'GBP';
-                  break;
+       }
 
-                }
-                case 'AED': {
+     });
 
-                  this.currencyType = 'AED';
-                  break;
+   }
 
-                }
+ }
 
-                }
 
-              } else {
+ setCurrencyValue() {
 
-                this.currencyType = 'EUR';
+   const cValue = localStorage.getItem(CURRENCY_TYPE);
+   switch (cValue) {
 
-              }
+   case 'EUR': {
 
-            }
+     this.currencyType = 'EUR';
+     break;
 
-          });
+   }
+   case 'USD': {
 
-        }
+     this.currencyType = 'USD';
+     break;
 
-      }
+   }
+   case 'SAR': {
 
-      navigateToHome():void {
+     this.currencyType = 'SAR';
+     break;
 
-        this.router.navigate([ '/' ]);
+   }
+   case 'GBP': {
 
-      }
+     this.currencyType = 'GBP';
+     break;
+
+   }
+   case 'AED': {
+
+     this.currencyType = 'AED';
+     break;
+
+   }
+
+   }
+
+ }
+
+ navigateToHome():void {
+
+   this.router.navigate([ '/' ]);
+
+ }
 
 }

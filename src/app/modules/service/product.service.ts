@@ -131,6 +131,7 @@ export class ProductService {
 
   singleCheckOut(data:any): Observable<any> {
 
+
     const data$ = JSON.stringify(data);
     const headers = new HttpHeaders({
       'content-type': 'application/json',
