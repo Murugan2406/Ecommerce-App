@@ -22,11 +22,11 @@ export class OfferSalesComponent implements OnInit {
 
   subCategoryName?: string;
 
-  sizeValue?: string;
+  sizeValue:any[] = [];
 
-  brandValue?: string;
+  brandValue:any[] = [];
 
-  colorValue?: string;
+  colorValue:any[] = [];
 
   sectionTitle = '';
 
@@ -64,7 +64,7 @@ export class OfferSalesComponent implements OnInit {
   fontStyleControl = new FormControl();
 
 
-  filterProducts:any = [];
+  filterProducts:any[] = [];
 
   sortingArray: any[] = [];
 
@@ -263,6 +263,7 @@ export class OfferSalesComponent implements OnInit {
 
       this.filterProducts = data['products'];
 
+
       this.dataSourceUpdation(this.products);
 
     });
@@ -460,8 +461,8 @@ export class OfferSalesComponent implements OnInit {
 
   resetFilter(): void {
 
-    this.sizeValue = '';
-    this.brandValue = '';
+    this.sizeValue = [];
+    this.brandValue = [];
     this.dataSource.data = this.products;
     this.dataSource$ = this.dataSource.connect();
 
@@ -512,108 +513,174 @@ export class OfferSalesComponent implements OnInit {
   }
 
 
+  // eslint-disable-next-line max-lines-per-function
   filterbySize(params: string) {
 
 
-    const paramss = params.toLowerCase();
-
-    const question: any = [];
-    const question$ = [ ...this.products ];
-    let idx: any[] = [];
-
-    question$.forEach((element: { [x: string]: any }) => {
+    const tempArray:any[] = [];
 
 
-      if (element['options'].length > 0) {
+    if (this.colorValue.length === 0 && this.brandValue.length === 0) {
 
-        const questionS = element['options'];
+      if (this.sizeValue.length > 0) {
+
+        const question$ = [ ...this.filterProducts ];
+
+        question$.forEach((element: { [x: string]: any }) => {
 
 
-        questionS.forEach((data: { [x: string]: any }) => {
+          if (element['options'].length > 0) {
 
 
-          if (data['sizes'].length > 0) {
+            element['options'].forEach((ele: any) => {
 
-            const xyz = data['sizes'];
-            xyz.forEach((ele: { [x: string]: any }) => {
 
-              if (paramss === ele['size']) {
+              if (ele['sizes']) {
 
-                if (!idx.includes(element['id'])) {
+                ele['sizes'].forEach((xyz:any) => {
 
-                  question.push(element);
 
-                }
+                  this.sizeValue.forEach((size: any) => {
 
-                idx.push(element['id']);
+                    if (size === xyz['size']) {
 
-              } else {
+                      tempArray.push(element);
+
+                    }
+
+                  });
+
+                });
 
               }
 
-            });
 
-          } else {
+            });
 
           }
 
         });
 
-        idx = idx.sort();
+        const ids = tempArray.map((ooo) => ooo.id);
+        const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+        this.updateValueChanges(filtered);
+
+      } else {
+
+        this.updateValueChanges(this.filterProducts);
 
 
       }
 
-    });
-    this.updateValueChanges(question);
+
+    }
 
   }
 
+  // eslint-disable-next-line max-lines-per-function
   filterbycolor() {
 
-    const question: any = [];
-    const question$ = [ ...this.filterProducts ];
+
+    const tempArray:any[] = [];
+
+    if (this.sizeValue.length === 0 && this.brandValue.length === 0) {
+
+      if (this.colorValue.length > 0) {
 
 
-    question$.forEach((element: { [x: string]: any }) => {
+        const question$ = [ ...this.filterProducts ];
 
-      if (element['options'].length > 0) {
+        question$.forEach((element: { [x: string]: any }) => {
 
-        element['options'].forEach((ele: any) => {
 
-          question.push(ele);
+          if (element['options'].length > 0) {
+
+            element['options'].forEach((ele: any) => {
+
+
+              if (ele['color']) {
+
+                this.colorValue.forEach((color: any) => {
+
+                  if (color === ele['color']) {
+
+                    tempArray.push(element);
+
+                  }
+
+                });
+
+              }
+
+
+            });
+
+          }
 
         });
 
+        const ids = tempArray.map((ooo) => ooo.id);
+        const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
+
+        this.updateValueChanges(filtered);
+
+      } else {
+
+        this.updateValueChanges(this.filterProducts);
+
+
       }
 
-    });
+
+    }
 
 
   }
 
 
-  filterbyBrand(params: string) {
+  filterbyBrand() {
 
-    const paramss = params.toLowerCase();
-    const question: any = [];
-    const question$ = [ ...this.products ];
 
-    question$.forEach((element: { [x: string]: any }) => {
+    const tempArray:any[] = [];
 
-      if (element['brand']) {
+    let sizeFilter = [];
 
-        if (paramss === element['brand'].name.toLowerCase()) {
+    if (this.sizeValue.length === 0 && this.colorValue.length === 0) {
 
-          question.push(element);
+      sizeFilter = [ ...this.filterProducts ];
 
-        }
+      if (this.brandValue.length > 0) {
+
+
+        sizeFilter.forEach((element:any) => {
+
+          if (element['brand']) {
+
+            this.brandValue.forEach((brand: any) => {
+
+              if (brand === element['brand'].name) {
+
+                tempArray.push(element);
+
+              }
+
+            });
+
+          }
+
+        });
+        this.updateValueChanges(tempArray);
+
+      } else {
+
+
+        this.updateValueChanges(this.filterProducts);
 
       }
 
-    });
 
-    this.updateValueChanges(question);
+    }
 
   }
 
@@ -646,5 +713,6 @@ export class OfferSalesComponent implements OnInit {
     }
 
   }
+
 
 }

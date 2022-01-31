@@ -7,6 +7,7 @@
 }
 .Filtertogglebutton{
   text-transform: lowercase;
+  flex-direction: column;
 }
 ::ng-deep[type=button]:not(:disabled),
 button:not(:disabled):before {
@@ -372,7 +373,7 @@ font-size: 14px;
 @media only screen and (min-width:769px) {
 
 
-  
+
   .main {
       background-color: #fffaf3;
       top: 0;

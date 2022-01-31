@@ -38,12 +38,37 @@
 
                 <div class="toggle_body mat_panel ">
                   <section>
-                    <mat-button-toggle-group [(ngModel)]="brandValue" multiple>
-                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand(brand.name)" class="Filtertogglebutton">{{brand.name}}
+                    <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand()" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
                 </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+
+
+            <mat-accordion >
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                [expanded]="isFirst">
+                <mat-expansion-panel-header>
+
+                  <mat-panel-title class="filter_title">
+                    Color
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="toggle_body mat_panel">
+                  <section>
+
+                    <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterbycolor()" >{{brand.color}}
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
+                  </section>
+                </div>
+
 
               </mat-expansion-panel>
             </mat-accordion>
@@ -66,29 +91,6 @@
                     </mat-button-toggle-group>
                   </section>
                 </div>
-
-              </mat-expansion-panel>
-            </mat-accordion>
-            <mat-accordion >
-              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
-                [expanded]="isFirst">
-                <mat-expansion-panel-header>
-
-                  <mat-panel-title class="filter_title">
-                    Color
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div class="toggle_body mat_panel">
-                  <section>
-
-                    <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterbycolor()" >{{brand.color}}
-                    </mat-button-toggle>
-                  </mat-button-toggle-group>
-                  </section>
-                </div>
-
 
               </mat-expansion-panel>
             </mat-accordion>
