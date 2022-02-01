@@ -36,6 +36,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ReactiveFormsModule, FormsModule, MatSelectModule, MatButtonToggleModule, MatIconModule,
     MatBadgeModule, MatSidenavModule, MatDialogModule, MatRippleModule, MatPaginatorModule, MatSnackBarModule,
     MatButtonModule, CarouselModule, MatGridListModule, MatExpansionModule, MatTabsModule, MatCardModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule, MatCheckboxModule
   ]
 })
 export class MainModule { }

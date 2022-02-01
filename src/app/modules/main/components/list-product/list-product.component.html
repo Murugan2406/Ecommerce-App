@@ -48,20 +48,7 @@
             <mat-expansion-panel-header>
               <mat-panel-title class="filter_title_top"> Refine/ Sortby </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-accordion>
-              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
-                [expanded]="isFirst">
 
-
-                <mat-expansion-panel-header>
-                  <mat-panel-title class="filter_title"> categories</mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div *ngFor="let category of filterCategory" class="filter_body mat_panel">
-                  <a (click)="innerCategoryRoute(category.id)" style="cursor: pointer;" class="nav_items" routerLinkActive="active" [routerLink]="['../'+ category.name]" [queryParams]="hparam"> {{category.name}} </a><br>
-              </div>
-              </mat-expansion-panel>
-            </mat-accordion>
             <mat-accordion >
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
@@ -72,13 +59,17 @@
                 </mat-expansion-panel-header>
 
                 <div class="toggle_body mat_panel ">
-                  <section>
-                    <mat-button-toggle-group [(ngModel)]="brandValue" aria-label="Font Style"
-                      *ngFor="let brand of brandList">
-                      <mat-button-toggle value="{{brand.name}}" (click)="filterbyBrand()" class="Filtertogglebutton">{{brand.name}}
+                  <section class="">
+                    <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand()" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
+                  <!-- <section >
+                    <mat-checkbox *ngFor="let brand of brandList" (ngModelChange)="filterbyBrand()">
+                      {{brand.name}}
+                    </mat-checkbox>
+                  </section> -->
                 </div>
 
               </mat-expansion-panel>
@@ -98,8 +89,8 @@
                 <div class="toggle_body mat_panel">
                   <section>
 
-                    <mat-button-toggle-group [(ngModel)]="colorValue" *ngFor="let brand of colorList" aria-label="Font Style">
-                    <mat-button-toggle   value="{{brand.color}}" (click)="filterbycolor()" class="Filtertogglebutton">{{brand.color}}
+                    <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterbycolor()" >{{brand.color}}
                     </mat-button-toggle>
                   </mat-button-toggle-group>
                   </section>
@@ -108,7 +99,6 @@
 
               </mat-expansion-panel>
             </mat-accordion>
-
 
             <mat-accordion >
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -121,8 +111,9 @@
 
                 <div class="toggle_body mat_panel">
                   <section>
-                    <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue" *ngFor="let subtask of sizeList">
-                      <mat-button-toggle value="{{subtask.size}}" (click)="filterbySize(subtask.size)" class="Filtertogglebutton">{{subtask.size}}
+                    <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue"  class="Filtertogglebutton" multiple>
+                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="filterbySize(subtask.size)" >
+                        {{subtask.size}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
@@ -130,6 +121,7 @@
 
               </mat-expansion-panel>
             </mat-accordion>
+
             <form [formGroup]="form" (ngSubmit)="submit()" class="form_container">
 
               <mat-accordion>

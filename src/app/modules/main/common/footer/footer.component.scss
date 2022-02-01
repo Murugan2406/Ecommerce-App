@@ -184,7 +184,8 @@
     }
 
     .header-divider{
-      display: none;
+      border: 1px solid #AF621A;
+      margin-top: 2em;
     }
 
   .footer_left_container,
@@ -268,7 +269,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2em;
+    margin: 4em 0 2em 0;
 
     a{
       color: #763301;

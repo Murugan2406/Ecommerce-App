@@ -17,7 +17,7 @@
               <img src="{{img.image['original']}}" alt="{{img.alt}}"
                 class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
-              <div class="offer_details">
+              <!-- <div class="offer_details">
                 <p>{{img.name}}</p>
                 <div class="pricing" style="display: flex; justify-content:
                   center; align-items: baseline;">
@@ -51,7 +51,7 @@
                   <span class='offer_percentage item ' *ngIf="currencyType ===
                     'AED'">{{img['OfferPecentageDirham']}}off</span>
                 </div>
-              </div>
+              </div> -->
             </ng-template>
 
           </owl-carousel-o>
@@ -76,9 +76,6 @@
             <ul class="nav_list"id="nav_menu">
               <li class="nav_items" *ngFor="let catogeory of mainCategory">
                 <a [routerLink]="['/listProduct', catogeory.id, catogeory.name]"
-                  [queryParams]="{category:'mainCategories',id:catogeory.id}"
-                  fragment={{catogeory.id}}
-                  routerLinkActive="active"
                   (mouseover)="openSubCategories(catogeory.subcategories,catogeory.id)">{{catogeory.name
                   }} </a>
               </li>
@@ -135,7 +132,7 @@
 
     <div class="main_container">
 
-      <span>WE RECCOMENDED</span>
+      <span class="offer_title">WE RECCOMENDED</span>
       <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
         data-aos-duration="1000">Offer Sale</h1>
       <div data-aos="fade-right" data-aos-duration="1000">

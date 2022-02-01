@@ -148,29 +148,6 @@ export class DashboardComponent implements OnInit {
     Email: new FormControl('', [ Validators.required ]),
   });
 
-  banner:any = [
-
-    {
-      imgUrl: '../../../../assets/images/banner-2.jpg',
-      alt: 'offer-2',
-      imgName: 'Lorem ipsum dolor sit amet',
-      price: '€19.99',
-    },
-    {
-      imgUrl: '../../../../assets/images/banner-3.jpg',
-      alt: 'offer-3',
-      imgName: 'Lorem ipsum dolor sit amet',
-      price: '€19.99',
-    },
-    {
-      imgUrl: '../../../../assets/images/banner-1.jpg',
-      alt: 'offer-4',
-      imgName: 'Lorem ipsum dolor sit amet',
-      price: '€19.99',
-    }
-  ];
-
-
   bagsTrends:any = [];
 
   constructor(private http: HttpClient,

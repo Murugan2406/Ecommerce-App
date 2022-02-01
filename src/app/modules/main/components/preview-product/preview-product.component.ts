@@ -107,9 +107,13 @@ export class PreviewProductComponent implements OnInit {
         items: 2,
         margin: 30
       },
-      769: {
+      1000: {
         items: 3,
-        margin: 40
+        margin: 30
+      },
+      1500: {
+        items: 4,
+        margin: 30
       }
     },
     nav: true

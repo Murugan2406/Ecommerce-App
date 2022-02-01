@@ -41,7 +41,7 @@
               </h2>
               <div class="pricing">
 
-                  <b class='item' >{{offerPrice}}</b>
+                  <b class='item actualPrice' >{{offerPrice}}</b>
                   <span class='offer_price item'> {{productPrice}} </span>
                   <span class='offerPercentage item' >{{offerPercentage}}off</span>
 
@@ -49,15 +49,15 @@
               </div>
 
               <mat-tab-group mat-align-tabs="start" class="product_tap">
-                  <mat-tab label="First">
+                  <mat-tab label="ABOUT">
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus amet tristique commodo nibh proin. Laoreet integer odio pretium semper posuere in purus </p>
                   </mat-tab>
-                  <mat-tab label="Second">
+                  <mat-tab label="STRUCTURE">
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus amet tristique commodo nibh proin.
 
                       </p>
                   </mat-tab>
-                  <mat-tab label="Third">
+                  <mat-tab label="DELIVERY&PAYMENT">
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nibh massa malesuada tristique posuere. Elementum augue amet adipiscing in massa nec vel massa in.</p>
                   </mat-tab>
               </mat-tab-group>
@@ -146,15 +146,15 @@
 
           <div class='review_header'>Reviews</div>
 
-          <div *ngFor="let product of products">
+          <div >
 
               <owl-carousel-o [options]="customOptions">
 
-                  <ng-template carouselSlide *ngFor="let reviewS of product.review">
+                  <ng-template carouselSlide *ngFor="let key of counter(6) ">
 
                       <mat-card>
 
-                          <mat-card-title> {{reviewS.reviewerName}}</mat-card-title>
+                          <mat-card-title> LOREM IPSUM</mat-card-title>
                           <mat-card-subtitle>
                               <i *ngFor="let key of counter(2) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
                               <i *ngFor="let key of counter(5-(2)) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>

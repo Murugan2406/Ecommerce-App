@@ -692,7 +692,6 @@ export class OfferSalesComponent implements OnInit {
 
   filterbyBrand() {
 
-
     let sizeFilter = [];
 
     if (this.sizeValue.length === 0 && this.colorValue.length === 0) {

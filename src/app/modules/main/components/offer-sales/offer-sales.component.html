@@ -37,12 +37,17 @@
                 </mat-expansion-panel-header>
 
                 <div class="toggle_body mat_panel ">
-                  <section>
+                  <section class="">
                     <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
                       <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand()" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
+                  <!-- <section >
+                    <mat-checkbox *ngFor="let brand of brandList" (ngModelChange)="filterbyBrand()">
+                      {{brand.name}}
+                    </mat-checkbox>
+                  </section> -->
                 </div>
 
               </mat-expansion-panel>

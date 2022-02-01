@@ -14,6 +14,7 @@
   }
   .item{
     margin-left: 5px;
+    font-size: 16px;
   }
   .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item{
     -ms-touch-action: auto;
@@ -25,8 +26,8 @@
     font-weight: normal;
     line-height: 24px;
     color:#000000;
-    padding:7px 12px;
-    font-size: 16px;
+    padding:7px 14px;
+    font-size: 15px;
     text-align: center;
     cursor: pointer;
     border-radius: 0;
@@ -36,13 +37,13 @@
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 24px;
      background-color: #815F46;
     color: #F9F3F1;
     border-radius: 0 ;
-    padding: 5px 15px;
-    margin-top: 1em;
+    padding: 6px 15px;
+
   }
 
   @media only screen and (min-width: 769px) {
@@ -91,6 +92,17 @@
     line-height: 30px;
 
     color: #000000;
+  }
+
+  .offer_title{
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 30px;
+letter-spacing: 0.02em;
+
+color: #874C20;
   }
   .banner_button {
     display: flex;
@@ -662,7 +674,7 @@ border-radius: 15px;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
-
+    letter-spacing: 0.02em;
     color: #874C20;
     }
 
@@ -680,17 +692,20 @@ border-radius: 15px;
    height: 422px;
    margin-top:70px;
    cursor: pointer;
+   object-fit: cover;
 
 }.category_img2{
   height: 280px;
    width: 367px;
     margin-left:10%;
     cursor: pointer;
+    object-fit: cover;
 }
 .category_img3{
   height:453px;
    width: 477px;
    cursor: pointer;
+   object-fit: cover;
 
 }
 
