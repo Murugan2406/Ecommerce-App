@@ -71,9 +71,7 @@
     <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
-        <a [routerLink]="['listProduct', catogeory.id, catogeory.name]"
-          [queryParams]="{category:true,id:catogeory.id}"
-          fragment={{catogeory.id}} routerLinkActive="active"
+        <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active"
           (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
           catogeory.name)">{{catogeory.name }}
         </a>
@@ -85,12 +83,8 @@
 
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
-        <div *ngFor="let element of subCategories">
-          <a mat-button [routerLink]="['listProduct', mainCategoryId,
-            categoryName]" routerLinkActive="active"
-            [queryParams]="{category:true,id:mainCategoryId,subcategory:true,
-            subId:element.id }"
-            fragment={{element.name}} class="nav_link"
+        <div *ngFor="let element of subCategories" >
+          <a mat-button  class="nav_link"  [routerLink]="['listProduct', mainCategoryId, categoryName]" fragment={{element.name}}
             (mouseenter)="openSubSubCategories(element.subsubcategories,
             element.id, element.name)"
             [ngClass]="element.default && toggleClass == true ? 'red' :

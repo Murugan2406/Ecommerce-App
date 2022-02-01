@@ -101,7 +101,7 @@ export class ListProductComponent implements OnInit {
     navSpeed: 500,
     center: true,
     lazyLoad: true,
-    URLhashListener: false,
+    URLhashListener: true,
     startPosition: 'URLHash',
     navText: [
       '<i class=\'fa fa-long-arrow-left\'></i>',
@@ -194,7 +194,7 @@ export class ListProductComponent implements OnInit {
 
     this.products = [];
     this.onLoad(event);
-    this.activatedRoute.queryParams.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
 
       this.checkid = 1;
       this.hparam = params;
@@ -880,6 +880,19 @@ export class ListProductComponent implements OnInit {
       this.nonAvailableProducts = false;
 
     }
+
+  }
+
+  isSectionActive(section: string): boolean {
+
+    let element = false;
+    // eslint-disable-next-line max-lines
+    this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+
+      element = fragment === section.split('#').pop();
+
+    });
+    return element;
 
   }
 

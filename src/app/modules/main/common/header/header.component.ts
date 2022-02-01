@@ -284,4 +284,16 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  isSectionActive(section: string): boolean {
+
+    let element = false;
+    this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+
+      element = fragment === section.split('#').pop();
+
+    });
+    return element;
+
+  }
+
 }
