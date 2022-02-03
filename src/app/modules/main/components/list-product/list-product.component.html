@@ -5,12 +5,12 @@
 
     <div class="align-items-center">
 
-      <div class="banner_title" data-aos="fade-down" data-aos-duration="1500">
+      <div class="banner_title">
         <h1>{{sectionTitle}} Section</h1>
         <h3>{{sectionSubtitle}}</h3>
       </div>
 
-      <div class="banner_curousal" data-aos="fade-up" data-aos-duration="1500">
+      <div class="banner_curousal">
         <owl-carousel-o [options]="offerOptions" (initialized)="initialized($event)"
           (translated)="onIndexChange($event)" (dragging)="isDragging = $event.dragging" (changed)="changed($event)">
           <ng-container *ngFor="let element of mainCategory">
@@ -33,7 +33,7 @@
 
   <section class="product_section">
 
-    <div class="filter_section" data-aos="zoom-in-right" data-aos-duration="1000">
+    <div class="filter_section">
 
       <div class="nav_path">
         <button mat-button [routerLink]=" '/' ">Home</button>
@@ -43,11 +43,28 @@
         <button mat-button> {{subCategoryName}} </button>
       </div>
       <div class="filter_container">
+
+
         <mat-accordion>
           <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
             <mat-expansion-panel-header>
               <mat-panel-title class="filter_title_top"> Refine/ Sortby </mat-panel-title>
             </mat-expansion-panel-header>
+
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
+
+
+                  <mat-expansion-panel-header>
+                      <mat-panel-title class="filter_title"> categories</mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div *ngFor="let category of filterCategory" class="filter_body mat_panel">
+
+                      <a (click)="innerCategoryRoute(category.id)" style="cursor: pointer;" class="nav_items"> {{category.name}} </a><br>
+                  </div>
+              </mat-expansion-panel>
+          </mat-accordion>
 
             <mat-accordion >
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -61,7 +78,7 @@
                 <div class="toggle_body mat_panel ">
                   <section class="">
                     <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
-                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterbyBrand()" class="Filtertogglebutton">{{brand.name}}
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterSection()" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
@@ -90,7 +107,7 @@
                   <section>
 
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterbycolor()" >{{brand.color}}
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterSection()" >{{brand.color}}
                     </mat-button-toggle>
                   </mat-button-toggle-group>
                   </section>
@@ -112,7 +129,7 @@
                 <div class="toggle_body mat_panel">
                   <section>
                     <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue"  class="Filtertogglebutton" multiple>
-                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="filterbySize(subtask.size)" >
+                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="filterSection()" >
                         {{subtask.size}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -122,7 +139,7 @@
               </mat-expansion-panel>
             </mat-accordion>
 
-            <form [formGroup]="form" (ngSubmit)="submit()" class="form_container">
+            <form [formGroup]="form" (ngSubmit)="filterSection()" class="form_container">
 
               <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -161,7 +178,7 @@
     </div>
 
 
-    <div class="preview_section" data-aos="zoom-in-left" data-aos-duration="1000">
+    <div class="preview_section">
 
 
       <div class="Tool_bar">
@@ -233,7 +250,7 @@
       </div>
       <!-- <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
       </ngx-skeleton-loader> -->
-      <mat-paginator *ngIf=" !nonAvailableProducts " [style.display]="loading ? 'none': ''" [length]="totalItems"
+      <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems"
         [pageSizeOptions]="[12, 15, 100]" [pageIndex]="0" aria-label="Select page">
       </mat-paginator>
 

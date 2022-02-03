@@ -969,3 +969,32 @@ font-size: 14px;
       }
   }
 }
+
+
+@media only screen and (min-width:1800px) {
+
+  .card {
+    box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
+    border-radius: 15px;
+    img {
+        min-height: 400px;
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+        padding: 3%;
+        border-radius: 15px;
+        transition-duration: 0.4s;
+    }
+    img:hover {
+        min-height: 400px;
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+        padding: 0;
+        transition-duration: 0.4s;
+        border-radius: 15px;
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+}
+
+}

@@ -1,7 +1,7 @@
 /* eslint-disable dot-notation */
 import {Component, HostListener, OnInit, ViewChild, } from '@angular/core';
 import { OwlOptions} from 'ngx-owl-carousel-o';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as AOS from 'aos';
 import { MatPaginator } from '@angular/material/paginator';
@@ -144,8 +144,8 @@ export class OfferSalesComponent implements OnInit {
     this.timeOutDuration = 1000;
 
     this.form = this.fb.group({
-      startprice: new FormControl(0),
-      endprice: new FormControl(0),
+      startprice: new FormControl(null, [ Validators.required ]),
+      endprice: new FormControl(null, [ Validators.required ]),
     });
     this.dataSource = new MatTableDataSource(this.products);
 
@@ -180,6 +180,7 @@ export class OfferSalesComponent implements OnInit {
     if (window.innerWidth <= this.screenSize) {
 
       this.isFirst = false;
+      // Mobile view
 
     } else {
 
@@ -190,7 +191,12 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
+
+    this.onLoad(event);
+
+    this.products = [];
 
     this.currencyChanges();
 
@@ -471,7 +477,7 @@ export class OfferSalesComponent implements OnInit {
     this.brandValue = [];
     this.colorValue = [];
 
-    this.updateValueChanges(this.products);
+    this.updateValueChanges(this.filterProducts);
 
   }
 
@@ -519,46 +525,6 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
-
-  // eslint-disable-next-line max-lines-per-function
-  filterbySize(params: string) {
-
-    if (this.colorValue.length === 0 && this.brandValue.length === 0) {
-
-      const question$ = [ ...this.filterProducts ];
-
-      if (this.sizeValue.length > 0) {
-
-        this.updateSize(question$);
-
-      } else {
-
-        this.updateValueChanges(this.filterProducts);
-
-
-      }
-
-
-    } else {
-
-      const question$ = [ ...this.brandTempArray ];
-
-      if (this.sizeValue.length > 0) {
-
-        this.updateSize(question$);
-
-      } else {
-
-        this.updateValueChanges(this.brandTempArray);
-
-
-      }
-
-    }
-
-  }
-
-
   updateSize(question$:any) {
 
     const tempArray:any[] = [];
@@ -601,49 +567,7 @@ export class OfferSalesComponent implements OnInit {
     const ids = tempArray.map((ooo) => ooo.id);
     const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
 
-    this.sizeTempArray = filtered;
-
-    this.updateValueChanges(filtered);
-
-  }
-
-  // eslint-disable-next-line max-lines-per-function
-  filterbycolor() {
-
-    if (this.sizeValue.length === 0 && this.brandValue.length === 0) {
-
-      if (this.colorValue.length > 0) {
-
-
-        const question$ = [ ...this.filterProducts ];
-
-        this.updateColor(question$);
-
-      } else {
-
-        this.updateValueChanges(this.filterProducts);
-
-
-      }
-
-
-    } else {
-
-      const question$ = [ ...this.brandTempArray ];
-
-      if (this.colorValue.length > 0) {
-
-        this.updateColor(question$);
-
-      } else {
-
-        this.updateValueChanges(this.brandTempArray);
-
-
-      }
-
-    }
-
+    return filtered;
 
   }
 
@@ -684,48 +608,11 @@ export class OfferSalesComponent implements OnInit {
     const ids = tempArray.map((ooo) => ooo.id);
     const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
 
-    this.colorTempArray = filtered;
+    return filtered;
 
-    this.updateValueChanges(filtered);
 
   }
 
-  filterbyBrand() {
-
-    let sizeFilter = [];
-
-    if (this.sizeValue.length === 0 && this.colorValue.length === 0) {
-
-      sizeFilter = [ ...this.filterProducts ];
-      if (this.brandValue.length > 0) {
-
-        this.updateBrand(sizeFilter);
-
-      } else {
-
-
-        this.updateValueChanges(this.filterProducts);
-
-      }
-
-    } else {
-
-      sizeFilter = [ ...this.brandTempArray ];
-      if (this.brandValue.length > 0) {
-
-        this.updateBrand(sizeFilter);
-
-      } else {
-
-
-        this.updateValueChanges(this.brandTempArray);
-
-      }
-
-
-    }
-
-  }
 
   updateBrand(sizeFilter:any) {
 
@@ -754,21 +641,158 @@ export class OfferSalesComponent implements OnInit {
     const ids = tempArray.map((ooo) => ooo.id);
     const filtered = tempArray.filter(({id}, index) => !ids.includes(id, index + 1));
 
-    this.brandTempArray = filtered;
-    this.updateValueChanges(filtered);
+    return filtered;
 
 
   }
 
+
   submit() {
 
-    const minimumPrice = this.form.get('startprice')?.value;
-    const maximumPrice = this.form.get('endprice')?.value;
-    this.sortingArray = [ ...this.dataSource.data ];
-    this.sortingArray = this.sortingArray.filter((product) =>
-      product.price >= minimumPrice && product.price <= maximumPrice);
+    const minPrice = this.form.get('startprice')?.value;
+    const maxPrice = this.form.get('endprice')?.value;
 
-    this.updateValueChanges(this.sortingArray);
+    let PRArray:any[] = [ ...this.filterProducts ];
+    if (this.form.valid) {
+
+      if (localStorage.getItem(CURRENCY_TYPE) === 'EUR') {
+
+        PRArray = PRArray.filter((prod) => prod.OfferEuro >= minPrice && prod.OfferEuro <= maxPrice);
+
+        return PRArray;
+
+
+      }
+      if (localStorage.getItem(CURRENCY_TYPE) === 'USD') {
+
+        PRArray = PRArray.filter((prod) => prod.OfferDollar >= minPrice && prod.OfferDollar <= maxPrice);
+
+        return PRArray;
+
+
+      }
+      if (localStorage.getItem(CURRENCY_TYPE) === 'SAR') {
+
+        PRArray = PRArray.filter((prod) => prod.OfferSAR >= minPrice && prod.OfferSAR <= maxPrice);
+
+        return PRArray;
+
+
+      }
+      if (localStorage.getItem(CURRENCY_TYPE) === 'GBP') {
+
+        PRArray = PRArray.filter((prod) => prod.OfferSterling >= minPrice && prod.OfferSterling <= maxPrice);
+
+        return PRArray;
+
+      }
+      if (localStorage.getItem(CURRENCY_TYPE) === 'AED') {
+
+        PRArray = PRArray.filter((prod) => prod.OfferDirham >= minPrice && prod.OfferDirham <= maxPrice);
+
+        return PRArray;
+
+
+      }
+
+
+    }
+
+    return PRArray;
+
+
+  }
+
+
+  filterSection() {
+
+
+    // For brand Filter
+
+
+    let brandResult:any[] = [];
+    const brandFilter = [ ...this.filterProducts ];
+
+    if (this.brandValue.length > 0) {
+
+      brandResult = this.updateBrand(brandFilter);
+
+
+    } else {
+
+      brandResult = this.filterProducts;
+
+    }
+
+
+    let colorResult:any[] = [];
+    const colorFilter = [ ...this.filterProducts ];
+
+    if (this.colorValue.length > 0) {
+
+
+      colorResult = this.updateColor(colorFilter);
+
+    } else {
+
+      colorResult = this.filterProducts;
+
+    }
+
+
+    // For size Filter
+
+    let sizeResult:any[] = [];
+
+    const sizeFilter = [ ...this.filterProducts ];
+
+
+    if (this.sizeValue.length > 0) {
+
+      sizeResult = this.updateSize(sizeFilter);
+
+    } else {
+
+      sizeResult = this.filterProducts;
+
+    }
+
+
+    // For price Filter
+
+    let priceResult:any[] = [];
+
+    priceResult = this.submit();
+
+    this.getResultendArray(brandResult, colorResult, sizeResult, priceResult);
+
+
+  }
+
+
+  getResultendArray(brandResult:any[], colorResult:any[], sizeResult:any[], priceResult:any[]) {
+
+    const result1 = brandResult.filter((obj1) => colorResult.some((obj2) =>
+
+      obj1.id === obj2.id
+
+    ));
+
+    const result2 = result1.filter((obj1) => sizeResult.some((obj2) =>
+
+      obj1.id === obj2.id
+
+    ));
+
+    const result3 = result2.filter((obj1) => priceResult.some((obj2) =>
+
+      obj1.id === obj2.id
+
+    ));
+
+
+    this.updateValueChanges(result3);
+
 
   }
 

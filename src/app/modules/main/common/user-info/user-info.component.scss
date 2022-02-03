@@ -1,0 +1,149 @@
+::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color:#AF621A;
+}
+:host ::ng-deep .mat-input-element {
+  caret-color: #AF621A;
+}
+:host ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
+   background-color: #AF621A;
+
+}
+:host ::ng-deep.mat-form-field-ripple {
+  background-color: #AF621A !important;
+}
+mat-label{
+  font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+
+letter-spacing: 0.05em;
+color: #000000;
+
+}
+mat-error{
+  color: #8B3B00;
+}
+.user_address, .user_details{
+  margin-bottom: 50px;
+}
+
+h1{
+  font-family: Ogg;
+font-style: normal;
+font-weight: normal;
+font-size: 35px;
+line-height: 62px;
+
+margin-bottom: 0;
+letter-spacing: 0.05em;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #8B3B00;
+}
+.submit-button{
+  background: #FFFAF3;
+  border: 0.2px solid #763301;
+  box-sizing: border-box;
+  padding: 0 15%;
+
+  font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+
+letter-spacing: 0.05em;
+color: #000000;
+}
+
+
+@media only screen and (min-width: 769px) {
+
+.form-submit-container
+{
+  text-align: center;
+  margin: 0;
+
+}
+
+  .main {
+    background-color: #fffaf3;
+    top: 0;
+    padding: var(--section-padding);
+  }
+
+.align-items-center {
+
+  justify-content: center;
+  align-items: center;
+}
+.fbo-create-formTwo{
+  width: 30%;
+  margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 5%;
+}
+
+input{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  color: #000000;
+}
+
+
+}
+@media only screen and (max-width: 768px) {
+  .align-items-center {
+display: flex;
+flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+  }
+  .fbo-create-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .main {
+    background-color: #fffaf3;
+    top: 0;
+   padding: 2em 16px;
+  }
+
+  mat-label{
+font-size: 14px;
+letter-spacing: 0.01em;
+  }
+  input{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+background-color: transparent !important;
+    letter-spacing: 0.03em;
+    color: #000000;
+  }
+
+.user_address, .user_details{
+
+    margin-bottom: 2em;
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 100%;
+}
+
+h1{
+  font-size: 28px;
+  margin-left: 0;
+}
+.submit-button{
+  padding: 0 20px;
+}
+}

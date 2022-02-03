@@ -65,7 +65,15 @@ export class AccountComponent implements OnInit {
 
    navigateToInfo():void {
 
-     this.router.navigate([ '/userinfo' ]);
+     if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+
+       this.router.navigate([ '/userinfo' ]);
+
+     } else {
+
+       this.router.navigate([ '/login' ]);
+
+     }
 
    }
 

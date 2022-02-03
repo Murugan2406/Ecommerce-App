@@ -192,6 +192,29 @@
                               <h4>{{img.name}}</h4>
                               <h4>{{img.price}}</h4>
                           </div>
+                          <div style="display: flex;justify-content: center">
+                            <b class='items' *ngIf="currencyType === 'EUR' "> €{{img['OfferEuro']}}</b>
+                            <b class='items' *ngIf="currencyType === 'USD' "> ${{img['OfferDollar'] }}</b>
+                            <b class='items' *ngIf="currencyType === 'SAR' "> SAR{{img['OfferSAR']}} </b>
+                            <b class='items' *ngIf="currencyType === 'GBP' ">£{{img['OfferSterling']}}</b>
+                            <b class='item' *ngIf="currencyType === 'AED' ">د.إ{{img['OfferDirham']}}</b>
+                            <span class='offer_price items' *ngIf="currencyType === 'EUR' "> €{{img['productpriceEuro']}} </span>
+                            <span class='offer_price items' *ngIf="currencyType === 'USD' "> ${{img['productpriceDollar'] }}</span>
+                            <span class='offer_price items' *ngIf="currencyType === 'SAR' "> SAR{{img['productpriceSAR']}} </span>
+                            <span class='offer_price items' *ngIf="currencyType === 'GBP' "> £{{img['productpriceSterling']}}</span>
+                            <span class='offer_price items' *ngIf="currencyType === 'AED' "> د.إ{{img['productpriceDirham']}}</span>
+
+                            <span class='offer_percentage items '
+                              *ngIf="currencyType === 'EUR' ">{{img['OfferPecentageEuro']}}off</span>
+                            <span class='offer_percentage items '
+                              *ngIf="currencyType === 'USD' ">{{img['OfferPecentageDollar']}}off</span>
+                            <span class='offer_percentage items '
+                              *ngIf="currencyType === 'SAR' ">{{img['OfferPecentageSAR']}}off</span>
+                            <span class='offer_percentage items '
+                              *ngIf="currencyType === 'GBP' ">{{img['OfferPecentageSterling']}}off</span>
+                            <span class='offer_percentage items '
+                              *ngIf="currencyType === 'AED' ">{{img['OfferPecentageDirham']}}off</span>
+                          </div>
                       </ng-template>
                   </ng-container>
 

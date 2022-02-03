@@ -7,6 +7,7 @@
 }
 .Filtertogglebutton{
   text-transform: lowercase;
+  flex-direction: column;
 }
 ::ng-deep[type=button]:not(:disabled),
 button:not(:disabled):before {
@@ -54,8 +55,8 @@ button:not(:disabled):before {
 }
 
 ::ng-deep.mat-checkbox-inner-container {
-  height: 15px !important;
-  width: 15px !important;
+  height: 17px !important;
+  width: 17px !important;
 }
 
 ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
@@ -313,7 +314,7 @@ font-size: 14px;
 }
 
 .emptyfilterResult img {
-  max-width: 400px;
+  max-width: 250px;
 }
 
 .emptyfilterResultH2 {
@@ -370,6 +371,9 @@ font-size: 14px;
 
 // ===========desktop =======================================
 @media only screen and (min-width:769px) {
+
+
+
   .main {
       background-color: #fffaf3;
       top: 0;
@@ -487,7 +491,6 @@ font-size: 14px;
       padding: 1em;
       img {
           height: 300px;
-          object-fit: cover;
       }
   }
   .product_section {
@@ -501,6 +504,7 @@ font-size: 14px;
       max-width: 300px;
       text-align: center;
   }
+
   .nav_path {
       font-family: Poppins;
       font-style: normal;
@@ -964,4 +968,32 @@ font-size: 14px;
           filter: drop-shadow(2px 4px 8px #585858);
       }
   }
+}
+
+@media only screen and (min-width:1800px) {
+
+  .card {
+    box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
+    border-radius: 15px;
+    img {
+        min-height: 400px;
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+        padding: 3%;
+        border-radius: 15px;
+        transition-duration: 0.4s;
+    }
+    img:hover {
+        min-height: 400px;
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+        padding: 0;
+        transition-duration: 0.4s;
+        border-radius: 15px;
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+}
+
 }
