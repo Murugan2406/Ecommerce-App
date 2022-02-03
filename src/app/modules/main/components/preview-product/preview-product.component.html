@@ -192,7 +192,7 @@
                               <h4>{{img.name}}</h4>
                               <h4>{{img.price}}</h4>
                           </div>
-                          <div style="display: flex;justify-content: center">
+                          <div style="display: flex;justify-content: center; align-items: baseline;">
                             <b class='items' *ngIf="currencyType === 'EUR' "> €{{img['OfferEuro']}}</b>
                             <b class='items' *ngIf="currencyType === 'USD' "> ${{img['OfferDollar'] }}</b>
                             <b class='items' *ngIf="currencyType === 'SAR' "> SAR{{img['OfferSAR']}} </b>

@@ -559,26 +559,64 @@ export class ListProductComponent implements OnInit {
 
   }
 
-  openSnackBar(id: number) {
+  addtoWishlist(id: number) {
 
     this.data[0].product = id;
     if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
       localStorage.getItem(ACCESS_TOKEN_ID);
 
-      this.productService.addWishList(this.data[0]).subscribe((data) => {
+      const wishArray:any[] = [];
 
-        this._snackBar.open('1 item added to favourite list !', '', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-        });
-        setTimeout(() => {
+      let exist = false;
 
-          this._snackBar.dismiss();
+      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
 
-        }, this.timeOutDuration);
+
+        if (data.length === 0) {
+
+          this.updateWishlist(this.data[0]);
+
+        } else {
+
+          data.forEach((element:any) => {
+
+            wishArray.push(element['product']);
+
+          });
+
+          wishArray.forEach((element) => {
+
+            if (element['id'] === this.data[0]['product']) {
+
+              exist = true;
+
+            }
+
+          });
+
+          if (exist) {
+
+            this._snackBar.open('Product already added in wishlist!', '', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            });
+            setTimeout(() => {
+
+              this._snackBar.dismiss();
+
+            }, this.timeOutDuration);
+
+          } else {
+
+            this.updateWishlist(this.data[0]);
+
+          }
+
+        }
 
       });
+
 
     } else {
 
@@ -593,6 +631,26 @@ export class ListProductComponent implements OnInit {
       }, this.timeOutDuration);
 
     }
+
+  }
+
+
+  updateWishlist(dataId:number) {
+
+
+    this.productService.addWishList(dataId).subscribe((data) => {
+
+      this._snackBar.open('1 item added to favourite list !', '', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      });
+      setTimeout(() => {
+
+        this._snackBar.dismiss();
+
+      }, this.timeOutDuration);
+
+    });
 
   }
 
@@ -840,6 +898,7 @@ export class ListProductComponent implements OnInit {
 
     // For price Filter
 
+    // eslint-disable-next-line max-lines
     let priceResult:any[] = [];
 
     priceResult = this.submit();
@@ -848,7 +907,6 @@ export class ListProductComponent implements OnInit {
 
 
   }
-
 
   getResultendArray(brandResult:any[], colorResult:any[], sizeResult:any[], priceResult:any[]) {
 

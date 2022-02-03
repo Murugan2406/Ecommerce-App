@@ -209,7 +209,7 @@
           <div class="card">
             <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" onerror ="this.src='../../../../../../assets/images/Logo_VOUI.svg' " class=""
               [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
-            <button mat-icon-button class="banner_explore_button" (click)="openSnackBar(img.id)" matRipple
+            <button mat-icon-button class="banner_explore_button" (click)="addtoWishlist(img.id)" matRipple
               matRippleColor="green">
               <mat-icon>favorite_border</mat-icon>
             </button>

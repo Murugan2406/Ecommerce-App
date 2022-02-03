@@ -427,10 +427,83 @@ export class PreviewProductComponent implements OnInit {
   addtoWishlist(id: number) {
 
     this.data[0].product = id;
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+
+      localStorage.getItem(ACCESS_TOKEN_ID);
+
+      const wishArray:any[] = [];
+
+      let exist = false;
+
+      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
 
 
-    localStorage.getItem(ACCESS_TOKEN_ID);
-    this.productService.addWishList(this.data[0]).subscribe((data) => {
+        if (data.length === 0) {
+
+          this.updateWishlist(this.data[0]);
+
+        } else {
+
+          data.forEach((element:any) => {
+
+            wishArray.push(element['product']);
+
+          });
+
+          wishArray.forEach((element) => {
+
+            if (element['id'] === this.data[0]['product']) {
+
+              exist = true;
+
+            }
+
+          });
+
+          if (exist) {
+
+            this._snackBar.open('Product already added in wishlist!', '', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+            });
+            setTimeout(() => {
+
+              this._snackBar.dismiss();
+
+            }, this.timeOutDuration);
+
+          } else {
+
+            this.updateWishlist(this.data[0]);
+
+          }
+
+        }
+
+      });
+
+
+    } else {
+
+      this._snackBar.open('you need to login before adding wishlist!', '', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      });
+      setTimeout(() => {
+
+        this._snackBar.dismiss();
+
+      }, this.timeOutDuration);
+
+    }
+
+  }
+
+
+  updateWishlist(dataId:number) {
+
+
+    this.productService.addWishList(dataId).subscribe((data) => {
 
       this._snackBar.open('1 item added to favourite list !', '', {
         horizontalPosition: 'end',

@@ -34,7 +34,7 @@ mat-icon{
 .card{
   margin-top: 2em;
   cursor: pointer;
-  background-color: #F3EEE9;
+  background-color: #ffffff;
 }
 
 .card-body {
@@ -110,35 +110,29 @@ mat-icon{
 @media only screen  and (min-width:769px){
 
 
-.card{
-  box-shadow:
-  0 0 5px rgba(177, 146, 116, 0.5),
-  0 0 15px rgba(134, 110, 170, 0.3)
-  ;
-  border-radius: 15px;
-  img{
-    min-height: 300px;
-    max-height: 300px;
-    width: 100%;
-    object-fit: cover;
-    padding: 2%;
+  .card {
+    box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
     border-radius: 15px;
-    transition-duration: 0.2s;
-
-
-  }
-  img:hover{
-    min-height: 300px;
-    max-height: 300px;
-    width: 100%;
-    object-fit: cover;
-    padding: 0;
-    transition-duration:0.2s ;
-
-    border-radius: 15px;
-    filter: drop-shadow(2px 4px 8px #585858);
-  }
-  }
+    img {
+        min-height: 250px;
+        max-height: 250px;
+        width: 100%;
+        object-fit: cover;
+        padding: 2%;
+        border-radius: 15px;
+        transition-duration: 0.4s;
+    }
+    img:hover {
+        min-height: 250px;
+        max-height: 250px;
+        width: 100%;
+        object-fit: cover;
+        padding: 0;
+        transition-duration: 0.4s;
+        border-radius: 15px;
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+}
 
 
 .align-items-center {

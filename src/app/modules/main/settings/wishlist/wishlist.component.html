@@ -20,7 +20,7 @@
             <div class="card">
               <img src="{{img.product['image']['original']}}" alt="Photo of
                 {{img.product['name']}}" class=""
-                routerLink="../../previewProduct/{{img.product['id']}}/">
+                [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
               <button mat-icon-button class="banner_explore_button">
                 <mat-icon (click)="removeProduct(img.id)">clear</mat-icon>
               </button>
