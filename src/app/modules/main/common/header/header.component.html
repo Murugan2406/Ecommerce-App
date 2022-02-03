@@ -66,8 +66,7 @@
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
 
-  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000"
-    (mouseleave)="ClosePanel()">
+  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()" >
     <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
@@ -83,24 +82,20 @@
 
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
-        <div *ngFor="let element of subCategories" >
-          <a mat-button  class="nav_link"  [routerLink]="['listProduct', mainCategoryId, categoryName]" fragment={{element.name}}
-            (mouseenter)="openSubSubCategories(element.subsubcategories,
-            element.id, element.name)"
-            [ngClass]="element.default && toggleClass == true ? 'red' :
-            'blue'">
-            {{element.name}}
-            <mat-icon class="icon">arrow_forward</mat-icon>
-            <!-- <mat-icon *ngIf="routerLinkActive">arrow_forward</mat-icon> -->
-            <mat-icon *ngIf="element.default && toggleClass == true">arrow_forward</mat-icon>
-          </a>
+        <div  *ngFor="let element of subCategories">
+          <a mat-button  class="nav_link" [routerLink]="['listProduct', mainCategoryId, categoryName]" [fragment]="element.name"
+          [class.active]="isSectionActive(element.name)"
+          (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
+          {{element.name }}
+          <mat-icon class="icon">arrow_forward</mat-icon>
+
+          <mat-icon *ngIf="element.default && toggleClass == true">arrow_forward</mat-icon>
+        </a>
         </div>
       </div>
       <div class="child_sub_menu">
         <div *ngFor="let child of subsubCategories">
-          <button mat-button [routerLink]="['listProduct',
-            mainCategoryId,categoryName]" routerLinkActive="active"
-            [queryParams]="{category:true,id:CategoryId,subcategory:true,subId:subsubCategoryId,subsubId:child.id}"
+          <button mat-button [routerLink]="['listProduct',mainCategoryId,categoryName]"
             fragment={{ssName}} class="nav_link">{{child.name}}
             <mat-icon class="icon">arrow_forward</mat-icon>
           </button>

@@ -11,6 +11,7 @@ import { ACCESS_TOKEN_ID, CURRENCY_TYPE, LANGUAGE } from '../../../../../assets/
 import { ProductService } from '../../../service/product.service';
 import { LogoutComponent } from '../logout/logout.component';
 import { MatDialog} from '@angular/material/dialog';
+import { share } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -59,6 +60,8 @@ export class HeaderComponent implements OnInit {
 
   searchValue = '';
 
+  activeFragment:any;
+
   linkFrom = '';
 
   size: any[] = [
@@ -104,6 +107,8 @@ export class HeaderComponent implements OnInit {
 
     this.quantity = 1;
 
+    this.activeFragment = this.activatedRoute.fragment.pipe(share());
+
   }
 
   currencyForm: FormGroup = new FormGroup({
@@ -118,6 +123,17 @@ export class HeaderComponent implements OnInit {
     inputValue: new FormControl(''),
   });
 
+  isSectionActive(section: string): boolean {
+
+    let element = false;
+    this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+
+      element = fragment === section.split('#').pop();
+
+    });
+    return element;
+
+  }
 
   ngOnInit(): void {
 
@@ -284,16 +300,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  isSectionActive(section: string): boolean {
-
-    let element = false;
-    this.activatedRoute.fragment.subscribe((fragment: string | null) => {
-
-      element = fragment === section.split('#').pop();
-
-    });
-    return element;
-
-  }
 
 }
+
