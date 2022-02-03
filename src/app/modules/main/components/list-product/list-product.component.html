@@ -61,7 +61,8 @@
 
                   <div *ngFor="let category of filterCategory" class="filter_body mat_panel">
 
-                      <a (click)="innerCategoryRoute(category.id)" style="cursor: pointer;" class="nav_items"> {{category.name}} </a><br>
+                      <a (click)="innerCategoryRoute(category.id)" style="cursor: pointer;" class="nav_items">
+                         {{category.name}} </a><br>
                   </div>
               </mat-expansion-panel>
           </mat-accordion>
@@ -71,7 +72,7 @@
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="filter_title">
-                    Brand
+                    Brands
                   </mat-panel-title>
                 </mat-expansion-panel-header>
 
@@ -107,7 +108,8 @@
                   <section>
 
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterSection()" >{{brand.color}}
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterSection()" >
+                      {{brand.color}}
                     </mat-button-toggle>
                   </mat-button-toggle-group>
                   </section>

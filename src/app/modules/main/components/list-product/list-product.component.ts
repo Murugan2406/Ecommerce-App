@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable dot-notation */
 import {Component, HostListener, OnInit, ViewChild, } from '@angular/core';
 import {OwlOptions, SlidesOutputData, } from 'ngx-owl-carousel-o';
@@ -148,7 +149,7 @@ export class ListProductComponent implements OnInit {
   }
 
   @HostListener('window:load', [ '$event' ])
-  onLoad(event: any) {
+  onLoad() {
 
     if (window.innerWidth <= this.screenSize) {
 
@@ -182,10 +183,12 @@ export class ListProductComponent implements OnInit {
 
   checkid = 0;
 
+
   ngOnInit(): void {
 
     this.products = [];
-    this.onLoad(event);
+    this.onLoad();
+
     this.activatedRoute.params.subscribe((params) => {
 
       this.checkid = 1;
@@ -194,7 +197,11 @@ export class ListProductComponent implements OnInit {
       this.setdefaultData(params['id']);
 
     });
+    this.setCurrencyValue();
 
+  }
+
+  setCurrencyValue() {
 
     if (localStorage.getItem(CURRENCY_TYPE)) {
 
@@ -655,14 +662,6 @@ export class ListProductComponent implements OnInit {
   }
 
 
-  productPreview(id: number): void {
-
-    const link = [ 'previewProduct', id ];
-    this.router.navigate(link);
-
-
-  }
-
   updateSize(question$:any) {
 
     const tempArray:any[] = [];
@@ -889,6 +888,7 @@ export class ListProductComponent implements OnInit {
 
       sizeResult = this.updateSize(sizeFilter);
 
+
     } else {
 
       sizeResult = this.filterProducts;
@@ -898,7 +898,7 @@ export class ListProductComponent implements OnInit {
 
     // For price Filter
 
-    // eslint-disable-next-line max-lines
+
     let priceResult:any[] = [];
 
     priceResult = this.submit();
@@ -907,6 +907,7 @@ export class ListProductComponent implements OnInit {
 
 
   }
+
 
   getResultendArray(brandResult:any[], colorResult:any[], sizeResult:any[], priceResult:any[]) {
 

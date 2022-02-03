@@ -578,13 +578,6 @@ export class OfferSalesComponent implements OnInit {
   }
 
 
-  productPreview(id: number): void {
-
-    const link = [ 'previewProduct', id ];
-    this.router.navigate(link);
-
-  }
-
   updateSize(question$:any) {
 
     const tempArray:any[] = [];
