@@ -9,12 +9,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from '../../../service/dashboard.service';
 import { CURRENCY_TYPE, ACCESS_TOKEN_ID } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/modules/service/header.service';
 @Component({
   selector: 'app-offer-sales',
   templateUrl: './offer-sales.component.html',
-  styleUrls: [ './offer-sales.component.scss' ]
+  styleUrls: [ './offer-sales.component.scss', '../list-product/list-product.component.scss' ]
 })
 export class OfferSalesComponent implements OnInit {
 
