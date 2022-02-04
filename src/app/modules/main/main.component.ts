@@ -27,4 +27,12 @@ export class MainComponent implements OnInit {
 
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  onSideNavScroll(event:any) {
+
+    event.stopPropagation();
+
+  }
+
+
 }

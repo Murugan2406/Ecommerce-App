@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { MainService } from '../../../service/main.service';
 import { ProductService } from '../../../service/product.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,10 +28,7 @@ export class CartComponent implements OnInit {
 
   @ViewChild('myname') input: any;
 
-
-  @ViewChild('rightSidenav', { static: true }) sidenav: MatSidenav | any;
-
-  constructor(private readonly mainService: MainService,
+  constructor(
     private readonly productService: ProductService,
     private readonly router: Router,
     private readonly fBuilder: FormBuilder,
@@ -74,7 +69,6 @@ export class CartComponent implements OnInit {
   ngOnInit() {
 
     this.initFboForm();
-    this.mainService.setSidenav(this.sidenav);
     if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
 
@@ -236,15 +230,8 @@ export class CartComponent implements OnInit {
   }
 
 
-  toggleRightSidenav(): void {
-
-    this.mainService.close();
-
-  }
-
   checkOut(): void {
 
-    this.sidenav.toggle();
     localStorage.getItem(CURRENCY_TYPE);
     this.userService.getUserData().subscribe((data: any) => {
 

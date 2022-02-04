@@ -52,7 +52,7 @@
       </button>
 
 
-      <button mat-button  (click)="toggleRightSidenav();$event.stopPropagation();"
+      <button mat-button  (click)="sidenav.toggle()"
       matBadge="{{cartLength}}" matBadgePosition="after">  CART </button>
 
     </div>
@@ -112,11 +112,19 @@
 
 </header>
 
-<mat-sidenav-container class="sidenav-container"
-  (click)="$event.stopPropagation();">
-  <mat-sidenav-content>
-    <app-cart></app-cart>
-  </mat-sidenav-content>
+
+<mat-sidenav-container >
+  <mat-sidenav #sidenav mode="over" opened="false" fixedInViewport="true" position="end" class="side_nav_mobile">
+    <mat-toolbar class="cart_header">
+      <h1 class="cart_header_title" >Cart</h1>
+
+      <button mat-button class="cart_header_button"
+      (click)="sidenav.toggle()">
+      <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+   <app-cart></app-cart>
+  </mat-sidenav>
 </mat-sidenav-container>
 
 <header class="for_mobile">
@@ -124,92 +132,13 @@
   <mat-toolbar class="toolbar_main">
     <div class="toggle_side_nav">
       <button mat-button class="mobile_menu"
-        (click)="drawer.open();$event.stopPropagation();">
+      (click)="mobileMenu.toggle()">
 
         <mat-icon>list</mat-icon>
       </button>
     </div>
 
 
-
-    <mat-drawer #drawer class="example-sidenav" mode="over"
-      hasBackdrop="hasBackdrop.value"
-      (click)="$event.stopPropagation();">
-
-      <mat-toolbar class="toolbar_main">
-        <div class="login_banner">
-          <mat-icon>account_circle</mat-icon> &nbsp;
-          <button mat-button class="login_button_nav">
-            <button mat-button (click)="myAccountNavigate()"
-              (click)="drawer.close()">{{user}}</button>
-          </button>
-        </div>
-        <button mat-button class="mobile_menu" (click)="drawer.toggle()">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </mat-toolbar>
-      <ul class="nav_list" id="nav_menu">
-        <li class="nav_items" *ngFor="let catogeory of mainCategory">
-
-          <a [routerLink]="['listProduct', mainCategoryId, categoryName]"
-            [queryParams]="{category:'mainCategories',id:catogeory.id}"
-            fragment={{catogeory.id}}
-            routerLinkActive="active"
-            (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,catogeory.name
-            )">{{catogeory.name }}
-          </a>
-        </li>
-      </ul>
-      <div class="nav_list" id="nav_menu">
-        <div class="language">
-          <span>Language</span>
-          <mat-label class="switch">
-            <input type="checkbox">
-          </mat-label>
-        </div>
-        <div class="currency">
-          <span>Currency</span>
-          <form [formGroup]="currencyForm">
-
-            <mat-form-field style="text-align: end;">
-              <mat-select formControlName="currency"
-                (selectionChange)="changeCurrency()">
-                <mat-option value="EUR">EUR</mat-option>
-                <mat-option value="AUD">AUD</mat-option>
-                <mat-option value="EGP">EGP</mat-option>
-                <mat-option value="AED">AED</mat-option>
-                <mat-option value="SAR">SAR</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </form>
-        </div>
-
-      </div>
-
-
-      <ul class="nav_list" id="nav_menu">
-
-        <li class="nav_items">
-          <a routerLinkActive="active" [routerLink]="'settings/myaccount'">
-            <i class="fa fa-user" aria-hidden="true"></i>My Account</a>
-        </li>
-
-        <li class="nav_items">
-          <a routerLinkActive="active" [routerLink]="'settings/orders'">
-            <i class="fa fa-cart-plus" aria-hidden="true"></i>My Orders</a>
-        </li>
-
-        <li class="nav_items">
-          <a routerLinkActive="active" [routerLink]="'settings/wishlist'">
-            <i class="fa fa-heart" aria-hidden="true"></i>My Wishlist</a>
-        </li>
-
-        <li class="nav_items" *ngIf="!logoutNeeded">
-          <a routerLinkActive="active" (click)="logOut()">
-            <i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
-        </li>
-      </ul>
-    </mat-drawer>
 
 
     <div class="logo_container" [routerLink]="'dashboard'">
@@ -219,14 +148,100 @@
 
     <div class="toggle_side_nav">
       <button mat-button class="mobile_menu"
-        (click)="toggleRightSidenav();$event.stopPropagation();">
+      (click)="sidenav.toggle()">
         <mat-icon>shopping_cart</mat-icon>
       </button>
 
     </div>
+
+
+
+
   </mat-toolbar>
 
+
+
+
+
   <mat-toolbar class="toolbar_main">
+
+    <mat-sidenav-container >
+      <mat-sidenav #mobileMenu mode="over" opened="false" fixedInViewport="true" position="start"  class="example-sidenav">
+        <mat-toolbar class="toolbar_main">
+          <div class="login_banner">
+            <mat-icon>account_circle</mat-icon> &nbsp;
+            <button mat-button class="login_button_nav">
+              <button mat-button (click)="myAccountNavigate()"
+              (click)="mobileMenu.toggle()">{{user}}</button>
+            </button>
+          </div>
+          <button mat-button  class="cart_header_button" (click)="mobileMenu.toggle()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-toolbar>
+        <ul class="nav_list" id="nav_menu">
+
+
+          <li class="nav_items" *ngFor="let catogeory of mainCategory">
+            <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active"
+              (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
+              catogeory.name)" (click)="mobileMenu.toggle()">{{catogeory.name }}
+            </a>
+          </li>
+
+        </ul>
+        <div class="nav_list" id="nav_menu">
+          <div class="language">
+            <span>Language</span>
+            <mat-label class="switch">
+              <input type="checkbox">
+            </mat-label>
+          </div>
+          <div class="currency">
+            <span>Currency</span>
+            <form [formGroup]="currencyForm">
+
+              <mat-form-field style="text-align: end;">
+                <mat-select formControlName="currency"
+                  (selectionChange)="changeCurrency()">
+                  <mat-option value="EUR">EUR</mat-option>
+                  <mat-option value="AUD">AUD</mat-option>
+                  <mat-option value="EGP">EGP</mat-option>
+                  <mat-option value="AED">AED</mat-option>
+                  <mat-option value="SAR">SAR</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+          </div>
+
+        </div>
+
+
+        <ul class="nav_list" id="nav_menu">
+
+          <li class="nav_items">
+            <a routerLinkActive="active" [routerLink]="'settings/myaccount'" (click)="mobileMenu.toggle()">
+              <i class="fa fa-user" aria-hidden="true"></i>My Account</a>
+          </li>
+
+          <li class="nav_items">
+            <a routerLinkActive="active" [routerLink]="'settings/orders'" (click)="mobileMenu.toggle()">
+              <i class="fa fa-cart-plus" aria-hidden="true"></i>My Orders</a>
+          </li>
+
+          <li class="nav_items">
+            <a routerLinkActive="active" [routerLink]="'settings/wishlist'" (click)="mobileMenu.toggle()">
+              <i class="fa fa-heart" aria-hidden="true"></i>My Wishlist</a>
+          </li>
+
+          <li class="nav_items" *ngIf="!logoutNeeded">
+            <a routerLinkActive="active" (click)="mobileMenu.toggle(); logOut()">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
+          </li>
+        </ul>
+
+      </mat-sidenav>
+    </mat-sidenav-container>
 
     <form [formGroup]="searchForm" class="header-search"
       (submit)="upsertSearch()">

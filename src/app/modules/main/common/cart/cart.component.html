@@ -1,31 +1,17 @@
-<mat-drawer-container class="example-container" [hasBackdrop]="over">
-  <mat-sidenav #rightSidenav mode="over" class="rightSidenav"
-    [fixedInViewport]="true" [fixedTopGap]="0" position="end"
-    class="xxx" hasBackdrop="unset" mode="over">
+
 
     <main class="main">
       <section class="offer_section" id="offer_section">
 
         <div class="align-items-center">
-          <mat-toolbar class="toolbar_main">
-            <h1>Cart</h1>
 
-            <button mat-button class="mobile_menu mobile_icon"
-              (click)="toggleRightSidenav()">
-              <i class="fa fa-close"></i>
-            </button>
-            <button mat-mini-fab (click)="toggleRightSidenav()"
-              class="for_desktop">
-              <mat-icon>clear</mat-icon>
-            </button>
-          </mat-toolbar>
 
           <div class="Empty_cart_section" *ngIf="carts.length ===0">
             <img src="../../../../../assets/images/shoppingCard_s.png" alt="">
             <div class="undraw_content">
               <h1>Your Cart is Empty Start adding Products</h1>
               <a class="custom-btn btn-11" routerLink="['/']"
-                (click)="toggleRightSidenav(); navigateToHome()">Add New<div
+                (click)="navigateToHome()">Add New<div
                   class="dot"></div></a>
             </div>
           </div>
@@ -78,17 +64,18 @@
                 </div>
                 <div>
                   <div>
-                    <h1 *ngIf="currencyType === 'EUR'">
+                    <h1 class="cart_price" *ngIf="currencyType === 'EUR'">
                       €{{cart['product']['OfferEuro'] * cart['quantity']}} </h1>
-                    <h1 *ngIf="currencyType === 'USD'">
+                    <h1 class="cart_price" *ngIf="currencyType === 'USD'">
                       €{{cart['product']['OfferDollar'] * cart['quantity'] }}
                     </h1>
-                    <h1 *ngIf="currencyType === 'SAR'">
+                    <h1 class="cart_price" *ngIf="currencyType === 'SAR'">
                       €{{cart['product']['OfferSAR'] * cart['quantity']}} </h1>
-                    <h1 *ngIf="currencyType === 'GBP'">
+
+                    <h1 class="cart_price" *ngIf="currencyType === 'GBP'">
                       €{{cart['product']['OfferSterling'] * cart['quantity']}}
                     </h1>
-                    <h1 *ngIf="currencyType === 'AED'">
+                    <h1 class="cart_price" *ngIf="currencyType === 'AED'">
                       €{{cart['product']['OfferDirham'] * cart['quantity']}}
                     </h1>
                   </div>
@@ -219,11 +206,11 @@
                 <div class="additional_details for_mobile">
                   <div class="sub_total">
                     <h2>Subtotal</h2>
-                    <h4>€{{fboForm.controls.totalAmount.value}}</h4>
+                    <h4 class="mobile_price">€{{fboForm.controls.totalAmount.value}}</h4>
                   </div>
                   <div class="shipping">
                     <h2>Shipping</h2>
-                    <h4>€{{fboForm.controls.shippingFee.value}}</h4>
+                    <h4 class="mobile_price" >€{{fboForm.controls.shippingFee.value}}</h4>
                   </div>
 
                 </div>
@@ -232,7 +219,7 @@
                 <div class="Total_amount for_mobile">
                   <div class="sub_total">
                     <h2>Total</h2>
-                    <h4>€{{fboForm.controls.grandTotal.value}}</h4>
+                    <h4 class="mobile_price">€{{fboForm.controls.grandTotal.value}}</h4>
                   </div>
 
                 </div>
@@ -251,5 +238,4 @@
 
       </section>
     </main>
-  </mat-sidenav>
-</mat-drawer-container>
+

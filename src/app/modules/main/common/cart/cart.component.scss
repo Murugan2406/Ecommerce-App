@@ -1,16 +1,7 @@
 .main {
   background: #DADADA;
 }
-::ng-deep.mat-drawer-inner-container {
-  background-color: #DADADA;
-}
-.mat-drawer:not(.mat-drawer-side) {
-  position: fixed;
-}
 
-.mat-drawer-backdrop {
-  position: fixed !important;
-}
 a {
   text-decoration: none;
   font-weight: 500;
@@ -92,6 +83,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 769px) {
 
+  ::ng-deep .mat-drawer:not(.mat-drawer-side) {
+    position: fixed;
+    overflow: hidden;
+}
+
+::ng-deep.mat-drawer-backdrop {
+    position: fixed !important;
+    overflow: hidden;
+}
+
   .Empty_cart_section{
     display: flex;
     flex-direction: column;
@@ -104,7 +105,7 @@ input[type=number]::-webkit-outer-spin-button {
       filter: drop-shadow(3px 4px 8px rgb(77, 65, 66));
       max-width: 300px;
       height: 100%;
-      filter: drop-shadow(3px 4px 80px #8d4182);
+      filter: drop-shadow(3px 4px 100px #8d4182);
     }
   }
   .undraw_content{
@@ -204,6 +205,10 @@ color: #000000;
 .title_price, .quantity_remove{
 display: flex;
 justify-content: space-between;
+color: #000000;
+}
+.cart_price{
+  margin-top: 5px;
 }
 .size_color{
   margin-bottom: 20px;
@@ -226,12 +231,9 @@ h1{
 }
 }
 
-.product_cart{
-  margin-top: 30px;
-
-}
 .action{
-  margin-top: 95px;
+  margin-top: 90px;
+  color: #000000;
 
 }
 .additional_details, .checkout_section{
@@ -301,9 +303,6 @@ input{
 
 }
 
-::ng-deep.mat-drawer-container {
-  z-index: 999;
-}
 ::ng-deep.mat-mini-fab:not([class*=mat-elevation-z]) {
 
   cursor: pointer;
@@ -319,20 +318,12 @@ input{
   display: flex;
   align-items: center;
   color: #000000;
+
 }
 }
 @media only screen and (max-width: 768px) {
 
 
-
-  ::ng-deep.mat-drawer-container {
-    z-index: 1000;
-    width: 90%;
-
-  }
-  ::ng-deep.mat-drawer{
-    width: 90%;
-  }
 
 img{
   width: 120px;
@@ -390,6 +381,7 @@ border-radius: 50%;
 width: 30px;
 height: 30px;
 padding: 0;
+
 }
 .for_mobile{
   padding: 5%;
@@ -430,12 +422,25 @@ h2{
 .quantity_remove{
   display:flex;
   align-items: center;
+  color: #000000;
 
   .mobile_menu{
     width: 25px;
     height: 25px;
   }
 
+}
+
+.mobile_price{
+  font-family: Ogg;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 31px;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+
+  color: #8B3B00;
 }
 .price_remove{
   display: flex;
@@ -523,5 +528,9 @@ justify-content: center;
   }
 }
 
+.mat-drawer:not(.mat-drawer-side) {
+  position: fixed;
+  width: 90%;
+}
 
 }

@@ -1,11 +1,9 @@
 /* eslint-disable dot-notation */
-import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild, } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MainService } from '../../../service/main.service';
 import { HeaderService } from '../../../service/header.service';
 import { UserService } from '../../../service/user.service';
-import { MatSidenav } from '@angular/material/sidenav';
 import * as AOS from 'aos';
 import { ACCESS_TOKEN_ID, CURRENCY_TYPE, LANGUAGE } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
@@ -75,29 +73,9 @@ export class HeaderComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<string>();
 
-  @ViewChild('rightSidenav', { static: true }) sidenav: MatSidenav | any;
-
-  @ViewChild('drawer') drawer: MatSidenav | any;
-
-  @HostListener('document:click', [ '$event' ]) onDocumentClick(event: any) {
-
-    if (this.drawer.open()) {
-
-      this.drawer.close();
-
-    }
-    if (this.mainService.open()) {
-
-      this.mainService.close();
-
-    }
-
-  }
-
-
   constructor(
     private router: Router,
-    private readonly mainService: MainService,
+
     private readonly headerService: HeaderService,
     private readonly userService: UserService,
     private readonly productService: ProductService,
@@ -259,11 +237,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  toggleRightSidenav = () => {
-
-    this.mainService.open();
-
-  };
 
   changeCurrency(): void {
 
