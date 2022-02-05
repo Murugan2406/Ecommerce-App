@@ -1,12 +1,10 @@
 <header class="for_desktop">
   <mat-toolbar class="toolbar_main">
-    <div class="first_toolbar_left" data-aos="fade-right"
-      data-aos-duration="2000">
+    <div class="first_toolbar_left" data-aos="fade-right" data-aos-duration="2000">
       <form [formGroup]="currencyForm">
         <mat-form-field>
 
-          <mat-select formControlName="currency"
-            (selectionChange)="changeCurrency()">
+          <mat-select formControlName="currency" (selectionChange)="changeCurrency()">
 
             <mat-option value="EUR">€ EUR</mat-option>
             <mat-option value="USD">$ USD</mat-option>
@@ -20,8 +18,7 @@
       <span class="example-spacer"></span>
       <form [formGroup]="LanguageForm">
 
-        <mat-button-toggle-group formControlName="language"
-          (change)="toggleLanguage()">
+        <mat-button-toggle-group formControlName="language" (change)="toggleLanguage()">
           <mat-button-toggle value="france">FR</mat-button-toggle>
           <mat-button-toggle value="English">EN</mat-button-toggle>
         </mat-button-toggle-group>
@@ -32,11 +29,9 @@
     <span class="example-spacer">
     </span>
 
-    <div class="first_toolbar_right" data-aos="fade-left"
-      data-aos-duration="2000">
+    <div class="first_toolbar_right" data-aos="fade-left" data-aos-duration="2000">
 
-      <form [formGroup]="searchForm" class="header-search"
-        (submit)="upsertSearch()">
+      <form [formGroup]="searchForm" class="header-search" (submit)="upsertSearch()">
         <mat-form-field class="input_field">
           <input type="text" matInput formControlName="inputValue">
         </mat-form-field>
@@ -46,62 +41,56 @@
         </button>
       </form>
       <button mat-button (click)="myAccountNavigate()">{{user}} </button>
-      <button mat-icon-button class="banner_explore_button"
-        [routerLink]="'settings/wishlist'">
+      <button mat-icon-button class="banner_explore_button" [routerLink]="'settings/wishlist'">
         <mat-icon>favorite</mat-icon>
       </button>
 
 
-      <button mat-button  (click)="sidenav.toggle()"
-      matBadge="{{cartLength}}" matBadgePosition="after">  CART </button>
+      <button mat-button (click)="sidenav.toggle()" matBadge="{{cartLength}}" matBadgePosition="after"> CART </button>
 
     </div>
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
   <mat-toolbar class="toolbar_main">
-    <div class="logo_container" [routerLink]="'/'" data-aos="zoom-in"
-      data-aos-duration="2500">
+    <div class="logo_container" [routerLink]="'/'" data-aos="zoom-in" data-aos-duration="2500">
       <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
     </div>
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
 
-  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()" >
-    <ul class="nav_list" id="nav_menu">
+  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()" >  
+    <ul class="nav_list" id="nav_menu" >
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
-        <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active"
-          (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
+        <a [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
           catogeory.name)">{{catogeory.name }}
         </a>
       </li>
 
     </ul>
     <mat-divider class="header-divider"></mat-divider>
-
-
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
-        <div  *ngFor="let element of subCategories">
-          <a mat-button  class="nav_link" [routerLink]="['listProduct', mainCategoryId, categoryName]" [fragment]="element.name"
-          [class.active]="isSectionActive(element.name)"
-          (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
-          {{element.name }}
-          <mat-icon class="icon">arrow_forward</mat-icon>
+        <div *ngFor="let element of subCategories">
+          <a class="subCategoryLink" [routerLink]="['listProduct', mainCategoryId]"
+            [fragment]="element.name" [class.active]="isSectionActive(element.name)"
+            (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
+            {{element.name }}
+            <mat-icon class="icon">arrow_forward</mat-icon>
 
-          <mat-icon *ngIf="element.default && toggleClass == true">arrow_forward</mat-icon>
-        </a>
+            
+          </a>
         </div>
       </div>
       <div class="child_sub_menu">
         <div *ngFor="let child of subsubCategories">
-          <button mat-button [routerLink]="['listProduct',mainCategoryId,categoryName]"
-            fragment={{ssName}} class="nav_link">{{child.name}}
+          
+          <a class="subCategoryLink"  [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}}
+           [queryParams]="{ ssId: child.id}" routerLinkActive="active">{{child.name}}s
             <mat-icon class="icon">arrow_forward</mat-icon>
-          </button>
+        </a>
         </div>
-        <button mat-button class="offer_explore_button"
-          *ngIf="subsubCategories.length !==0"
+        <button mat-button class="offer_explore_button" *ngIf="subsubCategories.length !==0"
           [routerLink]="['listProduct', CategoryId,'']">
           Shop All<mat-icon>trending_flat</mat-icon>
         </button>
@@ -113,17 +102,16 @@
 </header>
 
 
-<mat-sidenav-container >
+<mat-sidenav-container>
   <mat-sidenav #sidenav mode="over" opened="false" fixedInViewport="true" position="end" class="side_nav_mobile">
     <mat-toolbar class="cart_header">
-      <h1 class="cart_header_title" >Cart</h1>
+      <h1 class="cart_header_title">Cart</h1>
 
-      <button mat-button class="cart_header_button"
-      (click)="sidenav.toggle()">
-      <mat-icon>clear</mat-icon>
+      <button mat-button class="cart_header_button" (click)="sidenav.toggle()">
+        <mat-icon>clear</mat-icon>
       </button>
     </mat-toolbar>
-   <app-cart></app-cart>
+    <app-cart></app-cart>
   </mat-sidenav>
 </mat-sidenav-container>
 
@@ -131,8 +119,7 @@
 
   <mat-toolbar class="toolbar_main">
     <div class="toggle_side_nav">
-      <button mat-button class="mobile_menu"
-      (click)="mobileMenu.toggle()">
+      <button mat-button class="mobile_menu" (click)="mobileMenu.toggle()">
 
         <mat-icon>list</mat-icon>
       </button>
@@ -147,8 +134,7 @@
 
 
     <div class="toggle_side_nav">
-      <button mat-button class="mobile_menu"
-      (click)="sidenav.toggle()">
+      <button mat-button class="mobile_menu" (click)="sidenav.toggle()">
         <mat-icon>shopping_cart</mat-icon>
       </button>
 
@@ -165,17 +151,17 @@
 
   <mat-toolbar class="toolbar_main">
 
-    <mat-sidenav-container >
-      <mat-sidenav #mobileMenu mode="over" opened="false" fixedInViewport="true" position="start"  class="example-sidenav">
+    <mat-sidenav-container>
+      <mat-sidenav #mobileMenu mode="over" opened="false" fixedInViewport="true" position="start"
+        class="example-sidenav">
         <mat-toolbar class="toolbar_main">
           <div class="login_banner">
             <mat-icon>account_circle</mat-icon> &nbsp;
             <button mat-button class="login_button_nav">
-              <button mat-button (click)="myAccountNavigate()"
-              (click)="mobileMenu.toggle()">{{user}}</button>
+              <button mat-button (click)="myAccountNavigate()" (click)="mobileMenu.toggle()">{{user}}</button>
             </button>
           </div>
-          <button mat-button  class="cart_header_button" (click)="mobileMenu.toggle()">
+          <button mat-button class="cart_header_button" (click)="mobileMenu.toggle()">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-toolbar>
@@ -183,8 +169,7 @@
 
 
           <li class="nav_items" *ngFor="let catogeory of mainCategory">
-            <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active"
-              (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
+            <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
               catogeory.name)" (click)="mobileMenu.toggle()">{{catogeory.name }}
             </a>
           </li>
@@ -202,8 +187,7 @@
             <form [formGroup]="currencyForm">
 
               <mat-form-field style="text-align: end;">
-                <mat-select formControlName="currency"
-                  (selectionChange)="changeCurrency()">
+                <mat-select formControlName="currency" (selectionChange)="changeCurrency()">
                   <mat-option value="EUR">EUR</mat-option>
                   <mat-option value="AUD">AUD</mat-option>
                   <mat-option value="EGP">EGP</mat-option>
@@ -243,11 +227,9 @@
       </mat-sidenav>
     </mat-sidenav-container>
 
-    <form [formGroup]="searchForm" class="header-search"
-      (submit)="upsertSearch()">
+    <form [formGroup]="searchForm" class="header-search" (submit)="upsertSearch()">
 
-      <input type="text" matInput formControlName="inputValue"
-        class="input_field">
+      <input type="text" matInput formControlName="inputValue" class="input_field">
 
       <button type="submit" mat-button class="mobile_menu">
         <mat-icon class="mat-5by1-white">search</mat-icon>

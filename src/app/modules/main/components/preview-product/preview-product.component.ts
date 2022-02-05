@@ -235,8 +235,6 @@ export class PreviewProductComponent implements OnInit {
 
         this.contactForm.get('product')?.setValue(data.id);
 
-        this.checkoutForm.get('product')?.setValue(data.id);
-
 
         this.productName = data.name;
 

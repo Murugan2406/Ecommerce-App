@@ -32,7 +32,7 @@ const routes: Routes = [
         component: SignupComponent,
       },
       {
-        path: 'listProduct/:id/:product',
+        path: 'listProduct/:id',
         component: ListProductComponent,
       },
       {

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule, MatSidenavModule, BrowserAnimationsModule
+    AppRoutingModule, HttpClientModule, MatSidenavModule, BrowserAnimationsModule, FontAwesomeModule
   ],
   providers: [ HttpClient ],
   bootstrap: [ AppComponent ]

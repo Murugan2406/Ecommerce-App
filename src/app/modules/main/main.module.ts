@@ -37,6 +37,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FashionComponent } from './components/fashion/fashion.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     PreviewProductComponent,
     OfferSalesComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    FashionComponent
   ],
   imports: [
     CommonModule,

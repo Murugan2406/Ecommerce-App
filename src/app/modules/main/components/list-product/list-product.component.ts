@@ -67,7 +67,7 @@ export class ListProductComponent implements OnInit {
 
   hparam: any;
 
-  subsubId = 0;
+  ssId = 0;
 
   pageSize:number;
 
@@ -183,21 +183,42 @@ export class ListProductComponent implements OnInit {
 
   checkid = 0;
 
+  sectionId = 0;
+
+  ssName:string | null = '';
+
 
   ngOnInit(): void {
 
     this.products = [];
     this.onLoad();
 
+
     this.activatedRoute.params.subscribe((params) => {
 
       this.checkid = 1;
       this.hparam = params;
-      this.subsubId = Number.parseInt(params['subsubId'], 10);
+
       this.setdefaultData(params['id']);
+
+      this.sectionId = Number.parseInt(params['id'], 10);
 
     });
     this.setCurrencyValue();
+
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+
+
+      this.ssName = this.activatedRoute.snapshot.fragment;
+
+
+      this.ssId = Number.parseInt(params['ssId'], 10);
+
+      // This.innerCategoryRoute(this.ssId);
+
+    });
+
 
   }
 
@@ -256,6 +277,12 @@ export class ListProductComponent implements OnInit {
       this.sectionTitle = data.name;
       this.mainCategory = data.subcategories;
 
+      if (this.ssName === null) {
+
+        this.ssName = data.subcategories[0].name;
+
+      }
+
     });
 
   }
@@ -265,6 +292,8 @@ export class ListProductComponent implements OnInit {
   indexId = 0;
 
   onIndexChange(data: SlidesOutputData) {
+
+    this.ssName = this.activatedRoute.snapshot.fragment;
 
     this.loading = true;
 
@@ -312,6 +341,9 @@ export class ListProductComponent implements OnInit {
 
   initialized(data: SlidesOutputData) {
 
+
+    this.ssName = this.activatedRoute.snapshot.fragment;
+
     this.loading = true;
     if (!data.slides) {
 
@@ -339,7 +371,7 @@ export class ListProductComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe((params) => {
 
           const paramsID = Number.parseInt(params['subId'], 10);
-          if (params['id'] && !params['subId'] && !params['subsubId']) {
+          if (params['id'] && !params['subId'] && !params['ssId']) {
 
             this.listBeautyService.getDataofSubCategory(this.mainCategory[0].id).subscribe((ele) => {
 
@@ -365,6 +397,9 @@ export class ListProductComponent implements OnInit {
   }
 
   changed(data: SlidesOutputData) {
+
+    this.ssName = this.activatedRoute.snapshot.fragment;
+
 
     this.loading = true;
     if (this.checkid === 0) {
@@ -409,9 +444,9 @@ export class ListProductComponent implements OnInit {
     this.colorList = data.availabeColours;
 
 
-    if (this.subsubId) {
+    if (this.ssId) {
 
-      this.innerCategoryRoute(this.subsubId);
+      this.innerCategoryRoute(this.ssId);
 
     } else {
 
@@ -440,7 +475,7 @@ export class ListProductComponent implements OnInit {
   innerCategoryRoute(ssId: number) {
 
     this.products = [];
-    this.subsubId = ssId;
+    this.ssId = ssId;
 
 
     this.listBeautyService
