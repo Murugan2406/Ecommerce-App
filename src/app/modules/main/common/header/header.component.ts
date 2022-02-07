@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
 
   quantity: number;
 
-  subsubCategoryId: any;
+  subCategoryId: any;
 
   ssName: any;
 
@@ -206,7 +206,7 @@ export class HeaderComponent implements OnInit {
 
   openSubSubCategories(event: any, id: number, name: string) {
 
-    this.subsubCategoryId = id;
+    this.subCategoryId = id;
     this.ssName = name;
     this.subsubCategories = event;
 

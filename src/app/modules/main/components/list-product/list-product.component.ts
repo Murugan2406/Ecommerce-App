@@ -67,6 +67,8 @@ export class ListProductComponent implements OnInit {
 
   hparam: any;
 
+  subId = 0;
+
   ssId = 0;
 
   pageSize:number;
@@ -187,6 +189,8 @@ export class ListProductComponent implements OnInit {
 
   ssName:string | null = '';
 
+  quaryParams:object | any = '';
+
 
   ngOnInit(): void {
 
@@ -209,13 +213,45 @@ export class ListProductComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
 
-
+      this.quaryParams = params;
       this.ssName = this.activatedRoute.snapshot.fragment;
 
+      const subId = Number.parseInt(params['subId'], 10);
+      const subsubId = Number.parseInt(params['ssId'], 10);
 
-      this.ssId = Number.parseInt(params['ssId'], 10);
+      this.ssId = subsubId;
 
-      // This.innerCategoryRoute(this.ssId);
+      this.products = [];
+
+      this.updateValueChanges(this.products);
+      if (Object.keys(this.quaryParams).length === 0) {
+
+
+        this.activatedRoute.params.subscribe((param) => {
+
+          const sectionId = Number.parseInt(param['id'], 10);
+
+
+          this.listBeautyService.getDataofMainCategory(sectionId).subscribe((data) => {
+
+
+            const initialsubId = this.mainCategory[0]['id'];
+
+            this.products = [];
+
+            this.getProductData(initialsubId);
+
+
+          });
+
+
+        });
+
+      } else {
+
+        this.getProductData(subId);
+
+      }
 
     });
 
@@ -274,8 +310,10 @@ export class ListProductComponent implements OnInit {
 
     this.listBeautyService.getDataofMainCategory(id).subscribe((data) => {
 
+
       this.sectionTitle = data.name;
       this.mainCategory = data.subcategories;
+
 
       if (this.ssName === null) {
 
@@ -291,7 +329,9 @@ export class ListProductComponent implements OnInit {
 
   indexId = 0;
 
+  // eslint-disable-next-line max-statements
   onIndexChange(data: SlidesOutputData) {
+
 
     this.ssName = this.activatedRoute.snapshot.fragment;
 
@@ -312,7 +352,18 @@ export class ListProductComponent implements OnInit {
           return;
 
         }
-        this.getProductData(centerId, 'translated');
+
+        this.subId = centerId;
+        const fragment = this.activatedRoute.snapshot.fragment || '';
+
+
+        // eslint-disable-next-line no-undefined
+        if (isNaN(this.quaryParams) && this.quaryParams['ssId'] === undefined) {
+
+          this.router.navigate([], { fragment,
+            queryParams: {subId: centerId} });
+
+        }
 
         return;
 
@@ -321,72 +372,26 @@ export class ListProductComponent implements OnInit {
         const centerId = Number.parseInt(data.slides[1].id, 10);
         this.indexId = centerId;
 
+
         if (this.centervalueId === centerId) {
 
           return;
 
         }
 
-        this.getProductData(centerId, 'translated');
+        this.subId = centerId;
+
+        const fragment = this.activatedRoute.snapshot.fragment || '';
 
 
-      }
+        // eslint-disable-next-line no-undefined
+        if (isNaN(this.quaryParams) && this.quaryParams['ssId'] === undefined) {
 
-    }
-
-    this.loading = false;
-
-  }
-
-
-  initialized(data: SlidesOutputData) {
-
-
-    this.ssName = this.activatedRoute.snapshot.fragment;
-
-    this.loading = true;
-    if (!data.slides) {
-
-      return;
-
-    }
-    if (data.slides.length > 0) {
-
-      if (this.isFirst === false) {
-
-        const centerId = Number.parseInt(data.slides[0].id, 10);
-        if (!centerId) {
-
-          return;
+          this.router.navigate([], { fragment,
+            queryParams: {subId: centerId} });
 
         }
-        this.getProductData(centerId, 'translated');
 
-        return;
-
-      } else if (this.isFirst === true) {
-
-        const subId = Number.parseInt(data.slides[1].id, 10);
-        this.iinitialId = subId;
-        this.activatedRoute.queryParams.subscribe((params) => {
-
-          const paramsID = Number.parseInt(params['subId'], 10);
-          if (params['id'] && !params['subId'] && !params['ssId']) {
-
-            this.listBeautyService.getDataofSubCategory(this.mainCategory[0].id).subscribe((ele) => {
-
-              this.fetchData(ele);
-
-            });
-
-          }
-          if (!paramsID || paramsID === this.mainCategory[0].id) {
-
-            this.getProductData(subId, 'initialized');
-
-          }
-
-        });
 
       }
 
@@ -396,40 +401,17 @@ export class ListProductComponent implements OnInit {
 
   }
 
-  changed(data: SlidesOutputData) {
+  getProductData(subId: number) {
 
-    this.ssName = this.activatedRoute.snapshot.fragment;
+    this.products = [];
 
 
-    this.loading = true;
-    if (this.checkid === 0) {
+    this.listBeautyService.getDataofSubCategory(subId).subscribe((data) => {
 
-      if (!data.slides) {
+      this.fetchData(data);
 
-        return;
+    });
 
-      }
-      const centerId = Number.parseInt(data.slides[0].id, 10);
-      this.checkid = 1;
-      this.getProductData(centerId, 'dragging');
-
-    }
-    this.loading = false;
-
-  }
-
-  getProductData(subId: number, value:string) {
-
-    if (this.checkid === 1) {
-
-      this.listBeautyService.getDataofSubCategory(subId).subscribe((data) => {
-
-        this.fetchData(data);
-
-      });
-
-    }
-    this.checkid = 0;
 
   }
 
@@ -438,19 +420,18 @@ export class ListProductComponent implements OnInit {
 
     this.subCategoryName = data.name;
     this.filterCategory = data.subsubcategories;
-
     this.brandList = data.availablebrands;
     this.sizeList = data.availableSizes;
     this.colorList = data.availabeColours;
+    this.products = [];
 
 
     if (this.ssId) {
 
+
       this.innerCategoryRoute(this.ssId);
 
     } else {
-
-      this.products = [];
 
       this.filterCategory.forEach((element) => {
 
@@ -460,9 +441,7 @@ export class ListProductComponent implements OnInit {
           Array.prototype.push.apply(this.products, ele.products);
           Array.prototype.push.apply(this.filterProducts, ele.products);
 
-          this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource$ = this.dataSource.connect();
-          this.dataSource.paginator = this.paginator;
+          this.updateValueChanges(this.products);
 
         });
 
@@ -478,21 +457,27 @@ export class ListProductComponent implements OnInit {
     this.ssId = ssId;
 
 
-    this.listBeautyService
-      .getDataofSubSubCategory(ssId)
-      .subscribe((data) => {
+    this.listBeautyService.getDataofSubSubCategory(ssId).subscribe((data) => {
+
+      console.log(data);
+
+      this.products = data.products;
 
 
-        this.products = data.products;
+      this.filterProducts = data.products;
+      this.brandList = data.availablebrands;
+      this.sizeList = data.availableSizes;
+      this.colorList = data.availabeColours;
+      this.updateValueChanges(data.products);
 
-        this.filterProducts = data.products;
-        this.brandList = data.availablebrands;
-        this.sizeList = data.availableSizes;
-        this.colorList = data.availabeColours;
-        this.susubroute = true;
-        this.updateValueChanges(this.products);
+    });
 
-      });
+  }
+
+  updateValueChanges(products:any) {
+
+    this.dataSource = products;
+    this.dataSource.paginator = this.paginator;
 
   }
 
@@ -971,22 +956,7 @@ export class ListProductComponent implements OnInit {
   }
 
 
-  updateValueChanges(products:any) {
-
-    this.dataSource = new MatTableDataSource(products);
-    this.dataSource$ = this.dataSource.connect();
-    this.dataSource.paginator = this.paginator;
-    if (this.dataSource.data.length === 0) {
-
-      this.nonAvailableProducts = true;
-
-    } else {
-
-      this.nonAvailableProducts = false;
-
-    }
-
-  }
+  
 
 
 }

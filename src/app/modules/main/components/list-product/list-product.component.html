@@ -11,8 +11,8 @@
       </div>
 
       <div class="banner_curousal">
-        <owl-carousel-o [options]="offerOptions" (initialized)="initialized($event)"
-          (translated)="onIndexChange($event)" (dragging)="isDragging = $event.dragging" (changed)="changed($event)">
+        <owl-carousel-o [options]="offerOptions"
+          (translated)="onIndexChange($event)" (dragging)="isDragging = $event.dragging">
           <ng-container *ngFor="let element of mainCategory">
             <ng-template carouselSlide class="offer_curousal_imgs" [id]="element.id" [dataHash]=element.name>
               <img src="{{element.image['original']}}" alt="{{element.name}}" title=" {{element.name}}">
@@ -63,6 +63,8 @@
                     <a mat-button [routerLink]="[[]]" fragment={{ssName}}
                       class="nav_link" [queryParams]="{ ssId: child.id}" routerLinkActive="active">{{child.name}}
                   </a>
+
+
                   </div>
               </mat-expansion-panel>
           </mat-accordion>
@@ -200,14 +202,17 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div *ngIf="nonAvailableProducts === true ">
+      <!-- <div >
         <div class="emptyfilterResult">
           <img src="../../../../../../assets/images/undraw_empty_re_opql (1).svg" alt="">
         </div>
         <h2 class="emptyfilterResultH2">Sorry, no results found! <br> Please try something else</h2>
-      </div>
-      <div class="row" *ngIf="nonAvailableProducts === false ">
-        <div class="col-xl-3 col-md-4 col-lg-4 col-sm-4 col-6" *ngFor="let img of dataSource$ | async">
+      </div> -->
+      {{products.length}}
+      <div class="row">
+
+ 
+        <div class="col-xl-3 col-md-4 col-lg-4 col-sm-4 col-6" *ngFor="let img of products">
           <div class="card">
             <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" onerror ="this.src='../../../../../../assets/images/Logo_VOUI.svg' " class=""
               [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >

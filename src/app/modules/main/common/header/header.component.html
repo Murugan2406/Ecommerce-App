@@ -72,8 +72,9 @@
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
         <div *ngFor="let element of subCategories">
+          
           <a class="subCategoryLink" [routerLink]="['listProduct', mainCategoryId]"
-            [fragment]="element.name" [class.active]="isSectionActive(element.name)"
+            [fragment]="element.name" [queryParams]="{ subId: element.id}" [class.active]="isSectionActive(element.name)"
             (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
             {{element.name }}
             <mat-icon class="icon">arrow_forward</mat-icon>
@@ -86,8 +87,8 @@
         <div *ngFor="let child of subsubCategories">
           
           <a class="subCategoryLink"  [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}}
-           [queryParams]="{ ssId: child.id}" routerLinkActive="active">{{child.name}}s
-            <mat-icon class="icon">arrow_forward</mat-icon>
+           [queryParams]="{subId:subCategoryId,  ssId: child.id}"  routerLinkActive="active">{{child.name}}  
+             <mat-icon class="icon">arrow_forward</mat-icon>
         </a>
         </div>
         <button mat-button class="offer_explore_button" *ngIf="subsubCategories.length !==0"
