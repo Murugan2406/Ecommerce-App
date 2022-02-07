@@ -1,6 +1,8 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
 /* eslint-disable dot-notation */
 import {Component, HostListener, OnInit, ViewChild, } from '@angular/core';
-import { OwlOptions} from 'ngx-owl-carousel-o';
+
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as AOS from 'aos';
@@ -12,6 +14,7 @@ import { ProductService } from '../../../service/product.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/modules/service/header.service';
+
 @Component({
   selector: 'app-offer-sales',
   templateUrl: './offer-sales.component.html',
@@ -95,39 +98,6 @@ export class OfferSalesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  offerOptions: OwlOptions = {
-    loop: true,
-    margin: 40,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 500,
-    center: true,
-    URLhashListener: false,
-    startPosition: 'URLHash',
-    navText: [
-      '<i class=\'fa fa-long-arrow-left\'></i>',
-      '<i class=\'fa fa-long-arrow-right\'></i>',
-    ],
-
-    responsive: {
-      0: {
-        items: 1,
-        nav: true,
-      },
-
-      769: {
-        items: 3,
-        nav: true,
-        loop: true,
-        autoplay: false,
-        margin: 40,
-      },
-    },
-
-    nav: true,
-  };
 
   constructor(
     private readonly fb: FormBuilder,
@@ -192,6 +162,11 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+  canFilter = false;
+
+  canSort = false;
+
+  sortingValue = '';
 
   ngOnInit(): void {
 
@@ -201,83 +176,136 @@ export class OfferSalesComponent implements OnInit {
 
     this.currencyChanges();
 
+
     this.activatedRoute.queryParams.subscribe((params) => {
 
-
+      this.bindQuaryValues(params);
       this.linkFrom = params['from'];
       this.searchValue = params['value'];
 
-      if (this.linkFrom === 'searchResult') {
-
-        this.sectionTitle = 'Search Result';
-
-        this.getDataforSearch(this.searchValue);
-
-      } else if (this.linkFrom === 'offerSales') {
-
-        this.sectionTitle = 'Offer Sales';
-
-        this.getDataforOffersales();
-
-      } else if (this.linkFrom === 'newArrivals') {
-
-        this.sectionTitle = 'New Arrivals';
-
-        this.getDataforNewArraivals();
-
-      } else if (this.linkFrom === 'bagsTrends') {
-
-        this.sectionTitle = 'Trending Bags';
-
-        this.getDataforTrendingProducts();
-
-      }
+      this.getCorrectSection(this.linkFrom);
 
     });
 
+
+  }
+
+
+  // eslint-disable-next-line max-statements
+  bindQuaryValues(params:any) {
+
+    let brand = [];
+    let color = [];
+    let size = [];
+
+    if (typeof params['brand'] === 'string') {
+
+      brand = params['brand'].split(' ');
+
+
+    } else {
+
+      brand = params['brand'] ? params['brand'] : [];
+
+    }
+
+    if (typeof params['color'] === 'string') {
+
+      color = params['color'].split(' ');
+
+
+    } else {
+
+      color = params['color'] ? params['color'] : [];
+
+    }
+    if (typeof params['size'] === 'string') {
+
+      size = params['size'].split(' ');
+
+    } else {
+
+      size = params['size'] ? params['size'] : [];
+
+    }
+
+
+    this.brandValue = brand ? brand : [];
+    this.colorValue = color ? color : [];
+    this.sizeValue = size ? size : [];
+    this.form.get('startprice')?.setValue(params['minPrice'] ? params['minPrice'] : null);
+    this.form.get('endprice')?.setValue(params['maxPrice'] ? params['maxPrice'] : null);
+
+    if (params['brand'] || params['color'] || params['size'] || params['minPrice'] || params['maxPrice']) {
+
+      this.canFilter = true;
+
+    } else {
+
+      this.canFilter = false;
+
+    }
+    if (params['sortBy']) {
+
+      this.canSort = true;
+
+      this.sortingValue = params['sortBy'];
+
+    } else {
+
+      this.canSort = false;
+
+    }
+
+
+  }
+
+  getCorrectSection(linkFrom:string) {
+
+    if (this.linkFrom === 'searchResult') {
+
+      this.sectionTitle = 'Search Result';
+
+      this.getDataforSearch(this.searchValue);
+
+    } else if (linkFrom === 'offerSales') {
+
+      this.sectionTitle = 'Offer Sales';
+
+      this.getDataforOffersales();
+
+    } else if (linkFrom === 'newArrivals') {
+
+      this.sectionTitle = 'New Arrivals';
+
+      this.getDataforNewArraivals();
+
+    } else if (linkFrom === 'bagsTrends') {
+
+      this.sectionTitle = 'Trending Bags';
+
+      this.getDataforTrendingProducts();
+
+    }
 
   }
 
 
   getDataforSearch(searchValue:string) {
 
-    this.headerService.getSearchResult(searchValue).subscribe((result: any) => {
+    this.headerService.getSearchResult(searchValue).subscribe((data: any) => {
 
-
-      this.brandList = result['availablebrands'];
-
-      this.sizeList = result['availableSizes'];
-
-      this.colorList = result['availabeColours'];
-
-      this.products = result['products'];
-
-      this.filterProducts = result['products'];
-      this.dataSourceUpdation(this.products);
-
+      this.setDefaultdatas(data);
 
     });
 
   }
 
-
   getDataforOffersales() {
 
     this.dashboardService.getOfferSales().subscribe((data: any) => {
 
-
-      this.brandList = data['availablebrands'];
-
-      this.sizeList = data['availableSizes'];
-
-      this.colorList = data['availabeColours'];
-
-      this.products = data['products'];
-
-      this.filterProducts = data['products'];
-
-
-      this.dataSourceUpdation(this.products);
+      this.setDefaultdatas(data);
 
     });
 
@@ -288,38 +316,44 @@ export class OfferSalesComponent implements OnInit {
 
     this.dashboardService.getNewArrivals().subscribe((data: any) => {
 
-
-      this.brandList = data['availablebrands'];
-
-      this.sizeList = data['availableSizes'];
-
-      this.colorList = data['availabeColours'];
-
-      this.products = data['products'];
-
-      this.filterProducts = data['products'];
-
-      this.dataSourceUpdation(this.products);
+      this.setDefaultdatas(data);
 
     });
 
   }
 
-
   getDataforTrendingProducts() {
 
     this.dashboardService.getBottomProducts().subscribe((data: any) => {
 
-
-      data.forEach((element: { [x: string]: any; }) => {
-
-        this.products.push(element['product']);
-
-      });
-      this.dataSourceUpdation(this.products);
-
+      this.setDefaultdatas(data);
 
     });
+
+  }
+
+  setDefaultdatas(data:any) {
+
+    this.brandList = data['availablebrands'];
+
+    this.sizeList = data['availableSizes'];
+
+    this.colorList = data['availabeColours'];
+
+    this.products = data['products'];
+
+    this.filterProducts = data['products'];
+    this.dataSourceUpdation(this.products);
+    if (this.canFilter) {
+
+      this.filterSection();
+
+    }
+    if (this.canSort) {
+
+      this.changeSorting(this.sortingValue);
+
+    }
 
   }
 
@@ -336,38 +370,10 @@ export class OfferSalesComponent implements OnInit {
     if (localStorage.getItem(CURRENCY_TYPE)) {
 
       const cValue = localStorage.getItem(CURRENCY_TYPE);
-      switch (cValue) {
 
-      case 'EUR': {
+      if (cValue) {
 
-        this.currencyType = 'EUR';
-        break;
-
-      }
-      case 'USD': {
-
-        this.currencyType = 'USD';
-        break;
-
-      }
-      case 'SAR': {
-
-        this.currencyType = 'SAR';
-        break;
-
-      }
-      case 'GBP': {
-
-        this.currencyType = 'GBP';
-        break;
-
-      }
-      case 'AED': {
-
-        this.currencyType = 'AED';
-        break;
-
-      }
+        this.currencyType = cValue;
 
       }
 
@@ -376,6 +382,13 @@ export class OfferSalesComponent implements OnInit {
       this.currencyType = 'EUR';
 
     }
+
+  }
+
+  updateSortingUrl(value: string) {
+
+    this.router.navigate([], { queryParams: {sortBy: value, },
+      queryParamsHandling: 'merge'});
 
   }
 
@@ -402,10 +415,14 @@ export class OfferSalesComponent implements OnInit {
       );
       break;
 
+    default:
+      this.filterLtoH();
+      break;
+
     }
 
-    this.dataSource.data = this.sortingArray;
-    this.dataSource$ = this.dataSource.connect();
+    this.updateValueChanges(this.sortingArray);
+
 
   }
 
@@ -477,6 +494,10 @@ export class OfferSalesComponent implements OnInit {
     this.sizeValue = [];
     this.brandValue = [];
     this.colorValue = [];
+
+    this.form.get('startprice')?.setValue(null);
+    this.form.get('endprice')?.setValue(null);
+
 
     this.updateValueChanges(this.filterProducts);
 
@@ -756,12 +777,25 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+  updateURl() {
+
+    const minPrice = this.form.get('startprice')?.value;
+    const maxPrice = this.form.get('endprice')?.value;
+
+    this.router.navigate([], { queryParams: {brand: this.brandValue,
+      size: this.sizeValue,
+      color: this.colorValue,
+      minPrice,
+      maxPrice},
+    queryParamsHandling: 'merge'});
+
+  }
+
 
   filterSection() {
 
 
     // For brand Filter
-
 
     let brandResult:any[] = [];
     const brandFilter = [ ...this.filterProducts ];
@@ -849,12 +883,21 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  onPaginateChange(event:any) {
+
+    console.log(JSON.stringify(`Current page index: ${event.pageIndex}`));
+
+  }
+
 
   updateValueChanges(products:any) {
 
     this.dataSource = new MatTableDataSource(products);
     this.dataSource$ = this.dataSource.connect();
     this.dataSource.paginator = this.paginator;
+
+
     if (this.dataSource.data.length === 0) {
 
       this.nonAvailableProducts = true;

@@ -35,11 +35,6 @@ button:not(:disabled):before {
   background-color: transparent;
 }
 
-.toggle_body {
-  column-count: 2;
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-}
 
 :host ::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: var(--main-color);
