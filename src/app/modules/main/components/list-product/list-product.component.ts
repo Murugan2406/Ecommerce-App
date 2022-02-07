@@ -224,6 +224,7 @@ export class ListProductComponent implements OnInit {
       this.products = [];
 
       this.updateValueChanges(this.products);
+
       if (Object.keys(this.quaryParams).length === 0) {
 
 
@@ -237,9 +238,17 @@ export class ListProductComponent implements OnInit {
 
             const initialsubId = this.mainCategory[0]['id'];
 
-            this.products = [];
+            const initialfragment = this.mainCategory[0]['name'];
 
-            this.getProductData(initialsubId);
+            const {fragment} = this.activatedRoute.snapshot;
+
+            if (!fragment) {
+
+
+              this.router.navigate([], { fragment: initialfragment,
+                queryParams: {subId: initialsubId} });
+
+            }
 
 
           });
@@ -403,15 +412,15 @@ export class ListProductComponent implements OnInit {
 
   getProductData(subId: number) {
 
-    this.products = [];
+    if (this.checkid === 1) {
 
+      this.listBeautyService.getDataofSubCategory(subId).subscribe((data) => {
 
-    this.listBeautyService.getDataofSubCategory(subId).subscribe((data) => {
+        this.fetchData(data);
 
-      this.fetchData(data);
+      });
 
-    });
-
+    }
 
   }
 
@@ -420,18 +429,21 @@ export class ListProductComponent implements OnInit {
 
     this.subCategoryName = data.name;
     this.filterCategory = data.subsubcategories;
+
     this.brandList = data.availablebrands;
     this.sizeList = data.availableSizes;
     this.colorList = data.availabeColours;
-    this.products = [];
 
 
     if (this.ssId) {
 
+      this.products = [];
 
       this.innerCategoryRoute(this.ssId);
 
     } else {
+
+      this.products = [];
 
       this.filterCategory.forEach((element) => {
 
@@ -443,9 +455,11 @@ export class ListProductComponent implements OnInit {
 
           this.updateValueChanges(this.products);
 
+
         });
 
       });
+
 
     }
 
@@ -459,10 +473,6 @@ export class ListProductComponent implements OnInit {
 
     this.listBeautyService.getDataofSubSubCategory(ssId).subscribe((data) => {
 
-
-      this.products = data.products;
-
-
       this.filterProducts = data.products;
       this.brandList = data.availablebrands;
       this.sizeList = data.availableSizes;
@@ -470,13 +480,6 @@ export class ListProductComponent implements OnInit {
       this.updateValueChanges(data.products);
 
     });
-
-  }
-
-  updateValueChanges(products:any) {
-
-    this.dataSource = products;
-    this.dataSource.paginator = this.paginator;
 
   }
 
@@ -953,5 +956,30 @@ export class ListProductComponent implements OnInit {
 
 
   }
+
+
+  updateValueChanges(products:any) {
+
+
+    this.dataSource = new MatTableDataSource(products);
+
+    // eslint-disable-next-line no-underscore-dangle
+    this.dataSource._updateChangeSubscription();
+    this.dataSource$ = this.dataSource.connect();
+    this.dataSource.paginator = this.paginator;
+
+
+    if (this.dataSource.data.length === 0) {
+
+      this.nonAvailableProducts = true;
+
+    } else {
+
+      this.nonAvailableProducts = false;
+
+    }
+
+  }
+
 
 }
