@@ -166,6 +166,10 @@ export class OfferSalesComponent implements OnInit {
 
   canSort = false;
 
+  canPaginate = false;
+
+  pagIndex = 0;
+
   sortingValue = '';
 
   ngOnInit(): void {
@@ -256,7 +260,19 @@ export class OfferSalesComponent implements OnInit {
       this.canSort = false;
 
     }
+    if (params['pageIndex']) {
 
+      this.canPaginate = true;
+
+      this.pagIndex = Number.parseInt(params['pageIndex'], 10);
+
+
+    } else {
+
+      this.canPaginate = false;
+      this.pagIndex = 0;
+
+    }
 
   }
 
@@ -343,7 +359,7 @@ export class OfferSalesComponent implements OnInit {
     this.products = data['products'];
 
     this.filterProducts = data['products'];
-    this.dataSourceUpdation(this.products);
+    this.updateValueChanges(this.products);
     if (this.canFilter) {
 
       this.filterSection();
@@ -354,14 +370,6 @@ export class OfferSalesComponent implements OnInit {
       this.changeSorting(this.sortingValue);
 
     }
-
-  }
-
-  dataSourceUpdation(products: any[]) {
-
-    this.dataSource = new MatTableDataSource(products);
-    this.dataSource$ = this.dataSource.connect();
-    this.dataSource.paginator = this.paginator;
 
   }
 
@@ -777,7 +785,7 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
-  updateURl() {
+  updateFilterURl() {
 
     const minPrice = this.form.get('startprice')?.value;
     const maxPrice = this.form.get('endprice')?.value;
@@ -886,7 +894,10 @@ export class OfferSalesComponent implements OnInit {
   // eslint-disable-next-line class-methods-use-this
   onPaginateChange(event:any) {
 
-    console.log(JSON.stringify(`Current page index: ${event.pageIndex}`));
+    const Index = JSON.stringify(`Current page index: ${event.pageIndex}`);
+
+    this.router.navigate([], { queryParams: {pageIndex: Index, },
+      queryParamsHandling: 'merge'});
 
   }
 
@@ -897,6 +908,11 @@ export class OfferSalesComponent implements OnInit {
     this.dataSource$ = this.dataSource.connect();
     this.dataSource.paginator = this.paginator;
 
+    if (this.canPaginate) {
+
+      this.paginator.pageIndex = 0;
+
+    }
 
     if (this.dataSource.data.length === 0) {
 

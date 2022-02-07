@@ -35,8 +35,6 @@ export class OrdersComponent implements OnInit {
 
      this.userService.getOrders().subscribe((data: any) => {
 
-       console.log(data);
-
 
        if (data.length === 0) {
 

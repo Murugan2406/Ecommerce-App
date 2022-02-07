@@ -187,9 +187,104 @@ export class ListProductComponent implements OnInit {
 
   sectionId = 0;
 
+  subCategoryId = 0;
+
   ssName:string | null = '';
 
   quaryParams:object | any = '';
+
+  canFilter = false;
+
+  canSort = false;
+
+  sortingValue = '';
+
+  canPaginate = false;
+
+  pageIndex = 0;
+
+  // eslint-disable-next-line max-statements
+  bindQuaryValues(params:any) {
+
+    let brand = [];
+    let color = [];
+    let size = [];
+
+    if (typeof params['brand'] === 'string') {
+
+      brand = params['brand'].split(' ');
+
+
+    } else {
+
+      brand = params['brand'] ? params['brand'] : [];
+
+    }
+
+    if (typeof params['color'] === 'string') {
+
+      color = params['color'].split(' ');
+
+
+    } else {
+
+      color = params['color'] ? params['color'] : [];
+
+    }
+    if (typeof params['size'] === 'string') {
+
+      size = params['size'].split(' ');
+
+    } else {
+
+      size = params['size'] ? params['size'] : [];
+
+    }
+
+
+    this.brandValue = brand ? brand : [];
+    this.colorValue = color ? color : [];
+    this.sizeValue = size ? size : [];
+    this.form.get('startprice')?.setValue(params['minPrice'] ? params['minPrice'] : null);
+    this.form.get('endprice')?.setValue(params['maxPrice'] ? params['maxPrice'] : null);
+
+    if (params['brand'] || params['color'] || params['size'] || params['minPrice'] || params['maxPrice']) {
+
+      this.canFilter = true;
+
+    } else {
+
+      this.canFilter = false;
+
+    }
+    if (params['sortBy']) {
+
+      this.canSort = true;
+
+      this.sortingValue = params['sortBy'];
+
+    } else {
+
+      this.canSort = false;
+
+    }
+
+    if (params['pageIndex']) {
+
+      this.canPaginate = true;
+
+      this.pageIndex = Number.parseInt(params['pageIndex'], 10);
+
+
+    } else {
+
+      this.canPaginate = false;
+      this.pageIndex = 0;
+
+    }
+
+
+  }
 
 
   ngOnInit(): void {
@@ -217,11 +312,17 @@ export class ListProductComponent implements OnInit {
       this.ssName = this.activatedRoute.snapshot.fragment;
 
       const subId = Number.parseInt(params['subId'], 10);
+
+      this.subCategoryId = subId;
+
       const subsubId = Number.parseInt(params['ssId'], 10);
 
       this.ssId = subsubId;
 
       this.products = [];
+
+
+      this.bindQuaryValues(params);
 
       this.updateValueChanges(this.products);
 
@@ -243,7 +344,6 @@ export class ListProductComponent implements OnInit {
             const {fragment} = this.activatedRoute.snapshot;
 
             if (!fragment) {
-
 
               this.router.navigate([], { fragment: initialfragment,
                 queryParams: {subId: initialsubId} });
@@ -272,38 +372,10 @@ export class ListProductComponent implements OnInit {
     if (localStorage.getItem(CURRENCY_TYPE)) {
 
       const cValue = localStorage.getItem(CURRENCY_TYPE);
-      switch (cValue) {
 
-      case 'EUR': {
+      if (cValue) {
 
-        this.currencyType = 'EUR';
-        break;
-
-      }
-      case 'USD': {
-
-        this.currencyType = 'USD';
-        break;
-
-      }
-      case 'SAR': {
-
-        this.currencyType = 'SAR';
-        break;
-
-      }
-      case 'GBP': {
-
-        this.currencyType = 'GBP';
-        break;
-
-      }
-      case 'AED': {
-
-        this.currencyType = 'AED';
-        break;
-
-      }
+        this.currencyType = cValue;
 
       }
 
@@ -312,6 +384,7 @@ export class ListProductComponent implements OnInit {
       this.currencyType = 'EUR';
 
     }
+
 
   }
 
@@ -460,6 +533,17 @@ export class ListProductComponent implements OnInit {
 
       });
 
+      if (this.canFilter) {
+
+        this.filterSection();
+
+      }
+      if (this.canSort) {
+
+        this.changeSorting(this.sortingValue);
+
+      }
+
 
     }
 
@@ -478,6 +562,17 @@ export class ListProductComponent implements OnInit {
       this.sizeList = data.availableSizes;
       this.colorList = data.availabeColours;
       this.updateValueChanges(data.products);
+
+      if (this.canFilter) {
+
+        this.filterSection();
+
+      }
+      if (this.canSort) {
+
+        this.changeSorting(this.sortingValue);
+
+      }
 
     });
 
@@ -680,6 +775,28 @@ export class ListProductComponent implements OnInit {
       }, this.timeOutDuration);
 
     });
+
+  }
+
+
+  updateFilterURl() {
+
+    const minPrice = this.form.get('startprice')?.value;
+    const maxPrice = this.form.get('endprice')?.value;
+
+    this.router.navigate([], { queryParams: {brand: this.brandValue,
+      size: this.sizeValue,
+      color: this.colorValue,
+      minPrice,
+      maxPrice},
+    queryParamsHandling: 'merge'});
+
+  }
+
+  updateSortingUrl(value: string) {
+
+    this.router.navigate([], { queryParams: {sortBy: value, },
+      queryParamsHandling: 'merge'});
 
   }
 
@@ -957,6 +1074,17 @@ export class ListProductComponent implements OnInit {
 
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  onPaginateChange(event:any) {
+
+    const Index = JSON.stringify(event.pageIndex);
+
+
+    this.router.navigate([], { queryParams: {pageIndex: Index, },
+      queryParamsHandling: 'merge'});
+
+  }
+
 
   updateValueChanges(products:any) {
 
@@ -967,6 +1095,14 @@ export class ListProductComponent implements OnInit {
     this.dataSource._updateChangeSubscription();
     this.dataSource$ = this.dataSource.connect();
     this.dataSource.paginator = this.paginator;
+
+    if (this.canPaginate) {
+
+
+      // this.dataSource.paginator?() = this.pageIndex;
+
+
+    }
 
 
     if (this.dataSource.data.length === 0) {

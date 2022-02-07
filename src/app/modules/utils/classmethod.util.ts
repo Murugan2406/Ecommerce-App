@@ -28,7 +28,6 @@ export const reditectToStripe = (token:string) => {
 
   }).then((res:any) => {
 
-    console.log(res);
 
   });
 

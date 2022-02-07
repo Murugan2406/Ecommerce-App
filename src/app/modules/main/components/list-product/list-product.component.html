@@ -61,7 +61,7 @@
 
                   <div *ngFor="let child of filterCategory"  class="filter_body mat_panel">
                     <a mat-button [routerLink]="[[]]" fragment={{ssName}}
-                      class="nav_link" [queryParams]="{subId, ssId: child.id}" routerLinkActive="active">{{child.name}}
+                      class="nav_link" [queryParams]="{subId:subCategoryId, ssId: child.id}" routerLinkActive="active">{{child.name}}
                   </a>
 
 
@@ -81,7 +81,7 @@
                 <div class="toggle_body mat_panel ">
                   <section class="">
                     <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
-                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="filterSection()" class="Filtertogglebutton">{{brand.name}}
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="updateFilterURl()" class="Filtertogglebutton">{{brand.name}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
@@ -110,7 +110,7 @@
                   <section>
 
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="filterSection()" >
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="updateFilterURl()" >
                       {{brand.color}}
                     </mat-button-toggle>
                   </mat-button-toggle-group>
@@ -133,7 +133,7 @@
                 <div class="toggle_body mat_panel">
                   <section>
                     <mat-button-toggle-group  aria-label="Font Style" [(ngModel)]="sizeValue"  class="Filtertogglebutton" multiple>
-                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="filterSection()" >
+                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}" (click)="updateFilterURl()" >
                         {{subtask.size}}
                       </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -143,7 +143,7 @@
               </mat-expansion-panel>
             </mat-accordion>
 
-            <form [formGroup]="form" (ngSubmit)="filterSection()" class="form_container">
+            <form [formGroup]="form" (ngSubmit)="updateFilterURl()" class="form_container">
 
               <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -192,7 +192,7 @@
 
         <span class="example-spacer"></span>
         <mat-form-field>
-          <mat-select (selectionChange)="changeSorting($event.value)" value="lable">
+          <mat-select (selectionChange)="updateSortingUrl($event.value)" value="lable">
             <mat-option value="lable" disabled="">sort by preference</mat-option>
             <mat-option value="LowToHigh">Price: Low to High</mat-option>
             <mat-option value="HighToLow">Price: High to Low</mat-option>
@@ -255,7 +255,7 @@
       <!-- <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
       </ngx-skeleton-loader> -->
       <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems"
-        [pageSizeOptions]="[12, 15, 100]" [pageIndex]="0" aria-label="Select page">
+        [pageSizeOptions]="[12, 15, 100]" aria-label="Select page" >
       </mat-paginator>
 
 
