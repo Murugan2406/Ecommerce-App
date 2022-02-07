@@ -459,7 +459,6 @@ export class ListProductComponent implements OnInit {
 
     this.listBeautyService.getDataofSubSubCategory(ssId).subscribe((data) => {
 
-      console.log(data);
 
       this.products = data.products;
 
@@ -954,9 +953,5 @@ export class ListProductComponent implements OnInit {
 
 
   }
-
-
-  
-
 
 }
