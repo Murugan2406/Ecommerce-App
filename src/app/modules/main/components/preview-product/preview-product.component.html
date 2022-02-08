@@ -34,6 +34,18 @@
           <div class="swiper_slider">
               <div class="category_lg">
                   <img src="{{previewlg}}" alt="preview-lg" class="preview_lg" data-aos="fade-down" data-aos-duration="1000">
+                  <button mat-icon-button class="banner_explore_button" (click)="addtoWishlist(productId)">
+                    <mat-icon>favorite_border</mat-icon>
+                  </button>
+      
+                  <div *ngIf ="wishlistArray.length > 0">
+                      <div *ngFor="let wish of wishlistArray;let i = index">
+                        <button mat-icon-button class="banner_explore_button wishListAdded " *ngIf ="wish.id === this.productId "
+                        matRipple matRippleColor="green" (click)="alreadyAdded()">
+                        <mat-icon>favorite_border</mat-icon>
+                      </button> 
+                      </div>
+                        </div>
               </div>
               <div class="thumb_images">
                   <img src="{{previewSm1}}" alt="preview-1" class="preview_sm1" (click)='changePreviewImage(previewSm1)' data-aos="fade-down" data-aos-duration="1000">

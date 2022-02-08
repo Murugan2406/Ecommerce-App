@@ -11,6 +11,9 @@
       </div>
 
       <div class="banner_curousal">
+
+
+        
         <owl-carousel-o [options]="offerOptions"
           (translated)="onIndexChange($event)" (dragging)="isDragging = $event.dragging">
           <ng-container *ngFor="let element of mainCategory">

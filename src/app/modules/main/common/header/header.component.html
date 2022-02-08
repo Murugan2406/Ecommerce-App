@@ -58,8 +58,8 @@
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
 
-  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()" >  
-    <ul class="nav_list" id="nav_menu" >
+  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()">
+    <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
         <a [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
@@ -72,24 +72,24 @@
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
         <div *ngFor="let element of subCategories">
-          
-          <a class="subCategoryLink" [routerLink]="['listProduct', mainCategoryId]"
-            [fragment]="element.name" [queryParams]="{ subId: element.id}"  [class.active]="isSectionActive(element.name)"
+
+          <a class="subCategoryLink" [routerLink]="['listProduct', mainCategoryId]" [fragment]="element.name"
+            [queryParams]="{ subId: element.id}" [class.active]="isSectionActive(element.name)"
             (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
             {{element.name }}
             <mat-icon class="icon">arrow_forward</mat-icon>
 
-            
+
           </a>
         </div>
       </div>
       <div class="child_sub_menu">
         <div *ngFor="let child of subsubCategories">
-          
-          <a class="subCategoryLink"  [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}}
-           [queryParams]="{subId:subCategoryId,  ssId: child.id}"  routerLinkActive="active">{{child.name}}  
-             <mat-icon class="icon">arrow_forward</mat-icon>
-        </a>
+
+          <a class="subCategoryLink" [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}}
+            [queryParams]="{subId:subCategoryId,  ssId: child.id}" routerLinkActive="active">{{child.name}}
+            <mat-icon class="icon">arrow_forward</mat-icon>
+          </a>
         </div>
         <button mat-button class="offer_explore_button" *ngIf="subsubCategories.length !==0"
           [routerLink]="['listProduct', CategoryId,'']">
@@ -167,14 +167,11 @@
           </button>
         </mat-toolbar>
         <ul class="nav_list" id="nav_menu">
-
-
           <li class="nav_items" *ngFor="let catogeory of mainCategory">
-            <a [routerLink]="['listProduct', catogeory.id, catogeory.name]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
-              catogeory.name)" (click)="mobileMenu.toggle()">{{catogeory.name }}
+            <a [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active"
+              (click)="mobileMenu.toggle()">{{catogeory.name }}
             </a>
           </li>
-
         </ul>
         <div class="nav_list" id="nav_menu">
           <div class="language">
