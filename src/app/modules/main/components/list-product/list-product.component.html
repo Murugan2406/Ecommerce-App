@@ -217,6 +217,14 @@
               matRippleColor="green">
               <mat-icon>favorite_border</mat-icon>
             </button>
+            <div *ngIf ="wishlistArray.length > 0">
+              <div *ngFor="let wish of wishlistArray;let i = index">
+                <button mat-icon-button class="banner_explore_button wishListAdded " *ngIf ="wish.id === img.id"
+                matRipple matRippleColor="green" (click)="alreadyAdded()">
+                <mat-icon>favorite_border</mat-icon>
+              </button> 
+              </div>
+                </div>
 
             <div class="card-body"   [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
               <div class="card-title">{{img.name}}</div>

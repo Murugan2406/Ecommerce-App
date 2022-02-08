@@ -65,6 +65,8 @@ export class ListProductComponent implements OnInit {
 
   sortingArray: any[] = [];
 
+  wishlistArray:any[] = [];
+
   hparam: any;
 
   subId = 0;
@@ -135,6 +137,7 @@ export class ListProductComponent implements OnInit {
     private readonly listBeautyService: ListProductService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly productService: ProductService,
+
   ) {
 
     this.pageSize = 9;
@@ -683,6 +686,22 @@ export class ListProductComponent implements OnInit {
 
   }
 
+  alreadyAdded() {
+
+
+    this._snackBar.open('Product already added in wishlist!', '', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
+    setTimeout(() => {
+
+      this._snackBar.dismiss();
+
+    }, this.timeOutDuration);
+
+
+  }
+
   addtoWishlist(id: number) {
 
     this.data[0].product = id;
@@ -690,56 +709,7 @@ export class ListProductComponent implements OnInit {
 
       localStorage.getItem(ACCESS_TOKEN_ID);
 
-      const wishArray:any[] = [];
-
-      let exist = false;
-
-      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
-
-
-        if (data.length === 0) {
-
-          this.updateWishlist(this.data[0]);
-
-        } else {
-
-          data.forEach((element:any) => {
-
-            wishArray.push(element['product']);
-
-          });
-
-          wishArray.forEach((element) => {
-
-            if (element['id'] === this.data[0]['product']) {
-
-              exist = true;
-
-            }
-
-          });
-
-          if (exist) {
-
-            this._snackBar.open('Product already added in wishlist!', '', {
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
-            setTimeout(() => {
-
-              this._snackBar.dismiss();
-
-            }, this.timeOutDuration);
-
-          } else {
-
-            this.updateWishlist(this.data[0]);
-
-          }
-
-        }
-
-      });
+      this.updateWishlist(this.data[0]);
 
 
     } else {
@@ -776,8 +746,9 @@ export class ListProductComponent implements OnInit {
 
     });
 
-  }
+    this.updateValueChanges(this.dataSource.data);
 
+  }
 
   updateFilterURl() {
 
@@ -1099,7 +1070,7 @@ export class ListProductComponent implements OnInit {
     if (this.canPaginate) {
 
 
-      // this.dataSource.paginator?() = this.pageIndex;
+      // This.dataSource.paginator?() = this.pageIndex;
 
 
     }
@@ -1114,8 +1085,22 @@ export class ListProductComponent implements OnInit {
       this.nonAvailableProducts = false;
 
     }
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+
+      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
+
+
+        data.forEach((element: { [x: string]: any; }) => {
+
+          this.wishlistArray.push(element['product']);
+
+
+        });
+
+      });
+
+    }
 
   }
-
 
 }

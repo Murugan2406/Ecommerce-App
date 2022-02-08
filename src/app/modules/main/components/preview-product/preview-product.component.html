@@ -11,6 +11,15 @@
                       <button mat-icon-button class="banner_explore_button" (click)="addtoWishlist(productId)">
               <mat-icon>favorite_border</mat-icon>
             </button>
+
+            <div *ngIf ="wishlistArray.length > 0">
+                <div *ngFor="let wish of wishlistArray;let i = index">
+                  <button mat-icon-button class="banner_explore_button wishListAdded " *ngIf ="wish.id === this.productId "
+                  matRipple matRippleColor="green" (click)="alreadyAdded()">
+                  <mat-icon>favorite_border</mat-icon>
+                </button> 
+                </div>
+                  </div>
                   </mat-grid-tile>
                   <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="changelgImage(previewSm2)" (mouseenter)="changelgImage(previewSm2)">
                       <img src="{{previewSm2}}" class="preview_sm1">

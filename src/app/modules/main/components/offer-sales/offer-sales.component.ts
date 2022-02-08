@@ -2,7 +2,6 @@
 /* eslint-disable complexity */
 /* eslint-disable dot-notation */
 import {Component, HostListener, OnInit, ViewChild, } from '@angular/core';
-
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as AOS from 'aos';
@@ -11,9 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from '../../../service/dashboard.service';
 import { CURRENCY_TYPE, ACCESS_TOKEN_ID } from '../../../../../assets/API/server-api';
 import { ProductService } from '../../../service/product.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/modules/service/header.service';
+
 
 @Component({
   selector: 'app-offer-sales',
@@ -511,6 +510,23 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+
+  alreadyAdded() {
+
+
+    this._snackBar.open('Product already added in wishlist!', '', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
+    setTimeout(() => {
+
+      this._snackBar.dismiss();
+
+    }, this.timeOutDuration);
+
+
+  }
+
   addtoWishlist(id: number) {
 
     this.data[0].product = id;
@@ -518,56 +534,7 @@ export class OfferSalesComponent implements OnInit {
 
       localStorage.getItem(ACCESS_TOKEN_ID);
 
-      const wishArray:any[] = [];
-
-      let exist = false;
-
-      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
-
-
-        if (data.length === 0) {
-
-          this.updateWishlist(this.data[0]);
-
-        } else {
-
-          data.forEach((element:any) => {
-
-            wishArray.push(element['product']);
-
-          });
-
-          wishArray.forEach((element) => {
-
-            if (element['id'] === this.data[0]['product']) {
-
-              exist = true;
-
-            }
-
-          });
-
-          if (exist) {
-
-            this._snackBar.open('Product already added in wishlist!', '', {
-              horizontalPosition: 'end',
-              verticalPosition: 'top',
-            });
-            setTimeout(() => {
-
-              this._snackBar.dismiss();
-
-            }, this.timeOutDuration);
-
-          } else {
-
-            this.updateWishlist(this.data[0]);
-
-          }
-
-        }
-
-      });
+      this.updateWishlist(this.data[0]);
 
 
     } else {
@@ -901,6 +868,8 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
+  wishlistArray:any[] = [];
+
 
   updateValueChanges(products:any) {
 
@@ -924,7 +893,25 @@ export class OfferSalesComponent implements OnInit {
 
     }
 
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+
+      this.productService.getWishlist(localStorage.getItem(ACCESS_TOKEN_ID)).subscribe((data: any) => {
+
+
+        data.forEach((element: { [x: string]: any; }) => {
+
+          this.wishlistArray.push(element['product']);
+
+
+        });
+
+      });
+
+    }
+
   }
+
+  array:any[] = [];
 
 
 }
