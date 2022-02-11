@@ -58,9 +58,6 @@ export class SignupComponent {
           email,
           password}).subscribe((userR) => {
 
-          const Username = this.contactForm.get('name')?.value;
-
-
           this.userService.login({email,
             password}).subscribe((data: any) => {
 
@@ -68,12 +65,7 @@ export class SignupComponent {
             localStorage.setItem(VERIFY, 'true');
 
           });
-          this.router.navigate([ 'userinfo' ], {
-            queryParams: {
-              Username,
-              email
-            },
-          });
+          this.router.navigate([ 'userinfo' ]);
 
         }, (error) => {
 

@@ -1,7 +1,7 @@
 @media only screen and (min-width: 769px) {
   .footer_section{
 
-      background-color: #E6E7EB;
+      background-color: var(--explore_button);
       padding: 0 3%;
 
 
@@ -27,7 +27,7 @@
     font-size: 25px;
     line-height: 39px;
     letter-spacing: 0.1em;
-    color: #763301;
+    color: var(--main-color);
 
       a{
         font-family: Poppins;
@@ -36,7 +36,7 @@
     font-size: 15px;
     line-height: 33px;
     letter-spacing: 0.02em;
-    color: #000000;
+    color: var(--black-color);
       }
 
 
@@ -63,7 +63,7 @@
     line-height: 33px;
     letter-spacing: 0.02em;
     text-transform: lowercase;
-    color: #763301;
+    color: var(--main-color);
 
         }
 
@@ -179,7 +179,7 @@
 
     .footer_section{
       padding: 2em 16px;
-      background-color: #E6E7EB;
+      background-color: var(--explore_button);
 
     }
 
@@ -203,7 +203,7 @@
   font-size: 18px;
   line-height: 28px;
   letter-spacing: 0.1em;
-  color: #763301;
+  color: var(--main-color);
   // margin-bottom: 0;
 
   }
@@ -272,7 +272,7 @@
     margin: 4em 0 2em 0;
 
     a{
-      color: #763301;
+      color: var(--main-color);
     }
     img{
 

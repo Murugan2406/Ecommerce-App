@@ -1,5 +1,5 @@
 .main {
-  background-color: #fffaf3;
+  background-color: var(--backgroud-color);
   top: 0;
 }
 
@@ -11,7 +11,7 @@
 
 mat-error,
 .error {
-  color: #763301;
+  color: var(--main-color);
 }
 
 
@@ -25,18 +25,18 @@ h5 {
 }
 
 ::ng-deep .choose_color .mat-button-toggle-checked {
-  border: 2px solid #763301 !important;
-  color: #763301 !important;
+  border: 2px solid var(--main-color) !important;
+  color: var(--main-color) !important;
   transition: 0.2s ease;
 }
 
 ::ng-deep .choose_color .mat-button-toggle-appearance-standard {
   background-color: transparent;
-  color: #000000;
+  color: var(--black-color);
   font-weight: 400;
   margin: 0 10px !important;
   font-size: 18px;
-  border: 1px solid #000000;
+  border: 1px solid var(--black-color);
   width: 22px;
   height: 22px;
 
@@ -50,7 +50,7 @@ h5 {
 
 .choose_color {
   .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
-      border-left: 0.5px solid #000000;
+      border-left: 0.5px solid var(--black-color);
   }
 }
 
@@ -62,14 +62,14 @@ h5 {
 }
 
 ::ng-deep .choose_size .mat-button-toggle-checked {
-  color: #763301 !important;
+  color: var(--main-color) !important;
   font-weight: 500;
   font-size: 18px;
 }
 
 ::ng-deep .mat-button-toggle-appearance-standard {
   background-color: transparent;
-  color: #000000;
+  color: var(--black-color);
   font-weight: 400;
   font-size: 18px;
 }
@@ -88,9 +88,9 @@ h5 {
   font-weight: normal;
   font-size: 16px;
   line-height: 45px;
-  color: #763301;
+  color: var(--main-color);
   letter-spacing: 0.05em;
-  border: 1px solid #763301;
+  border: 1px solid var(--main-color);
   border-radius: 0 !important;
   margin-right: 5%;
   width: 45%;
@@ -105,9 +105,9 @@ h5 {
   font-weight: normal;
   font-size: 16px;
   line-height: 45px;
-  color: #763301;
+  color: var(--main-color);
   letter-spacing: 0.05em;
-  border: 1px solid #763301;
+  border: 1px solid var(--main-color);
   border-radius: 0 !important;
   margin-top: 10px;
   margin-left: 5%;
@@ -205,7 +205,7 @@ mat-card-content {
   line-height: 30px;
   letter-spacing: 0.05em;
   text-transform: capitalize;
-  color: #000000;
+  color: var(--black-color);
 }
 
 .review_header {
@@ -216,7 +216,7 @@ mat-card-content {
   line-height: 37px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: #000000;
+  color: var(--black-color);
   text-align: initial;
 }
 
@@ -261,7 +261,7 @@ mat-card-content {
       font-size: 45px;
       line-height: 65px;
       margin-bottom: 2em;
-      color: #000000;
+      color: var(--black-color);
   }
   .offer_details {
       margin-top: 1em;
@@ -302,7 +302,7 @@ mat-card-content {
     top: 0;
     mat-icon {
         font-size: 18px;
-        background-color: #FFFAF3;
+        background-color: var(--backgroud-color);
         border-radius: 69px;
         padding-top: 1px;
     }
@@ -330,7 +330,7 @@ mat-card-content {
       line-height: 26px;
       letter-spacing: 0.05em;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
   }
   h1 {
       font-family: Ogg;
@@ -371,7 +371,7 @@ mat-card-content {
     font-size: 50px;
     line-height: 60px;
     letter-spacing: 0.05em;
-    color: #763301;
+    color: var(--main-color);
   }
   span {
       font-family: Poppins;
@@ -381,7 +381,7 @@ mat-card-content {
       line-height: 27px;
       letter-spacing: 0.05em;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
   }
    ::ng-deep.mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -402,7 +402,7 @@ mat-card-content {
       font-size: 32px;
       line-height: 26px;
       letter-spacing: 0.05em;
-      color: #763301;
+      color: var(--main-color);
       margin-bottom: 0;
   }
   .title {
@@ -483,7 +483,7 @@ mat-card-content {
       line-height: 46px;
       letter-spacing: 0.05em;
       margin-bottom: 0;
-      color: #763301;
+      color: var(--main-color);
   }
   .product_tap {
       display: none;
@@ -496,12 +496,12 @@ mat-card-content {
       line-height: 24px;
       letter-spacing: 0.03em;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
   }
   .choose_size {
       .mat-button-toggle-appearance-standard {
           background-color: transparent;
-          color: #000000;
+          color: var(--black-color);
           font-weight: 400;
           margin: 0 !important;
           font-size: 16px;
@@ -521,7 +521,7 @@ mat-card-content {
       line-height: 15px;
   }
    ::ng-deep .choose_size .mat-button-toggle-checked {
-      color: #763301 !important;
+      color: var(--main-color) !important;
       font-weight: 600;
       font-size: 20px;
       font-family: ogg;
@@ -555,7 +555,7 @@ mat-card-content {
       border-bottom-left-radius: 0;
   }
    :host ::ng-deep.mat-accordion .mat-expansion-panel {
-      color: #000000;
+      color: var(--black-color);
       background-color: transparent;
   }
    ::ng-deep .mat-expansion-indicator::after {
@@ -579,7 +579,7 @@ mat-card-content {
       line-height: 25px;
       letter-spacing: 0.05em;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
 
   }
   .review_section,
@@ -602,7 +602,7 @@ mat-card-content {
       font-weight: normal;
       font-size: 25px;
       line-height: 39px;
-      color: #000000;
+      color: var(--black-color);
       display: flex;
       text-align: center;
       justify-content: center;
@@ -665,7 +665,7 @@ mat-card-content {
     top: 30px;
     mat-icon {
         font-size: 18px;
-        background-color: #FFFAF3;
+        background-color: var(--backgroud-color);
         border-radius: 69px;
         padding-top: 1px;
     }

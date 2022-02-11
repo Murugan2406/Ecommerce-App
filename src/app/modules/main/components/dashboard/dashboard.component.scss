@@ -1,6 +1,6 @@
 
   .main {
-    background: #fffaf3;
+    background: var(--backgroud-color);
   }
   .offer_price{
     color: #874C20;
@@ -21,11 +21,11 @@
         touch-action: auto;
 }
   .offer_explore_button {
-    background:#E6E7EB;
+    background:var(--explore_button);
     border: none;
     font-weight: normal;
     line-height: 24px;
-    color:#000000;
+    color:var(--black-color);
     padding:7px 14px;
     font-size: 15px;
     text-align: center;
@@ -39,8 +39,8 @@
     font-weight: normal;
     font-size: 15px;
     line-height: 24px;
-     background-color: #815F46;
-    color: #F9F3F1;
+     background-color: var(--button-color);
+    color: var(--white-color);
     border-radius: 0 ;
     padding: 6px 15px;
 
@@ -50,7 +50,7 @@
   a {
     text-decoration: none;
     font-weight: 500;
-    color: #000000;
+    color: var(--black-color);
   }
 
   .align-items-center {
@@ -91,7 +91,7 @@
     font-size: 20px;
     line-height: 30px;
 
-    color: #000000;
+    color: var(--black-color);
   }
 
   .offer_title{
@@ -305,18 +305,18 @@ content: '→' ;
     font-family: Ogg;
     font-style: normal;
     font-weight: normal;
-    color: #000000;
+    color: var(--black-color);
   }
   p {
     width: 60%;
-    color: #965b24;
+    color: var(--categories-color);
     margin: 50px 0;
     line-height: 25px;
   }
   h2 {
     font-size: 40px;
     line-height: 62px;
-    color: #000000;
+    color: var(--black-color);
     font-family: Ogg;
     font-style: normal;
     font-weight: normal;
@@ -391,25 +391,25 @@ color: #B08359;
   text-align: left;
   width: 100%;
   mat-label{
-    color: #763301;
+    color: var(--main-color);
   }
 
 }
 .form_submit_button{
-  color: #763301;
+  color: var(--main-color);
 }
 :host ::ng-deep .mat-input-element {
-  caret-color: #763301;
+  caret-color: var(--main-color);
 }
 :host ::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
    background-color: #AF621A;
 
 }
 :host ::ng-deep.mat-form-field-ripple {
-  background-color: #763301 !important;
+  background-color: var(--main-color) !important;
 }
 mat-error, h4{
-  color: #763301;
+  color: var(--main-color);
   font-family: ogg;
   font-size: 17px;
   letter-spacing: 1px;
@@ -440,7 +440,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 18px;
 text-transform: uppercase;
-color: #000000;
+color: var(--black-color);
 margin: 0;
 width: 100%;
 text-align: center;
@@ -473,7 +473,7 @@ font-weight: normal;
 font-size: 50px;
 line-height: 77px;
 
-color: #000000;
+color: var(--black-color);
 
 }
 .offer_details p{
@@ -611,7 +611,7 @@ touch-action: auto;
 
 .offer_explore_button .span {
   font-size: 16px !important;
-  color:#F9F3F1;
+  color:var(--white-color);
 }
 :host ::ng-deep.owl-carousel .owl-stage {
   display: flex;
@@ -799,7 +799,7 @@ font-size: 30px;
 line-height: 39px;
 text-align: center;
 letter-spacing: 0.05em;
-color: #763301;
+color: var(--main-color);
 text-transform: capitalize;
   }
   h2{
@@ -813,7 +813,7 @@ font-size: 18px;
 // line-height: 40px;
 text-align: center;
 letter-spacing: 0.03em;
-color: #763301;
+color: var(--main-color);
 }
 span{
   font-family: Poppins;
@@ -822,7 +822,7 @@ font-weight: normal;
 font-size: 17px;
 line-height: 37px;
 letter-spacing: 0.06em;
-color: #965B24;
+color: var(--categories-color);
 margin-bottom: 0.5em;
 align-items: center;
 justify-content: center;
@@ -857,7 +857,7 @@ flex-direction: row;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
   border-top: 1px solid rgba(0, 0, 0, 0.12);;
   padding: 2em 16px;
-  background-color: #FFFAF3;
+  background-color: var(--backgroud-color);
 }
 .nav_categories{
   display: flex;
@@ -882,7 +882,7 @@ font-weight: normal;
 font-size: 22px;
 line-height: 50px;
 letter-spacing: 0.04em;
-color: #000000;
+color: var(--black-color);
 text-transform: capitalize;
 font-weight: 500;
 
@@ -916,7 +916,7 @@ font-weight: 500;
     letter-spacing: 0.03em;
     text-transform: uppercase;
 margin-bottom: 0;
-    color: #000000;
+    color: var(--black-color);
   }
 
 
@@ -1008,7 +1008,7 @@ margin-top: 2em;
 }
 .collection_explore_button{
   border: none;
-  background-color: #E6E7EB;
+  background-color: var(--explore_button);
   font-family: Poppins;
   font-style: normal;
   align-items: center;
@@ -1018,7 +1018,7 @@ margin-top: 2em;
   line-height: 19px;
   display: flex;
   justify-content: center;
-  color: #000000;
+  color: var(--black-color);
 }
 
 .align-categories{
@@ -1060,7 +1060,7 @@ p{
 .new_arrivals_section{
   padding: 2em 16px;
   h1{
-    color: #000000;
+    color: var(--black-color);
   }
 p{
   font-family: Poppins;
@@ -1174,7 +1174,7 @@ font-weight: normal;
 font-size: 28px;
 line-height: 45px;
 text-align: center;
-color: #000000;
+color: var(--black-color);
   }
   .Collections_img_container{
     display: none;
@@ -1190,7 +1190,7 @@ font-weight: normal;
 font-size: 14px;
 line-height: 21px;
 letter-spacing: 0.03em;
-color: #000000;
+color: var(--black-color);
   }
   h1{
     font-family: Ogg;
@@ -1238,7 +1238,7 @@ font-weight: normal;
 font-size: 27px;
 line-height: 42px;
 text-align: center;
-color: #000000;
+color: var(--black-color);
 
   }
 }
@@ -1272,10 +1272,10 @@ justify-content: left;
 
 }
 :host ::ng-deep.mat-form-field-ripple {
-  background-color: #763301 !important;
+  background-color: var(--main-color) !important;
 }
 mat-error, mat-label{
-  color: #763301;
+  color: var(--main-color);
   font-family: ogg;
   font-size: 14px;
   letter-spacing: 1px;

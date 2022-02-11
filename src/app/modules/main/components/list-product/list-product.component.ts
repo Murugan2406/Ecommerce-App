@@ -79,6 +79,26 @@ export class ListProductComponent implements OnInit {
 
   timeOutDuration:number;
 
+  checkid = 0;
+
+  sectionId = 0;
+
+  subCategoryId = 0;
+
+  ssName:string | null = '';
+
+  quaryParams:object | any = '';
+
+  canFilter = false;
+
+  canSort = false;
+
+  sortingValue = '';
+
+  canPaginate = false;
+
+  pageIndex = 0;
+
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
   brandList: any[] = [];
@@ -94,6 +114,10 @@ export class ListProductComponent implements OnInit {
   centervalueId = 0;
 
   isDragging = true;
+
+  iinitialId = 0;
+
+  indexId = 0;
 
   offerOptions: OwlOptions = {
     loop: true,
@@ -187,25 +211,6 @@ export class ListProductComponent implements OnInit {
 
   }
 
-  checkid = 0;
-
-  sectionId = 0;
-
-  subCategoryId = 0;
-
-  ssName:string | null = '';
-
-  quaryParams:object | any = '';
-
-  canFilter = false;
-
-  canSort = false;
-
-  sortingValue = '';
-
-  canPaginate = false;
-
-  pageIndex = 0;
 
   // eslint-disable-next-line max-statements
   bindQuaryValues(params:any) {
@@ -291,11 +296,7 @@ export class ListProductComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-
-    this.products = [];
-    this.onLoad();
-
+  paramSubscripe() {
 
     this.activatedRoute.params.subscribe((params) => {
 
@@ -307,7 +308,10 @@ export class ListProductComponent implements OnInit {
       this.sectionId = Number.parseInt(params['id'], 10);
 
     });
-    this.setCurrencyValue();
+
+  }
+
+  quaryparamSubscripe() {
 
 
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -368,6 +372,15 @@ export class ListProductComponent implements OnInit {
 
     });
 
+  }
+
+
+  ngOnInit(): void {
+
+    this.onLoad();
+    this.setCurrencyValue();
+    this.paramSubscripe();
+    this.quaryparamSubscripe();
 
   }
 
@@ -410,10 +423,6 @@ export class ListProductComponent implements OnInit {
     });
 
   }
-
-  iinitialId = 0;
-
-  indexId = 0;
 
   // eslint-disable-next-line max-statements
   onIndexChange(data: SlidesOutputData) {
@@ -533,20 +542,22 @@ export class ListProductComponent implements OnInit {
           this.updateValueChanges(this.products);
 
 
+          if (this.canFilter) {
+
+            this.filterSection();
+
+          }
+          if (this.canSort) {
+
+            this.changeSorting(this.sortingValue);
+
+          }
+
+
         });
 
+
       });
-
-      if (this.canFilter) {
-
-        this.filterSection();
-
-      }
-      if (this.canSort) {
-
-        this.changeSorting(this.sortingValue);
-
-      }
 
 
     }
@@ -953,7 +964,6 @@ export class ListProductComponent implements OnInit {
 
 
   filterSection() {
-
 
     // For brand Filter
 

@@ -1,5 +1,5 @@
 .main {
-  background: #FFFAF3;
+  background: var(--backgroud-color);
 }
 
 
@@ -18,7 +18,7 @@
       line-height: 45px;
       text-transform: capitalize;
       text-decoration: none;
-      color: #000000;
+      color: var(--black-color);
   }
   .nav_section {
       background-color: #F3EEE9;
@@ -34,7 +34,7 @@
       line-height: 77px;
       text-transform: capitalize;
       margin-left: 20px;
-      color: #000000;
+      color: var(--black-color);
   }
   h2 {
       font-family: Poppins;
@@ -43,7 +43,7 @@
       font-size: 20px;
       line-height: 30px;
       text-transform: capitalize;
-      color: #763301
+      color: var(--main-color)
   }
   .logout {
       margin-top: 50px !important;
@@ -62,7 +62,7 @@
       font-size: 25px;
       line-height: 45px;
       text-transform: capitalize;
-      color: #763301;
+      color: var(--main-color);
       padding: 10px 0;
       width: 100%;
       mat-icon {
@@ -82,7 +82,7 @@
       font-weight: normal;
       font-size: 14px !important;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
       margin-top: 20%;
       a {
           font-size: 14px !important;

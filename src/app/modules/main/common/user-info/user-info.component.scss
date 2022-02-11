@@ -18,7 +18,7 @@ font-weight: normal;
 font-size: 16px;
 
 letter-spacing: 0.05em;
-color: #000000;
+color: var(--black-color);
 
 }
 mat-error{
@@ -43,8 +43,8 @@ justify-content: center;
 color: #8B3B00;
 }
 .submit-button{
-  background: #FFFAF3;
-  border: 0.2px solid #763301;
+  background: var(--backgroud-color);
+  border: 0.2px solid var(--main-color);
   box-sizing: border-box;
   padding: 0 15%;
 
@@ -54,7 +54,7 @@ font-weight: normal;
 font-size: 18px;
 
 letter-spacing: 0.05em;
-color: #000000;
+color: var(--black-color);
 }
 
 
@@ -68,7 +68,7 @@ color: #000000;
 }
 
   .main {
-    background-color: #fffaf3;
+    background-color: var(--backgroud-color);
     top: 0;
     padding: var(--section-padding);
   }
@@ -91,7 +91,7 @@ input{
   font-weight: normal;
   font-size: 16px;
   letter-spacing: 0.03em;
-  color: #000000;
+  color: var(--black-color);
 }
 
 
@@ -111,7 +111,7 @@ flex-direction: column;
     justify-content: center;
   }
   .main {
-    background-color: #fffaf3;
+    background-color: var(--backgroud-color);
     top: 0;
    padding: 2em 16px;
   }
@@ -127,7 +127,7 @@ letter-spacing: 0.01em;
     font-size: 14px;
 background-color: transparent !important;
     letter-spacing: 0.03em;
-    color: #000000;
+    color: var(--black-color);
   }
 
 .user_address, .user_details{

@@ -17,41 +17,6 @@
               <img src="{{img.image['original']}}" alt="{{img.alt}}"
                 class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
-              <!-- <div class="offer_details">
-                <p>{{img.name}}</p>
-                <div class="pricing" style="display: flex; justify-content:
-                  center; align-items: baseline;">
-                  <h3 class='item ' *ngIf="currencyType === 'EUR'">
-                    €{{img['OfferEuro']}}</h3>
-                  <h3 class='item ' *ngIf="currencyType === 'USD'">
-                    ${{img['OfferDollar'] }}</h3>
-                  <h3 class='item ' *ngIf="currencyType === 'SAR'">
-                    SAR{{img['OfferSAR']}} </h3>
-                  <h3 class='item ' *ngIf="currencyType === 'GBP'">£{{img['OfferSterling']}}</h3>
-                  <h3 class='item ' *ngIf="currencyType === 'AED'">د.إ{{img['OfferDirham']}}</h3>
-                  <span class='offer_price item' *ngIf="currencyType === 'EUR'">
-                    €{{img['productpriceEuro']}} </span>
-                  <span class='offer_price item' *ngIf="currencyType === 'USD'">
-                    ${{img['productpriceDollar'] }}</span>
-                  <span class='offer_price item' *ngIf="currencyType === 'SAR'">
-                    SAR{{img['productpriceSAR']}} </span>
-                  <span class='offer_price item' *ngIf="currencyType === 'GBP'">
-                    £{{img['productpriceSterling']}}</span>
-                  <span class='offer_price item' *ngIf="currencyType === 'AED'">
-                    د.إ{{img['productpriceDirham']}}</span>
-
-                  <span class='offer_percentage item '*ngIf="currencyType ===
-                    'EUR'">{{img['OfferPecentageEuro']}}off</span>
-                  <span class='offer_percentage item '*ngIf="currencyType ===
-                    'USD'">{{img['OfferPecentageDollar']}}off</span>
-                  <span class='offer_percentage item ' *ngIf="currencyType ===
-                    'SAR'">{{img['OfferPecentageSAR']}}off</span>
-                  <span class='offer_percentage item ' *ngIf="currencyType ===
-                    'GBP'">{{img['OfferPecentageSterling']}}off</span>
-                  <span class='offer_percentage item ' *ngIf="currencyType ===
-                    'AED'">{{img['OfferPecentageDirham']}}off</span>
-                </div>
-              </div> -->
             </ng-template>
 
           </owl-carousel-o>

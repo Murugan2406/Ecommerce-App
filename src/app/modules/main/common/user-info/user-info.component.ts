@@ -1,8 +1,9 @@
+/* eslint-disable dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VERIFY } from '../../../../../assets/API/server-api';
+import { ACCESS_TOKEN_ID, VERIFY } from '../../../../../assets/API/server-api';
 import { UserService } from '../../../service/user.service';
 
 @Component({
@@ -42,13 +43,32 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-    this.activatedRoute.queryParams.subscribe((params:any) => {
+      this.userService.getUserData().subscribe((data: any) => {
 
-      this.userInfo.get('firstName')?.setValue(params.Username);
-      this.userInfo.get('email')?.setValue(params.email);
+        this.userInfo.get('firstName')?.setValue(data[0].name);
 
-    });
+        let address = [];
+
+        if (data[0].address) {
+
+          // eslint-disable-next-line prefer-destructuring
+          address = data[0].address[0];
+          this.userInfo.get('firstName')?.setValue(address['firstName'] ? address['firstName'] : '');
+          this.userInfo.get('lastName')?.setValue(address['lastName'] ? address['lastName'] : '');
+          this.userInfo.get('email')?.setValue(address['email'] ? address['email'] : '');
+          this.userInfo.get('phone')?.setValue(address['phone'] ? address['phone'] : '');
+          this.userInfo.get('country')?.setValue(address['country'] ? address['country'] : '');
+          this.userInfo.get('city')?.setValue(address['city'] ? address['city'] : '');
+          this.userInfo.get('address')?.setValue(address['address'] ? address['address'] : '');
+          this.userInfo.get('pincode')?.setValue(address['pincode'] ? address['pincode'] : '');
+
+        }
+
+      });
+
+    }
 
   }
 

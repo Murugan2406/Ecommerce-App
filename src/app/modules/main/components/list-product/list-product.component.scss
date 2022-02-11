@@ -36,7 +36,7 @@ button:not(:disabled):before {
 }
 
 :host ::ng-deep.mat-accordion .mat-expansion-panel {
-  color: #000000;
+  color: var(--black-color);
   background-color: transparent;
 }
 
@@ -69,7 +69,7 @@ button:not(:disabled):before {
   border: none !important;
 }
 .mat-button-toggle-checked{
-  color: #763301 !important;
+  color: var(--main-color) !important;
 }
 
 .mat-button-toggle {
@@ -80,7 +80,7 @@ button:not(:disabled):before {
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
-  color: #000000;
+  color: var(--black-color);
   margin-top: 15px;
   width: 80px;
 
@@ -175,7 +175,7 @@ font-size: 14px;
   font-size: 15px;
   line-height: 30px;
   text-transform: uppercase;
-  color: #763301;
+  color: var(--main-color);
   padding: 2px 30px;
   margin-top: 1em;
   margin-left: 5%;
@@ -204,7 +204,7 @@ font-size: 14px;
   font-weight: normal;
   font-size: 15px;
   text-transform: capitalize;
-  color: #000000;
+  color: var(--black-color);
 }
 
 ::ng-deep.mat-paginator-page-size {
@@ -338,7 +338,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 18px;
       line-height: 30px;
-      color: #000000;
+      color: var(--black-color);
       display: inline-block;
       min-width: 180px;
       white-space: nowrap;
@@ -362,7 +362,7 @@ font-size: 14px;
 
 
   .main {
-      background-color: #fffaf3;
+      background-color: var(--backgroud-color);
       top: 0;
       padding: var(--section-padding);
   }
@@ -399,7 +399,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 20px;
       line-height: 30px;
-      color: #000000;
+      color: var(--black-color);
   }
   .category_name {
       background: rgba(196, 196, 196, 0.8);
@@ -411,7 +411,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 18px;
       bottom: 0;
-      color: #000000;
+      color: var(--black-color);
   }
    :host ::ng-deep.offer_section .owl-next,
    :host ::ng-deep.offer_section .owl-prev {
@@ -470,7 +470,7 @@ font-size: 14px;
           font-style: normal;
           font-weight: normal;
           font-size: 25px;
-          color: #000000;
+          color: var(--black-color);
       }
   }
    :host ::ng-deep .owl-carousel {
@@ -503,7 +503,7 @@ font-size: 14px;
       text-align: initial;
       mat-icon {
           vertical-align: middle;
-          color: #000000;
+          color: var(--black-color);
       }
       .mat-button {
           padding: 0;
@@ -549,7 +549,7 @@ font-size: 14px;
       line-height: 3px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #000000;
+      color: var(--black-color);
       margin-left: 15%;
       word-break: break-word;
       a {
@@ -561,7 +561,7 @@ font-size: 14px;
           letter-spacing: 0.03em;
           font-weight: 400px;
           text-transform: uppercase;
-          color: #000000;
+          color: var(--black-color);
           ;
       }
   }
@@ -583,7 +583,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 14px;
       text-transform: uppercase;
-      color: #000000;
+      color: var(--black-color);
       margin-top: 15px;
       width: 90px;
       border: solid 1px rgba(0, 0, 0, .12);
@@ -621,7 +621,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 18px;
       line-height: 30px;
-      color: #000000;
+      color: var(--black-color);
       display: inline-block;
       width: 100%;
       white-space: nowrap;
@@ -634,7 +634,7 @@ font-size: 14px;
       top: 0;
       mat-icon {
           font-size: 18px;
-          background-color: #FFFAF3;
+          background-color: var(--backgroud-color);
           border-radius: 69px;
           padding-top: 1px;
       }
@@ -694,7 +694,7 @@ font-size: 14px;
       display: none;
   }
   main {
-      background-color: #fffaf3;
+      background-color: var(--backgroud-color);
   }
   .banner_title {
       padding: 2em 16px;
@@ -710,7 +710,7 @@ font-size: 14px;
       line-height: 39px;
       text-align: center;
       letter-spacing: 0.05em;
-      color: #763301;
+      color: var(--main-color);
   }
   h3 {
       font-family: Poppins;
@@ -720,7 +720,7 @@ font-size: 14px;
       line-height: 24px;
       text-align: center;
       letter-spacing: 0.03em;
-      color: #763301;
+      color: var(--main-color);
   }
    :host ::ng-deep.offer_section .owl-next,
    :host ::ng-deep.offer_section .owl-prev {
@@ -784,7 +784,7 @@ font-size: 14px;
       justify-content: center;
       text-align: center;
       display: flex;
-      color: #000000;
+      color: var(--black-color);
   }
   h1 {
       font-family: Ogg;
@@ -798,7 +798,7 @@ font-size: 14px;
   }
   .mat-card-title {
       line-height: 30px;
-      color: #763301;
+      color: var(--main-color);
       font-size: 18px;
   }
   .mat-card-subtitle {
@@ -815,7 +815,7 @@ font-size: 14px;
       text-overflow: ellipsis;
   }
   b {
-      color: #763301;
+      color: var(--main-color);
   }
   .card {
       box-shadow: 0 0 5px rgba(177, 146, 116, 0.5), 0 0 15px rgba(134, 110, 170, 0.3);
@@ -865,7 +865,7 @@ font-size: 14px;
     top: 0;
     mat-icon {
         font-size: 18px;
-        background-color: #FFFAF3;
+        background-color: var(--backgroud-color);
         border-radius: 69px;
         padding-top: 1px;
     }
@@ -899,10 +899,10 @@ font-size: 14px;
       line-height: 30px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #000000;
+      color: var(--black-color);
       margin-left: 15%;
       a {
-          color: #000000;
+          color: var(--black-color);
           line-height: 35px;
       }
       [type=button]:not(:disabled),
@@ -920,7 +920,7 @@ font-size: 14px;
       font-weight: normal;
       font-size: 14px;
       text-transform: uppercase;
-      color: #000000;
+      color: var(--black-color);
       margin-top: 15px;
       width: 85px;
       height: 30px;

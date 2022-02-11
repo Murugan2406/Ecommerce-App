@@ -29,38 +29,27 @@ img {
     --main-font-family: "Open Sans", sans-serif;
     --heading-font-family: "Poppins", sans-serif;
     --main-color: #763301;
-    --button-color: #815F46;
-    --black-color: #000000;
+    --button-color:#815F46;
+    --black-color:#000000;
     --white-color: #F9F3F1;
     --explore_button: #E6E7EB;
     --backgroud-color: #FFFAF3;
     --section-padding: 50px 3%;
     --categories-color: #965B24;
 }
-:root[data] {
-  --main-font-family: "Open Sans", sans-serif;
-  --heading-font-family: "Poppins", sans-serif;
-  --main-color: #763301;
-  --button-color: #815F46;
-  --black-color: #000000;
-  --white-color: #F9F3F1;
-  --explore_button: #E6E7EB;
-  --backgroud-color: #FFFAF3;
-  --section-padding: 50px 3%;
-  --categories-color: #965B24;
-}
+
 
 a {
     text-decoration: none;
     font-weight: 500;
-    color: #000000;
+    color: var(--black-color);
     font-family: var(--heading-font-family);
 }
 
 a:hover {
     text-decoration: none !important;
     font-weight: 500;
-    color: #000000;
+    color: var(--black-color);
     font-family: var(--heading-font-family);
 }
 

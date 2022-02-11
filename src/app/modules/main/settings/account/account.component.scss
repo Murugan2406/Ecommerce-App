@@ -6,7 +6,7 @@
   line-height: 22px;
   text-decoration-line: underline;
   text-transform: capitalize;
-  color: #763301 !important;
+  color: var(--main-color) !important;
   padding-right: 0;
   padding-left: 5px;
 }
@@ -19,7 +19,7 @@ h1 {
   line-height: 77px;
   text-transform: capitalize;
   margin-left: 20px;
-  color: #000000;
+  color: var(--black-color);
 }
 
 h2 {
@@ -29,7 +29,7 @@ h2 {
   font-size: 20px;
   line-height: 30px;
   text-transform: capitalize;
-  color: #763301
+  color: var(--main-color)
 }
 
 .mat-table {
@@ -130,7 +130,7 @@ h2 {
           line-height: 40px;
           font-size: 30px;
           text-align: center;
-          color: #763301;
+          color: var(--main-color);
           font-family: ogg;
       }
   }
@@ -148,7 +148,7 @@ h2 {
       font-size: 14px;
       line-height: 27px;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
   }
   .mat-cell,
   .mat-footer-cell {
@@ -158,7 +158,7 @@ h2 {
       font-size: 15px;
       line-height: 27px;
       text-transform: capitalize;
-      color: #000000;
+      color: var(--black-color);
       min-width: min-content;
       margin-right: 2%;
   }
@@ -184,7 +184,7 @@ h2 {
   .mobile-label {
       display: inline-block;
       font-weight: 500;
-      color: #763301;
+      color: var(--main-color);
       text-transform: capitalize;
       margin-bottom: 3px;
   }
@@ -234,13 +234,13 @@ h2 {
       font-size: 16px;
       line-height: 50px;
       text-transform: capitalize;
-      color: #763301;
+      color: var(--main-color);
       margin-bottom: 0;
   }
   .mobile-label {
       display: inline-block;
       font-weight: 500;
-      color: #763301;
+      color: var(--main-color);
       text-transform: capitalize;
       margin-bottom: 3px;
   }
@@ -280,7 +280,7 @@ h2 {
       line-height: 22px;
       text-decoration-line: underline;
       text-transform: capitalize;
-      color: #763301 !important;
+      color: var(--main-color) !important;
       padding: 0 !important;
       min-width: 0 !important;
   }
@@ -305,7 +305,7 @@ h2 {
           line-height: 40px;
           font-size: 22px;
           text-align: center;
-          color: #763301;
+          color: var(--main-color);
           font-family: ogg;
           margin-bottom: 15px;
       }
