@@ -13,8 +13,13 @@ export const SUB_CATEGORY_API = 'subcategories/';
 export const SUB_CATEGORY_API_URI = `${BASE_URI}${SUB_CATEGORY_API}`;
 
 // SUBSUB CATEGORY API
-export const SUBSUB_CATEGORY_API = 'subsubcategories/';
+export const SUBSUB_CATEGORY_API = 'subsubcategories/?filter=[';
 export const SUBSUB_CATEGORY_API_URI = `${BASE_URI}${SUBSUB_CATEGORY_API}`;
+
+
+// SINGLE SUBSUB CATEGORY API
+export const SINGLE_SUBSUB_CATEGORY_API = 'subsubcategories/';
+export const SINGLE_SUBSUB_CATEGORY_API_URI = `${BASE_URI}${SINGLE_SUBSUB_CATEGORY_API}`;
 
 // INDIVIDUAL PRODUCT  API
 export const PRODUCT_API = 'products/';
@@ -72,7 +77,7 @@ export const BOTTOM_API = 'bottmProducts/';
 export const BOTTOMPRODUCTS_API_URI = `${BASE_URI}${BOTTOM_API}`;
 
 
-// DASHBOARD BOTTOM PRODUCTS API (BAGS TREND)
+// SEARCH API
 export const SEARCH_API = 'search/?key=';
 export const SEARCH_API_URI = `${BASE_URI}${SEARCH_API}`;
 

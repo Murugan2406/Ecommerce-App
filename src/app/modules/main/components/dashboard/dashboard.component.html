@@ -14,7 +14,7 @@
             data-aos-duration="1500">
             <ng-template carouselSlide *ngFor="let img of newArraivals">
 
-              <img src="{{img.image['original']}}" alt="{{img.alt}}"
+              <img src="{{img.image['original']}}" alt="{{img.name}}"
                 class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             </ng-template>
@@ -99,14 +99,16 @@
 
       <span class="offer_title">WE RECCOMENDED</span>
       <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
-        data-aos-duration="1000">Offer Sale</h1>
+        data-aos-duration="1000">Offer Sales</h1>
       <div data-aos="fade-right" data-aos-duration="1000">
         <owl-carousel-o [options]="offerOptions">
           <ng-container *ngFor="let img of offerSale">
 
             <ng-template carouselSlide class="offer_curousal_imgs">
-              <img src="{{img.image['original']}}" alt="{{img.name}}"
+
+              <img src="{{img.image.original}}" alt="{{img.name}}"
               [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
+    
               <div class="offer_details">
                 <p>{{img.name}}</p>
                 <div class="pricing" style="display: flex; justify-content:
@@ -124,7 +126,7 @@
                   <span class='offer_price item' *ngIf="currencyType === 'USD'">
                     ${{img['productpriceDollar'] }}</span>
                   <span class='offer_price item' *ngIf="currencyType === 'SAR'">
-                    SAR{{img['productpriceSAR']}} </span>
+                    SAR{{img['productpriceSar']}} </span>
                   <span class='offer_price item' *ngIf="currencyType === 'GBP'">
                     £{{img['productpriceSterling']}}</span>
                   <span class='offer_price item' *ngIf="currencyType === 'AED'">
@@ -199,7 +201,7 @@
 
           <ng-template carouselSlide *ngFor="let img of newArraivals">
 
-            <img src="{{img.image['original']}}" alt="{{img.alt}}"
+            <img src="{{img.image['original']}}" alt="{{img.name}}"
               class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
@@ -219,7 +221,7 @@
                 <span class='offer_price item' *ngIf="currencyType === 'USD'">
                   ${{img['productpriceDollar'] }}</span>
                 <span class='offer_price item' *ngIf="currencyType === 'SAR'">
-                  SAR{{img['productpriceSAR']}} </span>
+                  SAR{{img['productpriceSar']}} </span>
                 <span class='offer_price item' *ngIf="currencyType === 'GBP'">
                   £{{img['productpriceSterling']}}</span>
                 <span class='offer_price item' *ngIf="currencyType === 'AED'">
@@ -317,7 +319,7 @@
 
           <ng-template carouselSlide *ngFor="let img of bagsTrends">
 
-            <img src="{{img.image['original']}}" alt="{{img.alt}}"
+            <img src="{{img.image['original']}}" alt="{{img.name}}"
               class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
@@ -337,7 +339,7 @@
                 <span class='offer_price item' *ngIf="currencyType === 'USD'">
                   ${{img['productpriceDollar'] }}</span>
                 <span class='offer_price item' *ngIf="currencyType === 'SAR'">
-                  SAR{{img['productpriceSAR']}} </span>
+                  SAR{{img['productpriceSar']}} </span>
                 <span class='offer_price item' *ngIf="currencyType === 'GBP'">
                   £{{img['productpriceSterling']}}</span>
                 <span class='offer_price item' *ngIf="currencyType === 'AED'">

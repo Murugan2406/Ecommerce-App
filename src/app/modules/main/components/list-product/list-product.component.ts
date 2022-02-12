@@ -200,7 +200,6 @@ export class ListProductComponent implements OnInit {
     if (window.innerWidth <= this.screenSize) {
 
       this.isFirst = false;
-      // Mobile view
 
     } else {
 
@@ -516,11 +515,6 @@ export class ListProductComponent implements OnInit {
     this.subCategoryName = data.name;
     this.filterCategory = data.subsubcategories;
 
-    this.brandList = data.availablebrands;
-    this.sizeList = data.availableSizes;
-    this.colorList = data.availabeColours;
-
-
     if (this.ssId) {
 
       this.products = [];
@@ -531,30 +525,40 @@ export class ListProductComponent implements OnInit {
 
       this.products = [];
 
+      const subsubidcollection:string[] = [];
+
       this.filterCategory.forEach((element) => {
 
-        this.listBeautyService.getDataofSubSubCategory(element.id).subscribe((ele) => {
+
+        subsubidcollection.push(element.id);
 
 
-          Array.prototype.push.apply(this.products, ele.products);
-          Array.prototype.push.apply(this.filterProducts, ele.products);
+      });
 
-          this.updateValueChanges(this.products);
-
-
-          if (this.canFilter) {
-
-            this.filterSection();
-
-          }
-          if (this.canSort) {
-
-            this.changeSorting(this.sortingValue);
-
-          }
+      // Need to send the format like this
 
 
-        });
+      this.listBeautyService.getDataofSubSubCategory(subsubidcollection).subscribe((elements) => {
+
+        this.updateValueChanges(elements.products);
+
+        this.filterProducts = elements.products;
+
+        this.brandList = elements.availablebrands;
+        this.sizeList = elements.availableSizes;
+        this.colorList = elements.availabeColours;
+
+
+        if (this.canFilter) {
+
+          this.filterSection();
+
+        }
+        if (this.canSort) {
+
+          this.changeSorting(this.sortingValue);
+
+        }
 
 
       });
@@ -566,11 +570,12 @@ export class ListProductComponent implements OnInit {
 
   innerCategoryRoute(ssId: number) {
 
+
     this.products = [];
     this.ssId = ssId;
 
 
-    this.listBeautyService.getDataofSubSubCategory(ssId).subscribe((data) => {
+    this.listBeautyService.getDataofSingleSubSubCategory(ssId).subscribe((data) => {
 
       this.filterProducts = data.products;
       this.brandList = data.availablebrands;

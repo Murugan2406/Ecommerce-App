@@ -8,6 +8,8 @@ import * as AOS from 'aos';
 import { HeaderService } from '../../../service/header.service';
 import { Router } from '@angular/router';
 import { CURRENCY_TYPE, VERIFY } from '../../../../../assets/API/server-api';
+import { categories, } from '../../../shared/category';
+import { specialProducts } from '../../../shared/specialProducts';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,11 +19,13 @@ export class DashboardComponent implements OnInit {
 
   error = '';
 
-  mainCategory:any = [];
+  mainCategory:categories[] = [];
 
-  offerSale:any[] = [];
+  offerSale:specialProducts[] = [];
 
-  newArraivals:any[] = [];
+  newArraivals:specialProducts[] = [];
+
+  bagsTrends:specialProducts[] = [];
 
   name1 = '';
 
@@ -35,13 +39,13 @@ export class DashboardComponent implements OnInit {
 
   category3 = '';
 
-  id1 = '';
+  id1 = 0;
 
-  id2 = '';
+  id2 = 0;
 
-  id3 = '';
+  id3 = 0;
 
-  CategoryId:any = '';
+  CategoryId = 0;
 
   currencyType = 'EUR';
 
@@ -104,7 +108,7 @@ export class DashboardComponent implements OnInit {
     },
   };
 
-  suggestionOptions: any = {
+  suggestionOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
     touchDrag: true,
@@ -148,7 +152,6 @@ export class DashboardComponent implements OnInit {
     Email: new FormControl('', [ Validators.required ]),
   });
 
-  bagsTrends:any = [];
 
   constructor(private http: HttpClient,
     private dashboardService :DashboardService,
@@ -158,11 +161,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  data:any;
-
 
   // eslint-disable-next-line class-methods-use-this
-  @HostListener('window:scroll', [ '$event' ])onScroll(_event: any) {
+  @HostListener('window:scroll', [ '$event' ])
+  onScroll() {
 
     AOS.init({disable: 'mobile'});
 
@@ -170,32 +172,25 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.headerService.getCategory().subscribe((data: any) => {
+    this.headerService.getCategory().subscribe((data: categories[]) => {
 
       this.mainCategory = data;
       this.openSubCategories(this.mainCategory[0].subcategories, this.mainCategory[0].id);
 
     });
-    this.dashboardService.getOfferSales().subscribe((data:any) => {
-
+    this.dashboardService.getOfferSales().subscribe((data) => {
 
       this.offerSale = data['products'];
 
-
     });
-    this.dashboardService.getNewArrivals().subscribe((data: any) => {
+    this.dashboardService.getNewArrivals().subscribe((data) => {
 
       this.newArraivals = data['products'];
 
-
     });
-    this.dashboardService.getBottomProducts().subscribe((data: any) => {
+    this.dashboardService.getBottomProducts().subscribe((data) => {
 
-      data.forEach((element: { [x: string]: any; }) => {
-
-        this.bagsTrends.push(element['product']);
-
-      });
+      this.bagsTrends = data['products'];
 
 
     });
@@ -283,7 +278,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  openSubCategories(data:any, id:number) {
+  openSubCategories(data:specialProducts[], id:number) {
 
     this.id1 = data[0].id;
     this.id2 = data[1].id;

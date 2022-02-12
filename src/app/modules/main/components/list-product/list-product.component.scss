@@ -13,6 +13,7 @@
 .Filtertogglebutton{
   text-transform: lowercase;
   flex-direction: column;
+  flex-flow: wrap;
 
 }
 ::ng-deep[type=button]:not(:disabled),
@@ -81,7 +82,7 @@ button:not(:disabled):before {
   font-size: 14px;
   line-height: 22px;
   color: var(--black-color);
-  margin-top: 15px;
+  margin-top: 25px;
   width: 80px;
 
   margin-right: 10px;

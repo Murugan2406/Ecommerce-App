@@ -12,7 +12,9 @@ import { CURRENCY_TYPE, ACCESS_TOKEN_ID } from '../../../../../assets/API/server
 import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/modules/service/header.service';
-
+import { specialProducts, sizeArray, options } from '../../../shared/specialProducts';
+import { queryString } from '../../../shared/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-offer-sales',
@@ -25,25 +27,18 @@ export class OfferSalesComponent implements OnInit {
 
   subCategoryName?: string;
 
-  sizeValue:any[] = [];
+  sizeValue:string[] = [];
 
-  brandValue:any[] = [];
+  brandValue:string[] = [];
 
-  colorValue:any[] = [];
+  colorValue:string[] = [];
 
-  sizeTempArray:any[] = [];
-
-  colorTempArray:any[] = [];
-
-  brandTempArray:any[] = [];
 
   sectionTitle = '';
 
   sectionSubtitle = '';
 
   currencyType = 'USD';
-
-  date: any = '';
 
   nonAvailableProducts = false;
 
@@ -55,35 +50,21 @@ export class OfferSalesComponent implements OnInit {
 
   isFirst = true;
 
-  dataSource: MatTableDataSource<any>;
-
-  dataSource$: any;
-
   linkFrom = '';
 
-  searchValue = '';
+  searchValue:string;
 
-  filterCategory: any[] = [];
+  products: specialProducts[] = [];
 
-  mainCategory: any[] = [];
+  filterProducts:specialProducts[] = [];
 
-  products: any = [];
+  sortingArray: specialProducts[] = [];
 
+  brandList: specialProducts[] = [];
 
-  fontStyleControl = new FormControl();
+  sizeList:sizeArray[] = [];
 
-
-  filterProducts:any[] = [];
-
-  sortingArray: any[] = [];
-
-  brandList: any[] = [];
-
-  sizeList:any[] = [];
-
-  colorList:any[] = [];
-
-  hparam: any;
+  colorList:options[] = [];
 
   subsubId = 0;
 
@@ -94,6 +75,10 @@ export class OfferSalesComponent implements OnInit {
   timeOutDuration:number;
 
   data:any[] = [ {product: 1} ];
+
+  dataSource: MatTableDataSource<any>;
+
+  dataSource$: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
@@ -111,6 +96,8 @@ export class OfferSalesComponent implements OnInit {
     this.pageSize = 9;
     this.screenSize = 768;
 
+    this.searchValue = '';
+
     this.timeOutDuration = 1000;
 
     this.form = this.fb.group({
@@ -122,14 +109,14 @@ export class OfferSalesComponent implements OnInit {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  @HostListener('window:scroll', [ '$event' ])onScroll(_event: any) {
+  @HostListener('window:scroll', [ '$event' ])onScroll() {
 
     AOS.init({disable: 'mobile'});
 
   }
 
   @HostListener('window:load', [ '$event' ])
-  onLoad(event: any) {
+  onLoad() {
 
     if (window.innerWidth <= this.screenSize) {
 
@@ -145,7 +132,7 @@ export class OfferSalesComponent implements OnInit {
   }
 
   @HostListener('window:resize', [ '$event' ])
-  onResize(event: any) {
+  onResize() {
 
     if (window.innerWidth <= this.screenSize) {
 
@@ -173,12 +160,11 @@ export class OfferSalesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.onLoad(event);
+    this.onLoad();
 
     this.products = [];
 
     this.currencyChanges();
-
 
     this.activatedRoute.queryParams.subscribe((params) => {
 
@@ -190,13 +176,13 @@ export class OfferSalesComponent implements OnInit {
 
     });
 
-
   }
 
 
   // eslint-disable-next-line max-statements
   bindQuaryValues(params:any) {
 
+    console.log(params);
     let brand = [];
     let color = [];
     let size = [];
@@ -308,7 +294,7 @@ export class OfferSalesComponent implements OnInit {
 
   getDataforSearch(searchValue:string) {
 
-    this.headerService.getSearchResult(searchValue).subscribe((data: any) => {
+    this.headerService.getSearchResult(searchValue).subscribe((data) => {
 
       this.setDefaultdatas(data);
 
@@ -318,7 +304,7 @@ export class OfferSalesComponent implements OnInit {
 
   getDataforOffersales() {
 
-    this.dashboardService.getOfferSales().subscribe((data: any) => {
+    this.dashboardService.getOfferSales().subscribe((data) => {
 
       this.setDefaultdatas(data);
 
@@ -329,7 +315,7 @@ export class OfferSalesComponent implements OnInit {
 
   getDataforNewArraivals() {
 
-    this.dashboardService.getNewArrivals().subscribe((data: any) => {
+    this.dashboardService.getNewArrivals().subscribe((data) => {
 
       this.setDefaultdatas(data);
 
@@ -339,9 +325,10 @@ export class OfferSalesComponent implements OnInit {
 
   getDataforTrendingProducts() {
 
-    this.dashboardService.getBottomProducts().subscribe((data: any) => {
+    this.dashboardService.getBottomProducts().subscribe((data) => {
 
       this.setDefaultdatas(data);
+
 
     });
 
@@ -407,7 +394,7 @@ export class OfferSalesComponent implements OnInit {
     switch (value) {
 
     case 'rating':
-      this.sortingArray.sort((firsyArray: any, secondArray: any) => firsyArray.rating - secondArray.rating);
+      // This.sortingArray.sort((firsyArray, secondArray) => firsyArray.rating - secondArray.rating);
       break;
     case 'LowToHigh':
       this.filterLtoH();
@@ -416,7 +403,7 @@ export class OfferSalesComponent implements OnInit {
       this.filterHtoL();
       break;
     case 'latest':
-      this.sortingArray.sort((firsyArray: any, secondArray: any) =>
+      this.sortingArray.sort((firsyArray, secondArray) =>
         new Date(secondArray.created_date).getTime() -
             new Date(firsyArray.created_date).getTime()
       );
@@ -584,7 +571,7 @@ export class OfferSalesComponent implements OnInit {
       if (element['options'].length > 0) {
 
 
-        element['options'].forEach((ele: any) => {
+        element['options'].forEach((ele: { [x: string]: string[]; }) => {
 
 
           if (ele['sizes']) {
@@ -701,7 +688,7 @@ export class OfferSalesComponent implements OnInit {
     const minPrice = this.form.get('startprice')?.value;
     const maxPrice = this.form.get('endprice')?.value;
 
-    let PRArray:any[] = [ ...this.filterProducts ];
+    let PRArray:specialProducts[] = [ ...this.filterProducts ];
     if (this.form.valid) {
 
       if (localStorage.getItem(CURRENCY_TYPE) === 'EUR') {
@@ -772,7 +759,7 @@ export class OfferSalesComponent implements OnInit {
 
     // For brand Filter
 
-    let brandResult:any[] = [];
+    let brandResult:specialProducts[] = [];
     const brandFilter = [ ...this.filterProducts ];
 
     if (this.brandValue.length > 0) {
@@ -787,7 +774,7 @@ export class OfferSalesComponent implements OnInit {
     }
 
 
-    let colorResult:any[] = [];
+    let colorResult:specialProducts[] = [];
     const colorFilter = [ ...this.filterProducts ];
 
     if (this.colorValue.length > 0) {
@@ -804,7 +791,7 @@ export class OfferSalesComponent implements OnInit {
 
     // For size Filter
 
-    let sizeResult:any[] = [];
+    let sizeResult:specialProducts[] = [];
 
     const sizeFilter = [ ...this.filterProducts ];
 
@@ -871,7 +858,7 @@ export class OfferSalesComponent implements OnInit {
   wishlistArray:any[] = [];
 
 
-  updateValueChanges(products:any) {
+  updateValueChanges(products:specialProducts[]) {
 
     this.dataSource = new MatTableDataSource(products);
     this.dataSource$ = this.dataSource.connect();
