@@ -331,8 +331,6 @@ export class ListProductComponent implements OnInit {
 
       this.bindQuaryValues(params);
 
-      this.updateValueChanges(this.products);
-
       if (Object.keys(this.quaryParams).length === 0) {
 
 
@@ -375,6 +373,8 @@ export class ListProductComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.loading = true;
 
     this.onLoad();
     this.setCurrencyValue();
@@ -429,7 +429,6 @@ export class ListProductComponent implements OnInit {
 
     this.ssName = this.activatedRoute.snapshot.fragment;
 
-    this.loading = true;
 
     if (!data.slides) {
 
@@ -459,7 +458,6 @@ export class ListProductComponent implements OnInit {
 
         }
 
-        return;
 
       } else if (this.isFirst === true) {
 
@@ -490,8 +488,6 @@ export class ListProductComponent implements OnInit {
       }
 
     }
-
-    this.loading = false;
 
   }
 
@@ -1117,6 +1113,9 @@ export class ListProductComponent implements OnInit {
 
     }
 
+    this.loading = false;
+
   }
+
 
 }

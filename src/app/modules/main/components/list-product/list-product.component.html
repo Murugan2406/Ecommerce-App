@@ -211,7 +211,7 @@
         </div>
         <h2 class="emptyfilterResultH2">Sorry, no results found! <br> Please try something else</h2>
       </div>
-      <div class="row" *ngIf="nonAvailableProducts === false ">
+      <div class="row" *ngIf="!loading" >
         <div class="col-xl-3 col-md-4 col-lg-4 col-sm-4 col-6" *ngFor="let img of dataSource$ | async">
           <div class="card">
             <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" onerror ="this.src='../../../../../../assets/images/Logo_VOUI.svg' " class=""
@@ -263,9 +263,12 @@
 
 
       </div>
-      <!-- <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
-      </ngx-skeleton-loader> -->
-      <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems"
+
+
+          <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6 card-body " count="12" animation="progress">
+          </ngx-skeleton-loader>
+
+      <mat-paginator  [length]="totalItems"
         [pageSizeOptions]="[12, 15, 100]" aria-label="Select page" >
       </mat-paginator>
 

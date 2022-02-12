@@ -38,6 +38,7 @@ import {MatCardModule} from '@angular/material/card';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+
 @NgModule({
   declarations: [
     MainComponent,
