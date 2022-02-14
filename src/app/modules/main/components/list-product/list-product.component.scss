@@ -106,7 +106,7 @@ button:not(:disabled):before {
   position: relative;
   flex: auto;
   min-width: 0;
-  text-align: center;
+  text-align: end;
 }
 
 .betweenKeyInputs {
@@ -185,10 +185,8 @@ font-size: 14px;
   color: var(--main-color);
   padding: 0 15px;
 width: 85px;
-  margin-left: 5%;
-}
-.form_container{
-  text-align: end;
+
+  margin-top: 20px;
 }
 
 // ==============================================
@@ -243,7 +241,7 @@ width: 85px;
   background: transparent !important;
   color: rgba(0, 0, 0, 0.87);
   padding: 0 !important;
-  height: 40px;
+  height: 50px;
   align-items: center;
   display: flex;
   .mat_button {
@@ -690,22 +688,22 @@ width: 85px;
 
 // ===============================Mobile Responsive ===============================
 @media only screen and (max-width:768px) {
-
-   :host ::ng-deep.loader {
-      border-radius: 5px;
-      height: 200px !important;
-      width: 160px!important;
-      padding: 0 1%;
-      margin: 0;
-      border-radius: 15px !important;
-      border: 1px solid white;
-  }
+  main {
+    background-color: var(--backgroud-color);
+}
+:host ::ng-deep .loader {
+  border-radius: 5px;
+  height: 250px !important;
+  width: 225px!important;
+  margin-right: 15px;
+  margin-left: 15px;
+  border-radius: 15px !important;
+  border: 1px solid white;
+}
   .nav_path {
       display: none;
   }
-  main {
-      background-color: var(--backgroud-color);
-  }
+
   .banner_title {
       padding: 1em 16px 0  16px;
   }
@@ -773,7 +771,7 @@ width: 85px;
       }
   }
   .filter_section {
-      padding: 10px 16px;
+      padding: 8px 16px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -852,6 +850,20 @@ width: 85px;
   }
   .preview_section {
       padding: 0 16px 2em 16px;
+  }
+
+  .filter_submit_button {
+    background: #ffbd8c;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: var(--main-color);
+    padding: 0 15px;
+  width: 85px;
+  margin-left: 5%;
+  margin-top: 0;
+  
   }
   .col-6,
   .col-lg-4 {
@@ -981,6 +993,16 @@ width: 85px;
           border-radius: 15px;
           filter: drop-shadow(2px 4px 8px #585858);
       }
+  }
+
+  :host ::ng-deep .loader {
+    border-radius: 5px;
+    height: 200px !important;
+    width: 45%!important;
+    margin-right:2%;
+    margin-left: 2%;
+    border-radius: 15px !important;
+    border: 1px solid white;
   }
 
   .form_container{

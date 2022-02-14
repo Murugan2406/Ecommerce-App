@@ -115,7 +115,7 @@
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
                     <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" [style.background] = "brand.colorhash" 
                     (click)="updateFilterURl()" class = "colorFilter" title="{{brand.color}}">
-                      <!-- {{brand.color}} -->
+                 
                     </mat-button-toggle>
                   </mat-button-toggle-group>
                   </section>
@@ -224,10 +224,11 @@
                   <section>
 
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                      <mat-button-toggle *ngFor="let brand of colorList" value="{{brand.color}}"
-                        (click)="updateFilterURl()">{{brand.color}}
-                      </mat-button-toggle>
-                    </mat-button-toggle-group>
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" [style.background] = "brand.colorhash" 
+                    (click)="updateFilterURl()" class = "colorFilter" title="{{brand.color}}">
+                 
+                    </mat-button-toggle>
+                  </mat-button-toggle-group>
                   </section>
                 </div>
 
@@ -345,7 +346,7 @@
 
             <div class="card-body"   [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
               <div class="card-title">{{img.name}}</div>
-              <div class="card-subtitle text-muted">Card subtitlle</div>
+              <div class="card-subtitle text-muted">{{img.brand?.name ?? 'voui'}}</div>
               <div>
                 <b class='item' *ngIf="currencyType === 'EUR' "> €{{img['OfferEuro']}}</b>
                 <b class='item' *ngIf="currencyType === 'USD' "> ${{img['OfferDollar'] }}</b>
@@ -379,7 +380,7 @@
       </div>
 
 
-          <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6 card-body " count="12" animation="progress">
+          <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
           </ngx-skeleton-loader>
 
       <mat-paginator  [length]="totalItems"
