@@ -224,6 +224,7 @@ export class PreviewProductComponent implements OnInit {
 
       this.offerSale = data['products'];
 
+
     });
 
     if (localStorage.getItem(ACCESS_TOKEN_ID)) {

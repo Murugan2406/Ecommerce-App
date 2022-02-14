@@ -47,8 +47,8 @@
       </div>
       <div class="filter_container">
 
-
-        <mat-accordion>
+<!-- for desktop -->
+        <mat-accordion *ngIf="isFirst">
           <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
             <mat-expansion-panel-header>
               <mat-panel-title class="filter_title_top"> Refine/ Sortby </mat-panel-title>
@@ -113,8 +113,9 @@
                   <section>
 
                     <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
-                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" (click)="updateFilterURl()" >
-                      {{brand.color}}
+                    <mat-button-toggle *ngFor="let brand of colorList"   value="{{brand.color}}" [style.background] = "brand.colorhash" 
+                    (click)="updateFilterURl()" class = "colorFilter" title="{{brand.color}}">
+                      <!-- {{brand.color}} -->
                     </mat-button-toggle>
                   </mat-button-toggle-group>
                   </section>
@@ -180,6 +181,119 @@
 
           </mat-expansion-panel>
         </mat-accordion>
+
+        <mat-accordion *ngIf="!isFirst">
+          <mat-expansion-panel [expanded]="isFirst">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="filter_title_top"> Refine/ Sortby </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-accordion>
+              <mat-expansion-panel 
+              [expanded]="false">
+              
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="filter_title">
+                    Brand
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="toggle_body mat_panel ">
+                  <section class="">
+                    <mat-button-toggle-group [(ngModel)]="brandValue" multiple class="Filtertogglebutton">
+                      <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}"
+                        (click)="updateFilterURl()" class="Filtertogglebutton">{{brand.name}}
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </section>
+
+                </div>
+
+              </mat-expansion-panel>
+
+              <mat-expansion-panel 
+              [expanded]="isFirst">
+                <mat-expansion-panel-header>
+
+                  <mat-panel-title class="filter_title">
+                    Color
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="toggle_body mat_panel">
+                  <section>
+
+                    <mat-button-toggle-group [(ngModel)]="colorValue" class="Filtertogglebutton" multiple>
+                      <mat-button-toggle *ngFor="let brand of colorList" value="{{brand.color}}"
+                        (click)="updateFilterURl()">{{brand.color}}
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </section>
+                </div>
+
+
+              </mat-expansion-panel>
+
+              <mat-expansion-panel 
+              [expanded]="isFirst">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="filter_title">
+                    Size
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="toggle_body mat_panel">
+                  <section>
+                    <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="sizeValue" class="Filtertogglebutton"
+                      multiple>
+                      <mat-button-toggle *ngFor="let subtask of sizeList" value="{{subtask.size}}"
+                        (click)="updateFilterURl()">
+                        {{subtask.size}}
+                      </mat-button-toggle>
+
+                    </mat-button-toggle-group>
+                  </section>
+                </div>
+
+              </mat-expansion-panel>
+          
+
+            <form [formGroup]="form" (ngSubmit)="updateFilterURl()" class="form_container">
+
+     
+                <mat-expansion-panel 
+                  [expanded]="panelOpenState">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="filter_title">
+                      Price
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="betweenKeyInputs">
+
+
+                    <mat-form-field class="inputPrimary">
+                      <input matInput min="0" type="number" formControlName="startprice">
+                      <span matSuffix>{{currencyType}}</span>
+                    </mat-form-field>
+                    <span class="betweenlable"> to</span>
+                    <mat-form-field class="inputPrimary">
+                      <input matInput type="number" min="0" formControlName="endprice">
+                      <span matSuffix>{{currencyType}}</span>
+                    </mat-form-field>
+
+                  </div>
+                  <button mat-button type="submit" class="filter_submit_button">apply</button>
+
+                </mat-expansion-panel>
+
+              </form>
+              </mat-accordion>
+
+    
+
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
 
     </div>
@@ -217,13 +331,13 @@
             <img src="{{img.image['original']}}" alt="Photo of {{img.name}}" onerror ="this.src='../../../../../../assets/images/Logo_VOUI.svg' " class=""
               [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
             <button mat-icon-button class="banner_explore_button" (click)="addtoWishlist(img.id)" matRipple
-              matRippleColor="green">
+              matRippleColor="red">
               <mat-icon>favorite_border</mat-icon>
             </button>
             <div *ngIf ="wishlistArray.length > 0">
               <div *ngFor="let wish of wishlistArray;let i = index">
                 <button mat-icon-button class="banner_explore_button wishListAdded " *ngIf ="wish.id === img.id"
-                matRipple matRippleColor="green" (click)="alreadyAdded()">
+                matRipple matRippleColor="red" (click)="alreadyAdded()">
                 <mat-icon>favorite_border</mat-icon>
               </button> 
               </div>

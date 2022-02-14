@@ -67,7 +67,7 @@ input[type="checkbox"]:after {
   font-size: 14px;
   margin-left: 29px;
   position: absolute;
-  margin-top: -3px;
+  margin-top: 3px;
   font-family: Ogg;
   font-style: normal;
   letter-spacing: 0.05em;
@@ -126,9 +126,9 @@ input:checked[type="checkbox"]:after {
   filter: drop-shadow(0 0 0.75rem rgb(226, 45, 72));
 }
 
-img {
-  filter: drop-shadow(2px 4px 8px #585858);
-}
+// img {
+//   filter: drop-shadow(2px 4px 8px #585858);
+// }
 
 :host ::ng-deep.mat-mini-fab {
   width: 20px;
@@ -277,6 +277,12 @@ ul {
   .nav_items {
     a {
       text-transform: uppercase;
+    }
+  }
+  .nav_items {
+    a:hover {
+   color: #965627;
+
     }
   }
   :host ::ng-deep.mat-button-toggle-group-appearance-standard {
@@ -487,8 +493,8 @@ ul {
     background-color: transparent;
   }
   .material-icons {
-    font-size: 20px;
-    margin-top: 5px;
+    font-size: 22px;
+
   }
   .toolbar_main {
     background-color: var(--backgroud-color);
@@ -550,6 +556,7 @@ ul {
   }
   .nav_items {
     margin-bottom: 10px;
+    line-height: 2.5em;
     a {
       font-size: 15px;
     }
@@ -611,11 +618,10 @@ ul {
   .header-search {
     display: flex;
     outline: 0.2px solid rgba(0, 0, 0, 0.12);
-    padding: 4px 0;
-    height: 2em;
+
+    margin: 5px 16px;
+    height: 40px;
     border-radius: 50px;
-    width: 100%;
-    min-width: 200px;
     justify-content: center;
     background-color: #f3eee9;
     .mat-button {
@@ -624,18 +630,37 @@ ul {
       color: #2c2b2b;
       padding: 0;
       min-width: 0;
+      margin-top: 5px;
       mat-icon {
         color: var(--explore-button);
         vertical-align: text-bottom;
       }
     }
   }
+  .responsive_header{
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+
+  }
+  .responsive_header_secondary{
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 12%;
+  }
+
+  .mat-input-element {
+    caret-color: #763301;
+}
   .input_field {
     width: 80%;
     padding: 0 5% 0 5%;
     font-weight: 500;
     font-size: 16px;
     color: var(--black-color);
+    text-transform: capitalize;
   }
   .quantity_remove {
     color: var(--black-color);
@@ -681,5 +706,30 @@ ul {
 
   ::ng-deep.mat-drawer-backdrop.mat-drawer-shown {
     height: 100vh;
+  
   }
+
+
+  .sidenavS {
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    top: 56px !important;
+    /* background-color: #111; */
+    overflow-x: hidden;
+    transition: height 0.5s;
+    padding-top: 0;
+
+
+    }
+    .ssss{
+      ::ng-deep.mat-drawer-backdrop.mat-drawer-shown {
+        height: 100vh;
+        top: 112px;
+      }
+    }
+
 }

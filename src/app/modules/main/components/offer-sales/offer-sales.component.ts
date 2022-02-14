@@ -13,8 +13,6 @@ import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/app/modules/service/header.service';
 import { specialProducts, sizeArray, options } from '../../../shared/specialProducts';
-import { queryString } from '../../../shared/common';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-offer-sales',
@@ -24,6 +22,7 @@ import { Observable } from 'rxjs';
 export class OfferSalesComponent implements OnInit {
 
   form: FormGroup;
+
 
   subCategoryName?: string;
 
@@ -46,7 +45,7 @@ export class OfferSalesComponent implements OnInit {
 
   totalItems = 0;
 
-  panelOpenState = false;
+  panelOpenState = true;
 
   isFirst = true;
 
@@ -81,7 +80,6 @@ export class OfferSalesComponent implements OnInit {
   dataSource$: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
-
 
   constructor(
     private readonly fb: FormBuilder,
@@ -122,9 +120,13 @@ export class OfferSalesComponent implements OnInit {
 
       this.isFirst = false;
 
+      this.panelOpenState = false;
+
     } else {
 
       this.isFirst = true;
+
+      this.panelOpenState = true;
       this.pageSize = 12;
 
     }
@@ -182,7 +184,6 @@ export class OfferSalesComponent implements OnInit {
   // eslint-disable-next-line max-statements
   bindQuaryValues(params:any) {
 
-    console.log(params);
     let brand = [];
     let color = [];
     let size = [];

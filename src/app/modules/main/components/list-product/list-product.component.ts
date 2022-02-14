@@ -536,7 +536,9 @@ export class ListProductComponent implements OnInit {
 
       this.listBeautyService.getDataofSubSubCategory(subsubidcollection).subscribe((elements) => {
 
+
         this.updateValueChanges(elements.products);
+
 
         this.filterProducts = elements.products;
 
@@ -573,11 +575,13 @@ export class ListProductComponent implements OnInit {
 
     this.listBeautyService.getDataofSingleSubSubCategory(ssId).subscribe((data) => {
 
+
       this.filterProducts = data.products;
       this.brandList = data.availablebrands;
       this.sizeList = data.availableSizes;
       this.colorList = data.availabeColours;
       this.updateValueChanges(data.products);
+
 
       if (this.canFilter) {
 

@@ -70,7 +70,7 @@ export class LoginComponent {
 
           if (localStorage.getItem(ACCESS_TOKEN_ID)) {
 
-            this._snackBar.open('login successfull !', '', {
+            this._snackBar.open('Login successfull !', '', {
               horizontalPosition: 'end',
               verticalPosition: 'top',
             });
@@ -78,8 +78,10 @@ export class LoginComponent {
 
               this._snackBar.dismiss();
 
+
             }, this.timeOutduration);
             this._location.back();
+
 
           }
 
@@ -97,4 +99,3 @@ export class LoginComponent {
   }
 
 }
-

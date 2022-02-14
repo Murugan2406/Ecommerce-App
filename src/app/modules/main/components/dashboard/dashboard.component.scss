@@ -9,7 +9,7 @@
   }
 
   .offer_percentage{
-    color: #26a541 !important;
+    color: #000 !important;
     margin-top: 3px;
   }
   .item{
@@ -43,6 +43,14 @@
     color: var(--white-color);
     border-radius: 0 ;
     padding: 6px 15px;
+
+  }
+
+  .explore_button_offer:hover{
+
+     background-color: var(--categories-color);
+    color: var(--white-color);
+
 
   }
 
@@ -637,6 +645,7 @@ touch-action: auto;
   touch-action: auto;
   img{
     height: 300px;
+    cursor: pointer;
 
     }
   }
@@ -654,6 +663,7 @@ touch-action: auto;
 transition-duration: 0.7s;
 border-radius: 15px;
  transition-delay: 0.3s;
+ cursor: pointer;
 
    }
 

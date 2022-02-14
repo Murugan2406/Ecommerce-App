@@ -62,7 +62,7 @@
     <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
-        <a [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
+        <a  [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
           catogeory.name)">{{catogeory.name }}
         </a>
       </li>
@@ -116,9 +116,19 @@
   </mat-sidenav>
 </mat-sidenav-container>
 
+
+
+
+
+
+
+
+
 <header class="for_mobile">
 
   <mat-toolbar class="toolbar_main">
+
+    <div class="responsive_header">
     <div class="toggle_side_nav">
       <button mat-button class="mobile_menu" (click)="mobileMenu.toggle()">
 
@@ -127,18 +137,23 @@
     </div>
 
 
-
-
     <div class="logo_container" [routerLink]="'dashboard'">
       <img src="../../../../assets/images/Logo_VOUI.svg" alt="Logo_VOUI">
     </div>
 
+    </div>
+
+    <div class="responsive_header_secondary">
+    <button type="submit" mat-button class="mobile_menu" (click)="search.toggle()">
+      <mat-icon class="mat-5by1-white">search</mat-icon>
+    </button>
 
     <div class="toggle_side_nav">
       <button mat-button class="mobile_menu" (click)="sidenav.toggle()">
         <mat-icon>shopping_cart</mat-icon>
       </button>
 
+    </div>
     </div>
 
 
@@ -147,10 +162,21 @@
   </mat-toolbar>
 
 
+  <mat-sidenav-container class="ssss">
+    <mat-sidenav #search mode="over" opened="false" fixedInViewport="true" position="start" class="sidenavS">
+      <form [formGroup]="searchForm" class="header-search" (submit)="upsertSearch()">
+
+        <input type="text" matInput formControlName="inputValue" class="input_field">
+  
+        <button type="submit" mat-button class="mobile_menu" (click)="search.toggle()">
+          <mat-icon class="mat-5by1-white">search</mat-icon>
+        </button>
+      </form>
+    </mat-sidenav>
+  </mat-sidenav-container>
 
 
-
-  <mat-toolbar class="toolbar_main">
+  <div >
 
     <mat-sidenav-container>
       <mat-sidenav #mobileMenu mode="over" opened="false" fixedInViewport="true" position="start"
@@ -225,14 +251,6 @@
       </mat-sidenav>
     </mat-sidenav-container>
 
-    <form [formGroup]="searchForm" class="header-search" (submit)="upsertSearch()">
-
-      <input type="text" matInput formControlName="inputValue" class="input_field">
-
-      <button type="submit" mat-button class="mobile_menu">
-        <mat-icon class="mat-5by1-white">search</mat-icon>
-      </button>
-    </form>
-  </mat-toolbar>
+  </div>
 
 </header>

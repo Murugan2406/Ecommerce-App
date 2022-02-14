@@ -327,7 +327,7 @@ input{
 
 img{
   width: 120px;
-  margin-top: 23px;
+  margin-top: 10px;
   max-width: 120px;
 }
 .product_details{
@@ -398,9 +398,10 @@ h1{
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-
+margin: 0 ;
   letter-spacing: 0.05em;
   color: #8B3B00;
+  text-transform: capitalize;
 
 
 }
@@ -453,7 +454,7 @@ h2{
 }
   color: var(--main-color);
   .mobile_menu{
-    color: #d80e0e;
+    color: #c32525;
     font-size: 14px;
     width: 25px;
     height: 25px;

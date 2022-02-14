@@ -14,17 +14,11 @@
 }
 
 ::ng-deep.mat-snack-bar-container {
-  color: #ffffff;
-  background: #51a351;
+    color: #fffaf3;;
+  background: #000;
   margin: 51px 10px !important;
   min-width: 0 !important;
   max-width: 300px !important;
-}
-
-::ng-deep.mat-simple-snackbar::before {
-  content: "✔";
-  font-size: 18px;
-  margin-right: 4px;
 }
 
 .align-items-center {
