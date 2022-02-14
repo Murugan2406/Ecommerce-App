@@ -280,7 +280,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div *ngIf="products.length ===0">
+      <div *ngIf="products.length === 0">
         <div class="emptyfilterResult">
           <img src="../../../../../../assets/images/undraw_empty_re_opql (1).svg" alt="">
         </div>
@@ -339,8 +339,8 @@
 
 
       </div>
-      <!-- <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
-      </ngx-skeleton-loader> -->
+      <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6 card-body " count="12" animation="progress">
+      </ngx-skeleton-loader>
 
 
       <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems" [pageSizeOptions]="[12, 15, 100]"
