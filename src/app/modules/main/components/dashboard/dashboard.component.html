@@ -40,7 +40,7 @@
             data-aos-duration="1000">
             <ul class="nav_list"id="nav_menu">
               <li class="nav_items" *ngFor="let catogeory of mainCategory">
-                <a [routerLink]="['/listProduct', catogeory.id, catogeory.name]"
+                <a  [routerLink]="['/listProduct', catogeory.id]" 
                   (mouseover)="openSubCategories(catogeory.subcategories,catogeory.id)">{{catogeory.name
                   }} </a>
               </li>

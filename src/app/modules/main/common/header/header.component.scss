@@ -310,6 +310,40 @@ ul {
     font-weight: 500;
     font-size: 16px;
   }
+
+  .side_nav_meganenu{
+    top: 159px !important;
+    width: 100%;
+    left: 0;
+    height:fit-content;
+
+
+  }
+  .megameu_drawer, .side_nav_meganenu{
+  .mat-drawer {
+   background-color: transparent !important;
+   z-index: 0 !important;
+  }
+  .mat-drawer:not(.mat-drawer-side) {
+box-shadow: none !important;
+  }
+
+  ::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+ background-color: transparent !important; 
+}
+
+::ng-deep .mat-drawer-inner-container {
+  height:fit-content  !important;
+
+
+  }
+
+
+
+}
+
+
+
   .mat-button-toggle-group-appearance-standard
     .mat-button-toggle
     + .mat-button-toggle {

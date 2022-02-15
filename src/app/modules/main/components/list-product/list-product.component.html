@@ -383,9 +383,10 @@
           <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6" count="12" animation="progress">
           </ngx-skeleton-loader>
 
-      <mat-paginator  [length]="totalItems"
-        [pageSizeOptions]="[12, 15, 100]" aria-label="Select page" >
-      </mat-paginator>
+
+      <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems" [pageSizeOptions]="[12, 15, 100]"
+      [pageIndex]="pageIndex" [showFirstLastButtons]="true" aria-label="Select page"  (page)="yourPageChangeLogic($event)" >
+    </mat-paginator>
 
 
     </div>

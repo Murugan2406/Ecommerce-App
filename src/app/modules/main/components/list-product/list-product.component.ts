@@ -1061,14 +1061,12 @@ export class ListProductComponent implements OnInit {
 
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  onPaginateChange(event:any) {
-
-    const Index = JSON.stringify(event.pageIndex);
+  yourPageChangeLogic(name:any) {
 
 
-    this.router.navigate([], { queryParams: {pageIndex: Index, },
+    this.router.navigate([], { queryParams: {pageIndex: name.pageIndex, },
       queryParamsHandling: 'merge'});
+
 
   }
 
@@ -1082,14 +1080,6 @@ export class ListProductComponent implements OnInit {
     this.dataSource._updateChangeSubscription();
     this.dataSource$ = this.dataSource.connect();
     this.dataSource.paginator = this.paginator;
-
-    if (this.canPaginate) {
-
-
-      // This.dataSource.paginator?() = this.pageIndex;
-
-
-    }
 
 
     if (this.dataSource.data.length === 0) {

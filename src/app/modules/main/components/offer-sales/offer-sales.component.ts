@@ -32,6 +32,7 @@ export class OfferSalesComponent implements OnInit {
 
   colorValue:string[] = [];
 
+  pageIndex = 0;
 
   sectionTitle = '';
 
@@ -102,6 +103,7 @@ export class OfferSalesComponent implements OnInit {
       startprice: new FormControl(null, [ Validators.required ]),
       endprice: new FormControl(null, [ Validators.required ]),
     });
+
     this.dataSource = new MatTableDataSource(this.products);
 
   }
@@ -246,17 +248,18 @@ export class OfferSalesComponent implements OnInit {
       this.canSort = false;
 
     }
+   
     if (params['pageIndex']) {
 
       this.canPaginate = true;
 
-      this.pagIndex = Number.parseInt(params['pageIndex'], 10);
+      this.pageIndex = Number.parseInt(params['pageIndex'], 10);
 
 
     } else {
 
       this.canPaginate = false;
-      this.pagIndex = 0;
+      this.pageIndex = 0;
 
     }
 
@@ -846,13 +849,13 @@ export class OfferSalesComponent implements OnInit {
 
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  onPaginateChange(event:any) {
 
-    const Index = JSON.stringify(`Current page index: ${event.pageIndex}`);
+  yourPageChangeLogic(name:any) {
 
-    this.router.navigate([], { queryParams: {pageIndex: Index, },
+
+    this.router.navigate([], { queryParams: {pageIndex: name.pageIndex, },
       queryParamsHandling: 'merge'});
+
 
   }
 
@@ -898,8 +901,5 @@ export class OfferSalesComponent implements OnInit {
     }
 
   }
-
-  array:any[] = [];
-
 
 }

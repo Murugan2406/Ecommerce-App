@@ -45,6 +45,7 @@
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
+                  
 
                 </div>
 
@@ -160,11 +161,8 @@
               </mat-button-toggle>
             </mat-button-toggle-group>
           </section>
-          <!-- <section >
-            <mat-checkbox *ngFor="let brand of brandList" (ngModelChange)="filterbyBrand()">
-              {{brand.name}}
-            </mat-checkbox>
-          </section> -->
+
+          
         </div>
 
       </mat-expansion-panel>
@@ -343,10 +341,9 @@
       <ngx-skeleton-loader [style.display]="loading ? '': 'none'" class="col-xl-3 col-lg-4 col-sm-6 col-6 card-body " count="12" animation="progress">
       </ngx-skeleton-loader>
 
-
       <mat-paginator *ngIf=" !nonAvailableProducts " [length]="totalItems" [pageSizeOptions]="[12, 15, 100]"
-        [pageIndex]="0" [showFirstLastButtons]="true" aria-label="Select page">
-      </mat-paginator>
+      [pageIndex]="pageIndex" [showFirstLastButtons]="true" aria-label="Select page"  (page)="yourPageChangeLogic($event)" >
+    </mat-paginator>
 
 
     </div>

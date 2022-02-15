@@ -58,24 +58,28 @@
   </mat-toolbar>
   <mat-divider class="header-divider"></mat-divider>
 
-  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" (mouseleave)="ClosePanel()">
+<div (mouseleave)="megamenu.close()">
+  <div class="nav_menu" data-aos="flip-left" data-aos-duration="2000" >
     <ul class="nav_list" id="nav_menu">
 
       <li class="nav_items" *ngFor="let catogeory of mainCategory">
-        <a  [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,
-          catogeory.name)">{{catogeory.name }}
+        <a  [routerLink]="['listProduct', catogeory.id]" routerLinkActive="active" 
+        (mouseenter)="openSubCategories(catogeory.subcategories,catogeory.id,catogeory.name); megamenu.open()" (click)="megamenu.close()">{{catogeory.name }}
         </a>
       </li>
 
     </ul>
     <mat-divider class="header-divider"></mat-divider>
+  </div>
+    <mat-sidenav-container class="'megameu_drawer" >
+      <mat-sidenav #megamenu mode="side" opened="false" fixedInViewport="true" position="start" from="top"  class="side_nav_meganenu">
     <div Class="show_mega_menu" *ngIf="subCategories.length !==0">
       <div class="parent_sub_menu">
         <div *ngFor="let element of subCategories">
 
           <a class="subCategoryLink" [routerLink]="['listProduct', mainCategoryId]" [fragment]="element.name"
             [queryParams]="{ subId: element.id}" [class.active]="isSectionActive(element.name)"
-            (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)">
+            (mouseenter)="openSubSubCategories(element.subsubcategories,element.id, element.name)" (click)="megamenu.close()">
             {{element.name }}
             <mat-icon class="icon">arrow_forward</mat-icon>
 
@@ -87,16 +91,21 @@
         <div *ngFor="let child of subsubCategories">
 
           <a class="subCategoryLink" [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}}
-            [queryParams]="{subId:subCategoryId,  ssId: child.id}" routerLinkActive="active">{{child.name}}
+            [queryParams]="{subId:subCategoryId,  ssId: child.id}" routerLinkActive="active" (click)="megamenu.close()">{{child.name}}
             <mat-icon class="icon">arrow_forward</mat-icon>
           </a>
         </div>
         <button mat-button class="offer_explore_button" *ngIf="subsubCategories.length !==0"
-          [routerLink]="['listProduct', CategoryId,'']">
+          [routerLink]="['listProduct', CategoryId,'']" (click)="megamenu.close()">
           Shop All<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
     </div>
+
+
+
+  </mat-sidenav>
+  </mat-sidenav-container>
 
   </div>
 
