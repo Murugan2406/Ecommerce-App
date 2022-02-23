@@ -49,35 +49,45 @@
         </div>
 
         <div class="img_categories" data-aos="zoom-in-left"
-          data-aos-duration="1000">
+          data-aos-duration="1000">>
 
           <mat-grid-list cols="2" rowHeight="200px" style="text-align: end;">
+      
             <mat-grid-tile [colspan]="1" [rowspan]="4"
-              [routerLink]="['/listProduct',id1, name1]"
-              [queryParams]="{category:'subCategories',id:CategoryId, subId:id1
-              }" fragment={{name1}}>
-              <img src="{{category1}}" alt="" class="category_img1">
+              [routerLink]="['/listProduct',id1,]">
+           
+          
+              <ngx-skeleton-loader *ngIf="category1 === '' " class="category_img1" count="1" animation="progress">
+              </ngx-skeleton-loader>
+              <div *ngIf="category1 !== '' ">
+             <img src="{{category1}}" alt="" class="category_img1">
               <div class="categories_img_name name1">
                 <span>{{name1}}</span>
               </div>
+              </div>
+       
 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="2"
-              [routerLink]="['/listProduct',id2, name2]"
-              [queryParams]="{category:'subCategories',id:CategoryId, subId:id2
-              }" fragment={{name2}}>
+              [routerLink]="['/listProduct',id2]">
+              <ngx-skeleton-loader *ngIf="category2 === '' " class="category_img1" count="1" animation="progress">
+              </ngx-skeleton-loader>
+              <div *ngIf="category2 !== '' ">
               <img src="{{category2}}" alt="" class="category_img2">
-
               <span class="categories_img_name name2">{{name2}}</span>
+              </div>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="2"
-              [routerLink]="['/listProduct',id3, name3]"
-              [queryParams]="{category:'subCategories',id:CategoryId, subId:id3
-              }" fragment={{name3}}>
+              [routerLink]="['/listProduct',id3]">
+
+              <ngx-skeleton-loader *ngIf="category3 === '' " class="category_img1" count="1" animation="progress">
+              </ngx-skeleton-loader>
+              <div *ngIf="category3 !== '' " >
               <img src="{{category3}}" alt="" class="category_img3">
               <div class="categories_img_name name3">
                 <span>{{name3}}</span>
+              </div>
               </div>
             </mat-grid-tile>
           </mat-grid-list>

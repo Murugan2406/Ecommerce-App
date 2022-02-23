@@ -72,7 +72,7 @@
               </mat-expansion-panel>
           </mat-accordion>
 
-            <mat-accordion >
+            <mat-accordion  *ngIf="brandList.length > 0">
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
@@ -88,18 +88,13 @@
                       </mat-button-toggle>
                     </mat-button-toggle-group>
                   </section>
-                  <!-- <section >
-                    <mat-checkbox *ngFor="let brand of brandList" (ngModelChange)="filterbyBrand()">
-                      {{brand.name}}
-                    </mat-checkbox>
-                  </section> -->
                 </div>
 
               </mat-expansion-panel>
             </mat-accordion>
 
 
-            <mat-accordion >
+            <mat-accordion *ngIf="colorList.length > 0">
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
@@ -125,7 +120,7 @@
               </mat-expansion-panel>
             </mat-accordion>
 
-            <mat-accordion >
+            <mat-accordion *ngIf="sizeList.length > 0">
               <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 [expanded]="isFirst">
                 <mat-expansion-panel-header>
@@ -182,6 +177,10 @@
           </mat-expansion-panel>
         </mat-accordion>
 
+
+
+
+ <!-- for mobile -->
         <mat-accordion *ngIf="!isFirst">
           <mat-expansion-panel [expanded]="isFirst">
             <mat-expansion-panel-header>
@@ -190,7 +189,7 @@
 
             <mat-accordion>
               <mat-expansion-panel 
-              [expanded]="false">
+              [expanded]="false" *ngIf="brandList.length > 0">
               
                 <mat-expansion-panel-header>
                   <mat-panel-title class="filter_title">
@@ -211,8 +210,7 @@
 
               </mat-expansion-panel>
 
-              <mat-expansion-panel 
-              [expanded]="isFirst">
+              <mat-expansion-panel  [expanded]="isFirst" *ngIf="colorList.length > 0">
                 <mat-expansion-panel-header>
 
                   <mat-panel-title class="filter_title">
@@ -235,8 +233,7 @@
 
               </mat-expansion-panel>
 
-              <mat-expansion-panel 
-              [expanded]="isFirst">
+              <mat-expansion-panel [expanded]="isFirst" *ngIf="sizeList.length > 0">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="filter_title">
                     Size
@@ -347,7 +344,7 @@
             <div class="card-body"   [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}" >
               <div class="card-title">{{img.name}}</div>
               <div class="card-subtitle text-muted">{{img.brand?.name ?? 'voui'}}</div>
-              <div>
+              <div class="priceSection">
                 <b class='item' *ngIf="currencyType === 'EUR' "> €{{img['OfferEuro']}}</b>
                 <b class='item' *ngIf="currencyType === 'USD' "> ${{img['OfferDollar'] }}</b>
                 <b class='item' *ngIf="currencyType === 'SAR' "> SAR{{img['OfferSAR']}} </b>

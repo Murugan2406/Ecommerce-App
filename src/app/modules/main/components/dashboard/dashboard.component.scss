@@ -644,8 +644,9 @@ touch-action: auto;
   -ms-touch-action: auto;
   touch-action: auto;
   img{
-    height: 300px;
+    height: 350px;
     cursor: pointer;
+    object-fit: cover;
 
     }
   }
@@ -671,7 +672,7 @@ border-radius: 15px;
       font-family: Poppins;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #874C20;
     margin: 0;
@@ -718,7 +719,16 @@ border-radius: 15px;
    object-fit: cover;
 
 }
-
+::ng-deep.loader {
+  height: 400px !important;
+}
+.loader1{
+  width:307px;
+  height: 422px;
+  margin-top:70px;
+  cursor: pointer;
+  object-fit: cover;
+}
 .category_img1, .category_img2, .category_img3{
   position: relative;
 
@@ -753,6 +763,7 @@ border-radius: 15px;
   opacity: 0;
   height: 422px;
   transition: 1s ease;
+  text-transform: capitalize;
 }
 .name1:hover{
   bottom: 156px;
@@ -775,6 +786,7 @@ border-radius: 15px;
   text-align: center;
   opacity: 0;
   transition: 1s ease;
+  text-transform: capitalize;
 }
 .name2:hover{
   opacity: 1;
@@ -785,6 +797,7 @@ width: 477px;
 height: 100%;
 opacity: 0;
 transition: 1s ease;
+text-transform: capitalize;
 }
 .name3:hover{
   opacity: 1;
@@ -819,8 +832,8 @@ h3{
   font-family: Poppins;
 font-style: normal;
 font-weight: 200;
-font-size: 18px;
-// line-height: 40px;
+font-size: 15px;
+line-height: 20px;
 text-align: center;
 letter-spacing: 0.03em;
 color: var(--main-color);

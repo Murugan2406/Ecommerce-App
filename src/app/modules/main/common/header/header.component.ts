@@ -9,7 +9,6 @@ import { ACCESS_TOKEN_ID, CURRENCY_TYPE, LANGUAGE } from '../../../../../assets/
 import { ProductService } from '../../../service/product.service';
 import { LogoutComponent } from '../logout/logout.component';
 import { MatDialog} from '@angular/material/dialog';
-import { share } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -58,8 +57,6 @@ export class HeaderComponent implements OnInit {
 
   searchValue = '';
 
-  activeFragment:any;
-
   linkFrom = '';
 
   size: any[] = [
@@ -85,7 +82,6 @@ export class HeaderComponent implements OnInit {
 
     this.quantity = 1;
 
-    this.activeFragment = this.activatedRoute.fragment.pipe(share());
 
   }
 
@@ -265,6 +261,12 @@ export class HeaderComponent implements OnInit {
       this.router.navigate([ 'settings/myaccount' ]);
 
     } else {
+
+
+      /*
+       * Const dialogRef = this.dialog.open(LoginComponent, {
+       * });
+       */
 
       this.user = 'login';
       this.router.navigate([ '/login' ]);

@@ -248,7 +248,7 @@ export class OfferSalesComponent implements OnInit {
       this.canSort = false;
 
     }
-   
+
     if (params['pageIndex']) {
 
       this.canPaginate = true;

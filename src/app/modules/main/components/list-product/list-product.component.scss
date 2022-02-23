@@ -84,6 +84,7 @@ button:not(:disabled):before {
   color: var(--black-color);
   margin-top: 25px;
   width: 80px;
+  height: 29px;
   margin-right: 10px;
   background-color: #ffff;
 }
@@ -91,8 +92,7 @@ button:not(:disabled):before {
 .colorFilter{
   width: 25px;
   height: 25px;
-  border: 0.5px solid #d0cfd7 !important;
-  // border-radius: 50%;
+  border: none;
 }
 ::ng-deep.mat-button-toggle-button{
   max-width: 70px;
@@ -106,7 +106,7 @@ button:not(:disabled):before {
   position: relative;
   flex: auto;
   min-width: 0;
-  text-align: end;
+  text-align: start;
 }
 
 .betweenKeyInputs {
@@ -146,6 +146,14 @@ font-size: 14px;
 .item{
 margin-right: 5px;
 font-size: 14px;
+
+}
+.priceSection{
+  width: 100%;
+  min-width: 0 !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 
 .betweenlable {
@@ -345,7 +353,7 @@ width: 85px;
       font-style: normal;
       font-weight: normal;
       font-size: 18px;
-      line-height: 30px;
+      line-height: 28px;
       color: var(--black-color);
       display: inline-block;
       min-width: 180px;
@@ -391,6 +399,7 @@ width: 85px;
       font-size: 45px;
       font-weight: 400;
       color: var(--main-color);
+      text-transform: capitalize;
   }
   h3 {
       font-family: Poppins;
@@ -420,6 +429,7 @@ width: 85px;
       font-size: 18px;
       bottom: 0;
       color: var(--black-color);
+      text-transform: capitalize;
   }
    :host ::ng-deep.offer_section .owl-next,
    :host ::ng-deep.offer_section .owl-prev {
@@ -495,7 +505,7 @@ width: 85px;
   .filter_section {
       float: left;
       width: 25%;
-      min-width: 250px;
+      min-width: 220px;
       max-width: 300px;
       text-align: center;
   }
@@ -542,6 +552,7 @@ width: 85px;
   .filter_container {
       padding: 2em 16px;
       background-color: #f3eee9;
+      min-height: 100vh;
   }
   // ===============product preview section ==========
   .preview_section {
@@ -627,11 +638,12 @@ width: 85px;
       font-family: Poppins;
       font-style: normal;
       font-weight: normal;
-      font-size: 18px;
+      font-size: 17px;
       line-height: 30px;
       color: var(--black-color);
       display: inline-block;
       width: 100%;
+      min-width: 0 !important;
       white-space: nowrap;
       overflow: hidden !important;
       text-overflow: ellipsis;

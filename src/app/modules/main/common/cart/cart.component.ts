@@ -74,6 +74,7 @@ export class CartComponent implements OnInit {
 
       this.productService.getCart().subscribe((data: any) => {
 
+        console.log(data);
         this.carts = data;
 
         if (localStorage.getItem(CURRENCY_TYPE)) {

@@ -1,4 +1,4 @@
-const BASE_URI = 'https://voui.geany.website/api/';
+const BASE_URI = 'https://stock.voui.fr/api/';
 export const ACCESS_TOKEN_ID = 'ACCESSTOKEN';
 export const CURRENCY_TYPE = 'CURRENCY';
 export const VERIFY = 'VERIFY';
@@ -80,4 +80,8 @@ export const BOTTOMPRODUCTS_API_URI = `${BASE_URI}${BOTTOM_API}`;
 // SEARCH API
 export const SEARCH_API = 'search/?key=';
 export const SEARCH_API_URI = `${BASE_URI}${SEARCH_API}`;
+
+// REVIEW API
+export const REVIEW_API = 'addreviews/';
+export const REVIEW_API_URI = `${BASE_URI}${REVIEW_API}`;
 

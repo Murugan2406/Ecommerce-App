@@ -28,8 +28,7 @@
             </mat-expansion-panel-header>
 
             <mat-accordion>
-              <mat-expansion-panel 
-              [expanded]="false">
+              <mat-expansion-panel [expanded]="false" *ngIf="brandList.length > 0">
               
                 <mat-expansion-panel-header>
                   <mat-panel-title class="filter_title">
@@ -51,8 +50,7 @@
 
               </mat-expansion-panel>
 
-              <mat-expansion-panel 
-              [expanded]="isFirst">
+              <mat-expansion-panel [expanded]="isFirst" *ngIf="colorList.length > 0">
                 <mat-expansion-panel-header>
 
                   <mat-panel-title class="filter_title">
@@ -75,8 +73,7 @@
 
               </mat-expansion-panel>
 
-              <mat-expansion-panel 
-              [expanded]="isFirst">
+              <mat-expansion-panel [expanded]="isFirst" *ngIf="sizeList.length > 0">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="filter_title">
                     Size
@@ -145,7 +142,7 @@
       <mat-panel-title class="filter_title_top"> Refine/ Sortby </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-accordion >
+    <mat-accordion *ngIf="brandList.length > 0">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
         [expanded]="isFirst">
         <mat-expansion-panel-header>
@@ -157,19 +154,17 @@
         <div class="toggle_body mat_panel ">
           <section class="">
             <mat-button-toggle-group [(ngModel)]="brandValue" multiple  class="Filtertogglebutton">
-              <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="updateFilterURl()" class="Filtertogglebutton">{{brand.name}}
+              <mat-button-toggle *ngFor="let brand of brandList" value="{{brand.name}}" (click)="updateFilterURl()" title="{{brand.name}}" class="Filtertogglebutton">{{brand.name}}
               </mat-button-toggle>
             </mat-button-toggle-group>
           </section>
-
-          
         </div>
 
       </mat-expansion-panel>
     </mat-accordion>
 
 
-    <mat-accordion >
+    <mat-accordion *ngIf="colorList.length > 0">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
         [expanded]="isFirst">
         <mat-expansion-panel-header>
@@ -195,7 +190,7 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <mat-accordion >
+    <mat-accordion *ngIf="sizeList.length > 0">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
         [expanded]="isFirst">
         <mat-expansion-panel-header>

@@ -116,23 +116,22 @@ export class DashboardComponent implements OnInit {
     dots: false,
     navSpeed: 200,
     autoplayHoverPause: false,
+    margin: 40,
     nav: true,
     navText: [ '<i class=\'fa fa-long-arrow-left\'></i>', '<i class=\'fa fa-long-arrow-right\'></i>' ],
+
     responsive: {
       0: {
-        items: 1,
-        margin: 10,
-        nav: true
+        items: 1
       },
-      500: {
-        items: 1,
-        margin: 10,
-        nav: true
+      400: {
+        items: 2
       },
-      768: {
-        items: 3,
-        margin: 40,
-        nav: true
+      740: {
+        items: 2
+      },
+      940: {
+        items: 4
       },
       1000: {
         items: 4,

@@ -37,6 +37,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ReviewComponent } from './common/review/review.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     OfferSalesComponent,
     LoginComponent,
     SignupComponent,
+    ReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule, FormsModule, MatSelectModule, MatButtonToggleModule, MatIconModule,
     MatBadgeModule, MatSidenavModule, MatDialogModule, MatRippleModule, MatPaginatorModule, MatSnackBarModule,
     MatButtonModule, CarouselModule, MatGridListModule, MatExpansionModule, MatTabsModule, MatCardModule,
-    NgxSkeletonLoaderModule, MatCheckboxModule
+    NgxSkeletonLoaderModule, MatCheckboxModule, MatSliderModule
   ]
 })
 export class MainModule { }

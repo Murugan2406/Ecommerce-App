@@ -138,18 +138,18 @@ export class ListProductComponent implements OnInit {
 
     responsive: {
       0: {
-        items: 1,
-        nav: true,
+        items: 1
       },
-
-      769: {
+      400: {
+        items: 2
+      },
+      740: {
         items: 3,
-        nav: true,
-        loop: true,
-        autoplay: false,
-        touchDrag: true,
-        margin: 40,
+        margin: 10,
       },
+      940: {
+        items: 4
+      }
     },
 
     nav: true,

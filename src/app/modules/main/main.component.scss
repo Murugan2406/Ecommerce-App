@@ -2,10 +2,7 @@
 body{
   background-color: var(--backgroud-color);
 }
-.footer{
-position: relative;
-top: 10em;
-}
+
 .loading{
 height: 100vh;
 display: flex;
@@ -154,6 +151,13 @@ top: 0;
 z-index: 999 !important;
 width: 100%;
 }
+.footer{
+  position: relative;
+  top: 10em;
+  }
+  .product_tap{
+    margin-top: 2em;
+  }
 }
 @media only screen and (max-width:769px){
 .main-content{
@@ -166,4 +170,8 @@ top: 0;
 z-index: 999 !important;
 width: 100%;
 }
+.footer{
+  position: relative;
+  top: 7em;
+  }
 }

@@ -1,0 +1,51 @@
+<div mat-dialog-title class="dialog-title">
+    <span>Write a Review</span>
+    <button mat-button mat-dialog-close class="dialog-close">x</button>
+</div>
+<mat-dialog-content class="meida-content">
+
+<div class="producrContainer">
+    <div class="imgdiv">
+        <img src="{{image}}" alt="img">
+    </div>
+   
+    <div class="detaildiv" style="margin-left: 10%;">
+         <span class="imgName">{{imgname}}</span>
+
+        <span>Price: {{price}}</span>
+    </div>
+
+</div> 
+
+<div style="text-align: center; margin-top: 2em;">
+    <span>Drop your Ratings</span>
+    <h2>
+        <i *ngFor="let key of counter(value);let i= index " (click)="SelectedIndex(i+1)" class="fa fa-star heart" ></i>
+        <i *ngFor="let key of counter(5-value);let i= index " (click)="NonSelectedIndex(i+1)" class="fa fa-star-o" ></i>
+
+      
+
+       <br>
+        <mat-slider [(ngModel)]="value" thumbLabel  tickInterval="10" step="1" min="1"max="5"></mat-slider>
+    </h2>
+</div>
+
+<div style="text-align: center; margin-top: 2em;">
+    <span>Drop your Comments</span>
+    <mat-form-field class="example-full-width">
+        <textarea matInput [(ngModel)]="Comments" placeholder="Ex. Execllent quality, worth buying.."></textarea>
+      </mat-form-field>
+</div>
+
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="error" class="actions">
+    <span class="error" >{{error}}</span>
+    <button mat-button class="explore_button_offer" (click)="submitForm()">
+        Submit Review
+    </button>
+</mat-dialog-actions>
+<mat-dialog-actions *ngIf="!error" class="action">
+    <button mat-button class="explore_button_offer" (click)="submitForm()">
+        Submit Review
+    </button>
+</mat-dialog-actions>

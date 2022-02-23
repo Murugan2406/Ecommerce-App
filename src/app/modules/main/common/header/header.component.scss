@@ -1,5 +1,6 @@
 .mat-drawer:not(.mat-drawer-side) {
   position: fixed;
+  max-width: 50%;
 }
 
 .mat-drawer-backdrop {
@@ -537,7 +538,7 @@ box-shadow: none !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
   .toolbar_mainn {
-    // background-color: var(--backgroud-color);
+
     justify-content: space-between;
     text-align: justify;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
@@ -545,8 +546,7 @@ box-shadow: none !important;
 
   .mobile_menu {
     cursor: pointer;
-    // box-shadow: 10px 10px 15px rgba(209, 217, 230, 1), -10px -10px 15px rgba(255, 255, 255, 1), inset 0 0 15px rgba(209, 217, 230, 1), inset 0 0 15px rgba(255, 255, 255, 1);
-    // text-shadow: 0 0 5px rgba(209, 141, 77, 0.5), 0 0 15px rgba(94, 10, 219, 0.3);
+    
     border-radius: 50px;
     transition: 0.2s ease;
     border-radius: 50%;
@@ -732,6 +732,7 @@ box-shadow: none !important;
   }
   .mat-drawer:not(.mat-drawer-side) {
     position: fixed;
+    min-width: 65%;
   }
 
   .mat-drawer-backdrop {
@@ -742,7 +743,13 @@ box-shadow: none !important;
     height: 100vh;
   
   }
-
+  .side_nav_mobile{
+    min-width:90% !important
+  }
+  .mat-drawer:not(.mat-drawer-side) {
+    position: fixed;
+    max-width: 100%; 
+  }
 
   .sidenavS {
     height: 55px;

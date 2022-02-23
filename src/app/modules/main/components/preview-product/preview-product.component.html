@@ -57,9 +57,14 @@
 
           <div class="imgdetails">
               <h1>{{productName}}</h1>
-              <h2> <i *ngFor="let key of counter(3) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
-                  <i *ngFor="let key of counter(2) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+              <h2 *ngIf="productReview.length > 0 "> <i *ngFor="let key of counter(avgRating) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                  <i *ngFor="let key of counter(5-avgRating) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
               </h2>
+              <label *ngIf="productReview.length === 0" (click)="addReview()" class="noreview" >
+              
+              <button mat-button class="offer_explore_button"> Rate Product</button>
+             No reviews yet
+              </label>
               <div class="pricing">
 
                   <b class='item actualPrice' >{{offerPrice}}</b>
@@ -68,6 +73,31 @@
 
 
               </div>
+              <form [formGroup]="contactForm" (ngSubmit)='addtoCart()' >
+                <div class="choose_color" *ngIf = "productOptions.length>0 && sizeList.length >0">
+                    <span>Color: &nbsp; &nbsp;</span>
+                      <mat-button-toggle-group class="choose_color" formControlName="color" >
+                        <mat-button-toggle *ngFor="let color of productOptions" [style.background]="color['colorhash']"
+                         (change)="changeColor(color['id'])" class="xxx" title="{{color['color'] }}" [value]="color['id']"></mat-button-toggle>
+                        </mat-button-toggle-group>
+                      <mat-error *ngIf="contactForm.controls['color'].hasError('required')">*Choose color to proceed </mat-error>
+
+                </div>
+   
+                <div class="choose_size" *ngIf = "productOptions.length>0 && sizeList.length >0 ">
+                    <span>Size:&nbsp;</span>
+                    <mat-button-toggle-group formControlName="size">
+                        <mat-button-toggle *ngFor="let size of sizeList" class="mat_toggle_buttton" [value]="size['id']" (change)="changeSize(size['id'])">
+{{size.size}}
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <mat-error *ngIf="contactForm.controls['size'].hasError('required')">*Choose size to proceed</mat-error>
+                </div>
+                <div class="action_button">
+                    <button mat-button type="submit" class="cart_button">{{cartButton}}</button>
+                    <button mat-button type="button" (click)="gotoCheckout()" class="buy_button">BUY NOW</button>
+                </div>
+                </form>
 
               <mat-tab-group mat-align-tabs="start" class="product_tap">
                   <mat-tab label="ABOUT">
@@ -82,32 +112,7 @@
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nibh massa malesuada tristique posuere. Elementum augue amet adipiscing in massa nec vel massa in.</p>
                   </mat-tab>
               </mat-tab-group>
-              <form [formGroup]="contactForm" (ngSubmit)='addtoCart()'>
-              <div class="choose_color">
-                  <span>Color &nbsp; &nbsp;</span>
-                    <mat-button-toggle-group class="choose_color" formControlName="color" >
-                      <mat-button-toggle *ngFor="let color of productOptions" [style.background]="color['colorhash']"
-                       (change)="changeColor(color['id'])" class="xxx" title="{{color['color'] }}" [value]="color['id']"></mat-button-toggle>
-                      </mat-button-toggle-group>
-                    <mat-error *ngIf="contactForm.controls['color'].hasError('required')">*Choose color to proceed </mat-error>
-
-
-              </div>
-
-              <div class="choose_size">
-                  <span>Size &nbsp;</span>
-                  <mat-button-toggle-group formControlName="size">
-                      <mat-button-toggle *ngFor="let size of sizeList"   class="mat_toggle_buttton" [value]="size['id']" (change)="changeSize(size['id'])">
-                          {{size.size}}
-                      </mat-button-toggle>
-                  </mat-button-toggle-group>
-                  <mat-error *ngIf="contactForm.controls['size'].hasError('required')">*Choose size to proceed</mat-error>
-              </div>
-              <div class="action_button">
-                  <button mat-button type="submit" class="cart_button">{{cartButton}}</button>
-                  <button mat-button type="button" (click)="gotoCheckout()" class="buy_button">BUY NOW</button>
-              </div>
-              </form>
+         
           </div>
       </div>
   </section>
@@ -126,10 +131,7 @@
                   <p>{{aboutProduct}}</p>
               </div>
           </mat-expansion-panel>
-      </mat-accordion>
 
-
-      <mat-accordion>
           <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
 
 
@@ -141,10 +143,7 @@
                   <p>{{aboutProduct}}</p>
               </div>
           </mat-expansion-panel>
-      </mat-accordion>
-
-
-      <mat-accordion>
+  
           <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="isFirst">
 
 
@@ -161,30 +160,35 @@
 
   </section>
 
-  <section class="review_section">
+  <section class="review_section"  *ngIf="productReview.length > 0 ">
 
-      <div class="align-items-center">
+      <div class="align-items-center " style="text-align: center;">
 
-          <div class='review_header'>Reviews</div>
+          <div class='review_header'> Customer Reviews</div>
 
-          <div >
+    <div>
+
+          <h2> <i *ngFor="let key of counter(avgRating) " class="fa fa-star" style="color: var(--main-color);font-size:1.5rem; padding-right: 3px;"></i>
+              <i *ngFor="let key of counter(5-avgRating) " class="fa fa-star-o" style="color: var(--main-color);font-size: 1.5rem; padding-right: 3px;"></i>
+          </h2>
+          <span>Based on {{noOfRating}} reviews</span>
+
+          <div style="margin-top: 2em;" >
 
               <owl-carousel-o [options]="customOptions">
 
-                  <ng-template carouselSlide *ngFor="let key of counter(6) ">
+                  <ng-template carouselSlide *ngFor="let review of productReview ">
 
                       <mat-card>
 
-                          <mat-card-title> LOREM IPSUM</mat-card-title>
+                          <mat-card-title>{{review.customer.name}}</mat-card-title>
                           <mat-card-subtitle>
-                              <i *ngFor="let key of counter(2) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
-                              <i *ngFor="let key of counter(5-(2)) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                              <i *ngFor="let key of counter(review.rating) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
+                              <i *ngFor="let key of counter(5-(review.rating)) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
                           </mat-card-subtitle>
 
                           <mat-card-content>
-                              <p>
-                                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod aliquid obcaecati officia pariatur corrupti repellendus qui. Laborum, dignissimos maiores. Omnis atque aliquam sequi repudiandae consequuntur voluptate quia vero nisi magnam. {{reviewS.review
-                                  }}
+                              <p>{{review.comment }}
                               </p>
                           </mat-card-content>
 
@@ -192,6 +196,7 @@
                   </ng-template>
 
               </owl-carousel-o>
+          </div>
           </div>
       </div>
 

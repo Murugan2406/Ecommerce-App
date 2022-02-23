@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LOGIN_API_URI, GETUSER_API_URI, SIGNUP_API_URI, USERINFO_API_URI, ORDERS_API_URI, ACCESS_TOKEN_ID} from '../../../assets/API/server-api';
+import { LOGIN_API_URI, GETUSER_API_URI, SIGNUP_API_URI,
+  USERINFO_API_URI, ORDERS_API_URI, ACCESS_TOKEN_ID, REVIEW_API_URI} from '../../../assets/API/server-api';
 
 import { catchError, Observable, throwError } from 'rxjs';
 
@@ -66,6 +67,19 @@ export class UserService {
       'Authorization': `Bearer ${this.token}`,
     });
     return this.http.get(`${ORDERS_API_URI}`, { headers }).pipe(
+      catchError((err) => throwError(() => err))
+    );
+
+  }
+
+  addReviews(review:any) {
+
+    const token = localStorage.getItem(ACCESS_TOKEN_ID);
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    });
+    return this.http.post(`${REVIEW_API_URI}`, review, { headers }).pipe(
       catchError((err) => throwError(() => err))
     );
 

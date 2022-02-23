@@ -1,3 +1,5 @@
+/* eslint-disable vars-on-top */
+/* eslint-disable max-lines-per-function */
 /* eslint-disable dot-notation */
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,6 +41,8 @@ export class PreviewProductComponent implements OnInit {
 
   products: any[] = [];
 
+  productReview: any[] = [];
+
   cartButton = 'Add to cart';
 
   currencyType = 'EUR';
@@ -51,6 +55,9 @@ export class PreviewProductComponent implements OnInit {
 
   reviewS: any;
 
+  avgRating = 0;
+
+  noOfRating = 0;
 
   colorIdx = 0;
 
@@ -249,6 +256,7 @@ export class PreviewProductComponent implements OnInit {
   }
 
 
+  // eslint-disable-next-line max-lines-per-function
   initialChanges() {
 
 
@@ -261,6 +269,21 @@ export class PreviewProductComponent implements OnInit {
       // eslint-disable-next-line max-statements
       this.previewProductService.getDataofSubSubCategory(this.productId).subscribe((data) => {
 
+        console.log(data);
+
+        if (data.productreviews.length > 0) {
+
+          this.productReview = data.productreviews;
+          const xyz = this.productReview;
+
+          this.noOfRating = this.productReview.length;
+
+          // eslint-disable-next-line @typescript-eslint/no-shadow
+          const res = xyz.map((xyz) => xyz.rating).reduce((acc, bill) => bill + acc);
+
+          this.avgRating = res / this.noOfRating;
+
+        }
 
         this.contactForm.get('product')?.setValue(data.id);
 
@@ -642,6 +665,11 @@ export class PreviewProductComponent implements OnInit {
 
     const link = [ 'previewProduct' ];
     this.router.navigate(link, { queryParams: {from: id }});
+
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  addReview() {
 
   }
 

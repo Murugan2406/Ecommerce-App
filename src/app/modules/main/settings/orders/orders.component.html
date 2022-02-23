@@ -21,7 +21,7 @@
               <img mat-card-lg-image *ngIf="idx['selectedcolor']" src="{{idx['selectedcolor']['image_one']['original']}}"class="">
           </div>
           <div class="info">
-            <mat-card-title>{{idx['product']['name']}}</mat-card-title>
+            <mat-card-title>{{idx['product']['name']}}m</mat-card-title>
             <mat-card-subtitle *ngIf="idx['selectedsize']">Size: {{idx['selectedsize']['size'] ?? '-'}}</mat-card-subtitle>
             <mat-card-subtitle *ngIf="idx['selectedsize'] === null">Size: -</mat-card-subtitle>
             <mat-card-subtitle *ngIf="idx['selectedcolor']">Color: {{idx['selectedcolor']['color'] ?? '-'}}</mat-card-subtitle>
@@ -44,10 +44,18 @@
 
           </div>
           <div class="content">
-            <mat-card-subtitle>Status</mat-card-subtitle>
-            <mat-card-content>
-              {{longText}}
-            </mat-card-content>
+            <mat-card-subtitle *ngIf="idx['status']">status: {{idx['status'] ?? '-'}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['selectedcolor']">Order date: {{idx['created_on'] ?? '-' | date}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="idx['expected_delivery'] === null">expected devivery:{{idx['expected_delivery'] ?? 'Soon'}}</mat-card-subtitle>
+
+          </div>
+
+          <div class="reviewSection">
+
+
+            <button class="custom-btn btn-11 reviewbutton" (click)="openReviewDialog(idx)" 
+            data-aos="fade-down" data-aos-duration="1000"><mat-icon>add</mat-icon>Review<div
+              class="dot"></div></button>
           </div>
         </mat-card>
 
@@ -76,9 +84,21 @@
               <img mat-card-sm-image *ngIf="idx['selectedcolor']" src="{{idx['selectedcolor']['image_one']['original']}}"class="" data-aos="fade-right">
           </mat-card-title-group>
           <mat-card-content>
-            <mat-card-subtitle>Status</mat-card-subtitle>
-            {{longText}}
-          </mat-card-content>
+            <div class="content">
+              <mat-card-subtitle *ngIf="idx['status']">status: {{idx['status'] ?? '-'}}</mat-card-subtitle>
+              <mat-card-subtitle *ngIf="idx['selectedcolor']">Order date: {{idx['created_on'] ?? '-' | date}}</mat-card-subtitle>
+              <mat-card-subtitle *ngIf="idx['expected_delivery'] === null">expected devivery:{{idx['expected_delivery'] ?? 'Soon'}}</mat-card-subtitle>
+  
+            </div>
+  
+            <div class="reviewSection">
+  
+  
+              <button class="custom-btn btn-11 reviewbutton" (click)="openReviewDialog(idx)" 
+              data-aos="fade-down" data-aos-duration="1000"><mat-icon>add</mat-icon>Review<div
+                class="dot"></div></button>
+            </div>
+            </mat-card-content>
         </mat-card>
 
       </div>
