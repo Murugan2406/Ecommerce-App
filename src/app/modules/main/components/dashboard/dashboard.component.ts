@@ -1,10 +1,10 @@
 /* eslint-disable dot-notation */
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import {DashboardService } from '../../../service/dashboard.service';
 import { HttpClient } from '@angular/common/http';
-import * as AOS from 'aos';
+
 import { HeaderService } from '../../../service/header.service';
 import { Router } from '@angular/router';
 import { CURRENCY_TYPE, VERIFY } from '../../../../../assets/API/server-api';
@@ -157,15 +157,6 @@ export class DashboardComponent implements OnInit {
     private readonly headerService:HeaderService,
     private readonly router: Router,
     private el: ElementRef,) {
-
-  }
-
-
-  // eslint-disable-next-line class-methods-use-this
-  @HostListener('window:scroll', [ '$event' ])
-  onScroll() {
-
-    AOS.init({disable: 'mobile'});
 
   }
 

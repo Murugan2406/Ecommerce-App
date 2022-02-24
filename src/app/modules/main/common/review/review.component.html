@@ -45,7 +45,7 @@
     </button>
 </mat-dialog-actions>
 <mat-dialog-actions *ngIf="!error" class="action">
-    <button mat-button class="explore_button_offer" (click)="submitForm()">
-        Submit Review
-    </button>
+
+    <button mat-button type="submit" class="explore_button_offer" (click)="submitForm()"
+     mat-dialog-close [disabled]="formisvalid">Submit</button>
 </mat-dialog-actions>

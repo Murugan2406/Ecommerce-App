@@ -117,7 +117,8 @@ export class OrdersComponent implements OnInit {
  openReviewDialog(campaign:any) {
 
    const dialogRef = this.dialog.open(ReviewComponent, {
-     data: campaign
+     data: {data: campaign,
+       message: 'order'}
    });
 
  }

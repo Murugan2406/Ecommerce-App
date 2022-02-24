@@ -6,7 +6,6 @@
 ::ng-deep.mat-dialog-container{
     background-color:#dfdfdf !important;
     max-width: 80%;
-    margin: 0px 10%;
 }
 .meida-content{
     padding: 20px;
@@ -170,7 +169,17 @@ element.style {
 	}
 }
 
-@media only screen  and (max-width:769px){
+@media only screen  and (min-width:769px){
+    ::ng-deep .cdk-overlay-pane{
+        max-width: 90%!important;
+        min-width: 35%;
+        margin-left: 8%;
+        width: fit-content;
+        
+    }
+}
+
+@media only screen  and (max-width:768px){
 
     ::ng-deep.mat-dialog-container{
         background-color:#dfdfdf !important;
@@ -195,6 +204,7 @@ element.style {
     }
     ::ng-deep .cdk-overlay-pane{
         max-width: 90vw !important;
+        
     }
     mat-icon{
         line-height: 0.8px !important;

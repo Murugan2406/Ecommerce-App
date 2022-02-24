@@ -60,10 +60,10 @@
               <h2 *ngIf="productReview.length > 0 "> <i *ngFor="let key of counter(avgRating) " class="fa fa-star" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
                   <i *ngFor="let key of counter(5-avgRating) " class="fa fa-star-o" style="color: var(--main-color);font-size: 16px; padding-right: 3px;"></i>
               </h2>
-              <label *ngIf="productReview.length === 0" (click)="addReview()" class="noreview" >
-              
-              <button mat-button class="offer_explore_button"> Rate Product</button>
-             No reviews yet
+              <label *ngIf="productReview.length === 0" class="noreview" >
+                No reviews yet
+              <button mat-button class="offer_explore_button" (click)="addReview()"> Rate Product</button>
+       
               </label>
               <div class="pricing">
 

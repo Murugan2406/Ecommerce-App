@@ -15,12 +15,6 @@ export class SettingsComponent {
     public dialog: MatDialog) { }
 
 
-  // openDialog() {
-
-  //   this.dialog.open(LogoutComponent);
-
-  // }
-
   openDialog(): void {
 
     const dialogRef = this.dialog.open(LogoutComponent, {

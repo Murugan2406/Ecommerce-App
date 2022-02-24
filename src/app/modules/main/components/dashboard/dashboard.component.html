@@ -3,26 +3,25 @@
   <section id="home" class="home_section">
     <div class="main_container">
       <div class="align-items-center">
-        <div class="banner_title" data-aos="fade-down" data-aos-duration="3000">
+        <div class="banner_title">
           <h1>Lorem ipsum doler </h1>
           <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut netus
             convallis </h3>
         </div>
         <div>
-          <owl-carousel-o [options]="customOptions" class='banner_section'
-            data-aos="fade-down" data-aos-easing="linear"
-            data-aos-duration="1500">
+          <owl-carousel-o [options]="customOptions" class='banner_section'>
             <ng-template carouselSlide *ngFor="let img of newArraivals">
 
-              <img src="{{img.image['original']}}" alt="{{img.name}}"
-                class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
+              <img src="{{img.image['original']}}" alt="{{img.name}}" class="inner-image arrival_img"
+                [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             </ng-template>
 
           </owl-carousel-o>
         </div>
         <div class='offer_explore_button_div'>
-          <button mat-button class="offer_explore_button" [routerLink]="'/specialProducts'" [queryParams]="{from:'newArrivals'}">
+          <button mat-button class="offer_explore_button" [routerLink]="'/specialProducts'"
+            [queryParams]="{from:'newArrivals'}">
             New Collections &nbsp;<mat-icon>trending_flat</mat-icon>
           </button>
         </div>
@@ -36,58 +35,52 @@
       <div class="align-categories">
         <div class="nav_categories">
           <span>OUR CATEGORIES</span>
-          <div class="categories_links" data-aos="zoom-in-right"
-            data-aos-duration="1000">
-            <ul class="nav_list"id="nav_menu">
+          <div class="categories_links">
+            <ul class="nav_list" id="nav_menu">
               <li class="nav_items" *ngFor="let catogeory of mainCategory">
-                <a  [routerLink]="['/listProduct', catogeory.id]" 
-                  (mouseover)="openSubCategories(catogeory.subcategories,catogeory.id)">{{catogeory.name
-                  }} </a>
+                <a [routerLink]="['/listProduct', catogeory.id]"
+                  (mouseover)="openSubCategories(catogeory.subcategories,catogeory.id)">{{catogeory.name}} </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div class="img_categories" data-aos="zoom-in-left"
-          data-aos-duration="1000">>
+        <div class="img_categories">
 
           <mat-grid-list cols="2" rowHeight="200px" style="text-align: end;">
-      
-            <mat-grid-tile [colspan]="1" [rowspan]="4"
-              [routerLink]="['/listProduct',id1,]">
-           
-          
+
+            <mat-grid-tile [colspan]="1" [rowspan]="4" [routerLink]="['/listProduct',id1,]">
+
+
               <ngx-skeleton-loader *ngIf="category1 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>
               <div *ngIf="category1 !== '' ">
-             <img src="{{category1}}" alt="" class="category_img1">
-              <div class="categories_img_name name1">
-                <span>{{name1}}</span>
+                <img src="{{category1}}" alt="" class="category_img1">
+                <div class="categories_img_name name1">
+                  <span>{{name1}}</span>
+                </div>
               </div>
-              </div>
-       
+
 
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="2"
-              [routerLink]="['/listProduct',id2]">
+            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',id2]">
               <ngx-skeleton-loader *ngIf="category2 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>
               <div *ngIf="category2 !== '' ">
-              <img src="{{category2}}" alt="" class="category_img2">
-              <span class="categories_img_name name2">{{name2}}</span>
+                <img src="{{category2}}" alt="" class="category_img2">
+                <span class="categories_img_name name2">{{name2}}</span>
               </div>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="2"
-              [routerLink]="['/listProduct',id3]">
+            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',id3]">
 
               <ngx-skeleton-loader *ngIf="category3 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>
-              <div *ngIf="category3 !== '' " >
-              <img src="{{category3}}" alt="" class="category_img3">
-              <div class="categories_img_name name3">
-                <span>{{name3}}</span>
-              </div>
+              <div *ngIf="category3 !== '' ">
+                <img src="{{category3}}" alt="" class="category_img3">
+                <div class="categories_img_name name3">
+                  <span>{{name3}}</span>
+                </div>
               </div>
             </mat-grid-tile>
           </mat-grid-list>
@@ -108,17 +101,16 @@
     <div class="main_container">
 
       <span class="offer_title">WE RECCOMENDED</span>
-      <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
-        data-aos-duration="1000">Offer Sales</h1>
-      <div data-aos="fade-right" data-aos-duration="1000">
+      <h1>Offer Sales</h1>
+      <div>
         <owl-carousel-o [options]="offerOptions">
           <ng-container *ngFor="let img of offerSale">
 
             <ng-template carouselSlide class="offer_curousal_imgs">
 
-              <img src="{{img.image.original}}" alt="{{img.name}}"
-              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
-    
+              <img src="{{img.image.original}}" alt="{{img.name}}" [routerLink]="'/previewProduct'"
+                [queryParams]="{from:img.id}">
+
               <div class="offer_details">
                 <p>{{img.name}}</p>
                 <div class="pricing" style="display: flex; justify-content:
@@ -142,9 +134,9 @@
                   <span class='offer_price item' *ngIf="currencyType === 'AED'">
                     د.إ{{img['productpriceDirham']}}</span>
 
-                  <span class='offer_percentage item '*ngIf="currencyType ===
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
                     'EUR'">{{img['OfferPecentageEuro']}}off</span>
-                  <span class='offer_percentage item '*ngIf="currencyType ===
+                  <span class='offer_percentage item ' *ngIf="currencyType ===
                     'USD'">{{img['OfferPecentageDollar']}}off</span>
                   <span class='offer_percentage item ' *ngIf="currencyType ===
                     'SAR'">{{img['OfferPecentageSAR']}}off</span>
@@ -162,8 +154,8 @@
 
 
       <div class=''>
-        <button mat-button class="explore_button_offer"
-          [routerLink]="'/specialProducts'" [queryParams]="{from:'offerSales'}">
+        <button mat-button class="explore_button_offer" [routerLink]="'/specialProducts'"
+          [queryParams]="{from:'offerSales'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
@@ -175,9 +167,7 @@
   <section class='collections_section'>
     <div class="main_container">
       <div class="align-categories">
-        <div class="Collections_text_container" data-aos="zoom-in-right"
-          data-aos-easing="linear"
-          data-aos-duration="700">
+        <div class="Collections_text_container">
           <h1 class="collection_title">VOUI 2021 Collection</h1>
           <h2>Just for Him & Her</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -189,8 +179,7 @@
         </div>
         <div class="Collections_img_container">
           <div>
-            <img src="../../../../assets/images/collections-1.jpg"
-              alt="collections-1" class="inner-image collection"
+            <img src="../../../../assets/images/collections-1-min.jpg" alt="collections-1" class="inner-image collection"
               style="width: 100%;">
           </div>
         </div>
@@ -203,16 +192,14 @@
   <section class="new_arrivals_section">
 
     <div class="main_container">
-      <h1 data-aos="flip-left" data-aos-easing="ease-out-cubic"
-        data-aos-duration="1000">New Arrivals</h1>
-      <div data-aos="fade-up" data-aos-anchor-placement="top-bottom"
-        data-aos-duration="1000">
+      <h1 >New Arrivals</h1>
+      <div>
         <owl-carousel-o [options]="suggestionOptions">
 
           <ng-template carouselSlide *ngFor="let img of newArraivals">
 
-            <img src="{{img.image['original']}}" alt="{{img.name}}"
-              class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
+            <img src="{{img.image['original']}}" alt="{{img.name}}" class="inner-image arrival_img"
+              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
               <p>{{img.name}}</p>
@@ -237,9 +224,9 @@
                 <span class='offer_price item' *ngIf="currencyType === 'AED'">
                   د.إ{{img['productpriceDirham']}}</span>
 
-                <span class='offer_percentage item '*ngIf="currencyType ===
+                <span class='offer_percentage item ' *ngIf="currencyType ===
                   'EUR'">{{img['OfferPecentageEuro']}}off</span>
-                <span class='offer_percentage item '*ngIf="currencyType ===
+                <span class='offer_percentage item ' *ngIf="currencyType ===
                   'USD'">{{img['OfferPecentageDollar']}}off</span>
                 <span class='offer_percentage item ' *ngIf="currencyType ===
                   'SAR'">{{img['OfferPecentageSAR']}}off</span>
@@ -254,8 +241,8 @@
         </owl-carousel-o>
       </div>
       <div class='offer_explore_button_div'>
-        <button mat-button class="offer_explore_button"
-        [routerLink]="'/specialProducts'" [queryParams]="{from:'newArrivals'}">
+        <button mat-button class="offer_explore_button" [routerLink]="'/specialProducts'"
+          [queryParams]="{from:'newArrivals'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
@@ -267,11 +254,9 @@
   <section class='session_collections_section'>
     <div class="main_container">
       <div class="align-categories">
-        <div class="Collections_img_container" data-aos="zoom-in-right"
-          data-aos-duration="1000">
+        <div class="Collections_img_container" >
           <div>
-            <img src="../../../../assets/images/winter_collection-1.jpg"
-              alt="winter_collections-1"
+            <img src="../../../../assets/images/winter_collection-1-min.jpg" alt="winter_collections-1"
               class="inner-image collection">
           </div>
         </div>
@@ -280,8 +265,7 @@
           <h2>Lorem ipsum doler </h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Sit consectetur nisi, donec quis. Lorem ipsum dolor sit amet,</p>
-          <button class="collection_explore_button" data-aos="zoom-in-left"
-            data-aos-duration="1000">
+          <button class="collection_explore_button">
             Explore all &nbsp;
             <mat-icon>trending_flat</mat-icon>
           </button>
@@ -301,12 +285,9 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Sit consectetur nisi, donec quis. Lorem ipsum dolor sit amet,</p>
         </div>
-        <div class="Collections_img_container" data-aos="zoom-in-left"
-          data-aos-easing="linear"
-          data-aos-duration="1000">
+        <div class="Collections_img_container">
           <div>
-            <img src="../../../../assets/images/free_collection.jpg"
-              alt="free-collections-1"
+            <img src="../../../../assets/images/free_collection-min.jpg" alt="free-collections-1"
               class="inner-image collection">
           </div>
         </div>
@@ -322,15 +303,14 @@
     <div class="main_container">
 
       <span>WE RECCOMENDED</span>
-      <h1 data-aos="flip-right" data-aos-easing="ease-out-cubic"
-        data-aos-duration="1000">Bags on Trend</h1>
-      <div data-aos="fade-down-right" data-aos-duration="1000">
+      <h1 >Bags on Trend</h1>
+      <div>
         <owl-carousel-o [options]="suggestionOptions">
 
           <ng-template carouselSlide *ngFor="let img of bagsTrends">
 
-            <img src="{{img.image['original']}}" alt="{{img.name}}"
-              class="inner-image arrival_img" [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
+            <img src="{{img.image['original']}}" alt="{{img.name}}" class="inner-image arrival_img"
+              [routerLink]="'/previewProduct'" [queryParams]="{from:img.id}">
 
             <div class="offer_details">
               <p>{{img.name}}</p>
@@ -355,9 +335,9 @@
                 <span class='offer_price item' *ngIf="currencyType === 'AED'">
                   د.إ{{img['productpriceDirham']}}</span>
 
-                <span class='offer_percentage item '*ngIf="currencyType ===
+                <span class='offer_percentage item ' *ngIf="currencyType ===
                   'EUR'">{{img['OfferPecentageEuro']}}off</span>
-                <span class='offer_percentage item '*ngIf="currencyType ===
+                <span class='offer_percentage item ' *ngIf="currencyType ===
                   'USD'">{{img['OfferPecentageDollar']}}off</span>
                 <span class='offer_percentage item ' *ngIf="currencyType ===
                   'SAR'">{{img['OfferPecentageSAR']}}off</span>
@@ -372,8 +352,8 @@
         </owl-carousel-o>
       </div>
       <div class='offer_explore_button_div'>
-        <button mat-button class="offer_explore_button"
-        [routerLink]="'/specialProducts'" [queryParams]="{from:'bagsTrends'}">
+        <button mat-button class="offer_explore_button" [routerLink]="'/specialProducts'"
+          [queryParams]="{from:'bagsTrends'}">
           Explore all &nbsp;<mat-icon>trending_flat</mat-icon>
         </button>
       </div>
@@ -391,8 +371,7 @@
             <mat-form-field class="contact">
               <mat-label>Enter the Email</mat-label>
               <input type="text" matInput formControlName="Email">
-              <button mat-button class="form_submit_button"
-                data-aos="fade-right" data-aos-duration="1000">Send &nbsp;
+              <button mat-button class="form_submit_button">Send &nbsp;
                 <mat-icon>trending_flat</mat-icon>
               </button>
             </mat-form-field>

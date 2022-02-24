@@ -11,6 +11,8 @@ import { ACCESS_TOKEN_ID, CURRENCY_TYPE } from '../../../../../assets/API/server
 import { ProductService } from '../../../service/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/modules/service/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReviewComponent } from '../../common/review/review.component';
 export interface subtasks {
   name: string
   Available: boolean
@@ -84,6 +86,8 @@ export class PreviewProductComponent implements OnInit {
   colors: any[] = [];
 
   colorsName: any[] = [];
+
+  previewProduct :any = [];
 
   data: any[] = [ {
     product: null,
@@ -170,6 +174,7 @@ export class PreviewProductComponent implements OnInit {
   });
 
 
+  // eslint-disable-next-line max-params
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -177,7 +182,8 @@ export class PreviewProductComponent implements OnInit {
     private dashboardService: DashboardService,
     private previewProductService: PreviewProductService,
     private readonly productService: ProductService,
-    public readonly userService: UserService,) {
+    public readonly userService: UserService,
+    public dialog: MatDialog) {
 
     this.timeOutDuration = 1000;
     this.reviewS = [];
@@ -269,7 +275,7 @@ export class PreviewProductComponent implements OnInit {
       // eslint-disable-next-line max-statements
       this.previewProductService.getDataofSubSubCategory(this.productId).subscribe((data) => {
 
-        console.log(data);
+        this.previewProduct = data;
 
         if (data.productreviews.length > 0) {
 
@@ -671,6 +677,29 @@ export class PreviewProductComponent implements OnInit {
   // eslint-disable-next-line class-methods-use-this
   addReview() {
 
+    if (localStorage.getItem(ACCESS_TOKEN_ID)) {
+
+      const dialogRef = this.dialog.open(ReviewComponent, {
+        data: {data: this.previewProduct,
+          message: 'preview'}
+
+      });
+
+    } else {
+
+      this._snackBar.open('please login to proceed !', '', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      });
+      setTimeout(() => {
+
+        this._snackBar.dismiss();
+
+      }, this.timeOutDuration);
+
+    }
+
   }
+
 
 }

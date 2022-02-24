@@ -17,6 +17,8 @@ export class ReviewComponent implements OnInit {
 
   image = '';
 
+  formisvalid = false;
+
   imgname = '';
 
   currencyType = '';
@@ -29,18 +31,30 @@ export class ReviewComponent implements OnInit {
 
   error = '';
 
+  productId = 0;
+
 
   contactForm: FormGroup;
 
   constructor(private readonly userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public dialogData:any
-  ) {
+    @Inject(MAT_DIALOG_DATA) public dialogData: {data: any, message: string},) {
 
-    this.data = dialogData;
-    this.product = dialogData.product;
-    this.image = dialogData.product.image.original;
-    this.imgname = dialogData.product.name;
-    this.setCurrencyValue(dialogData.product);
+    if (dialogData.message === 'preview') {
+
+      this.product = dialogData.data;
+      this.image = dialogData.data.image.original;
+      this.imgname = dialogData.data.name;
+      this.setCurrencyValue(dialogData.data);
+
+
+    } else {
+
+      this.product = dialogData.data.product;
+      this.image = dialogData.data.product.image.original;
+      this.imgname = dialogData.data.product.name;
+      this.setCurrencyValue(dialogData.data.product);
+
+    }
 
     this.contactForm = new FormGroup({
       product: new FormControl(null),
@@ -60,9 +74,6 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
 
     this.contactForm.get('product')?.setValue(this.product.id);
-
-    console.log(this.contactForm.get('product')?.value);
-
 
   }
 
@@ -165,7 +176,7 @@ export class ReviewComponent implements OnInit {
 
       this.userService.addReviews(this.contactForm.value).subscribe((data) => {
 
-        console.log(data);
+        this.formisvalid = true;
 
       });
 
