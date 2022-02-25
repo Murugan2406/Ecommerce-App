@@ -142,7 +142,7 @@
     border-radius: 50%;
 
     box-shadow: -7px -7px 15px rgba(255, 255, 255, 0.75), 7px 7px 15px rgba(255, 255, 255, 0.75);
-    background-image: url('../../../../../assets//images/united-kingdom.png');
+    background-image: url('../../../../../assets//images/united-kingdom.jpeg');
     background-repeat: no-repeat;
     background-position: left center;
     background-size: auto 100%;
@@ -281,7 +281,14 @@
     }
   }
 
-
+.Copyright{
+margin-top: 2em;
+  width: 90%;
+  margin-left: 5%;
+  a{
+    font-size: 13px;
+  }
+}
 
 
 

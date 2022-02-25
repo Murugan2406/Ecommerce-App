@@ -96,7 +96,7 @@
           </a>
         </div>
         <button mat-button class="offer_explore_button" *ngIf="subsubCategories.length !==0"
-          [routerLink]="['listProduct', CategoryId,'']" (click)="megamenu.close()">
+        [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}} [queryParams]="{ subId: subCategoryId}" (click)="megamenu.close()">
           Shop All<mat-icon>trending_flat</mat-icon>
         </button>
       </div>

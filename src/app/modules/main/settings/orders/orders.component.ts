@@ -121,6 +121,12 @@ export class OrdersComponent implements OnInit {
        message: 'order'}
    });
 
+   dialogRef.afterClosed().subscribe((presentation) => {
+
+     this.ngOnInit();
+
+   });
+
  }
 
 

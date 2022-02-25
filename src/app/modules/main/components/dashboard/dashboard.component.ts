@@ -39,6 +39,15 @@ export class DashboardComponent implements OnInit {
 
   category3 = '';
 
+  hoverId = 0;
+
+
+  ssName1 = '';
+
+  ssName2 = '';
+
+  ssName3 = '';
+
   id1 = 0;
 
   id2 = 0;
@@ -270,9 +279,12 @@ export class DashboardComponent implements OnInit {
 
   openSubCategories(data:specialProducts[], id:number) {
 
+    console.log(data, id);
+    this.hoverId = id;
+
     this.id1 = data[0].id;
-    this.id2 = data[1].id;
-    this.id3 = data[2].id;
+    this.id2 = data[0].id;
+    this.id3 = data[0].id;
     this.CategoryId = id;
     this.name1 = data[0].name;
     this.name2 = data[1].name;

@@ -49,12 +49,15 @@
 
           <mat-grid-list cols="2" rowHeight="200px" style="text-align: end;">
 
-            <mat-grid-tile [colspan]="1" [rowspan]="4" [routerLink]="['/listProduct',id1,]">
+            <!-- [routerLink]="['listProduct',mainCategoryId]" fragment={{ssName}} [queryParams]="{ subId: subCategoryId}" -->
+
+            <mat-grid-tile [colspan]="1" [rowspan]="4" [routerLink]="['/listProduct',hoverId,]"
+             fragment={{name1}} [queryParams]="{ subId: id1}">
 
 
               <ngx-skeleton-loader *ngIf="category1 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>
-              <div *ngIf="category1 !== '' ">
+              <div *ngIf="category1 !== '' " >
                 <img src="{{category1}}" alt="" class="category_img1">
                 <div class="categories_img_name name1">
                   <span>{{name1}}</span>
@@ -63,7 +66,8 @@
 
 
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',id2]">
+            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',hoverId]"
+             fragment={{name2}} [queryParams]="{ subId: id2}">
               <ngx-skeleton-loader *ngIf="category2 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>
               <div *ngIf="category2 !== '' ">
@@ -72,7 +76,8 @@
               </div>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',id3]">
+            <mat-grid-tile [colspan]="1" [rowspan]="2" [routerLink]="['/listProduct',hoverId]" 
+            fragment={{name3}} [queryParams]="{ subId: id3}">
 
               <ngx-skeleton-loader *ngIf="category3 === '' " class="category_img1" count="1" animation="progress">
               </ngx-skeleton-loader>

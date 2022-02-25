@@ -684,6 +684,11 @@ export class PreviewProductComponent implements OnInit {
           message: 'preview'}
 
       });
+      dialogRef.afterClosed().subscribe((presentation) => {
+
+        this.ngOnInit();
+
+      });
 
     } else {
 

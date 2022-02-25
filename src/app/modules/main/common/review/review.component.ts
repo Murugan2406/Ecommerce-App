@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/modules/service/user.service';
 import { CURRENCY_TYPE } from '../../../../../assets/API/server-api';
 
@@ -37,6 +37,7 @@ export class ReviewComponent implements OnInit {
   contactForm: FormGroup;
 
   constructor(private readonly userService: UserService,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public dialogData: {data: any, message: string},) {
 
     if (dialogData.message === 'preview') {
@@ -173,10 +174,12 @@ export class ReviewComponent implements OnInit {
 
     if (this.contactForm.valid) {
 
-
+      this.error = '';
       this.userService.addReviews(this.contactForm.value).subscribe((data) => {
 
+
         this.formisvalid = true;
+        this.dialog.closeAll();
 
       });
 
